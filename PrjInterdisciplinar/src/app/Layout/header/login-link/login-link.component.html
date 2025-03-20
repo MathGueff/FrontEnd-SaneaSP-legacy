@@ -1,34 +1,46 @@
 <div>
-    @if (this.userAtivo == null) {
-        <div class="login-link">
-            <a class="d-flex justify-content-center align-items-center" routerLink="/login">
-                <img src="assets/icones/icon_white_login.svg" id="icon_login">
-                <!-- Caso haja um usuário, exibe o nome, caso contrário, escreve login-->
-                <span>Login</span>
-            </a>
-        </div>
-    }
-    @else {
-        <div class="login-menu dropdown">
-            <a class="dropdown-toggle d-flex justify-content-center align-items-center" data-bs-toggle="dropdown">
-                <img src="assets/icones/icon_white_login.svg" id="icon_login">
-                <!-- Caso haja um usuário, exibe o nome, caso contrário, escreve login-->
-                <span>{{this.userAtivo}}</span>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark row">
-                <li>
-                    <a class="dropdown-item" (click)="btnLogout()">
-                        <img src="assets/icones/logout_icon.svg" class="me-1" alt="">
-                        Logout
-                    </a>
-                </li>
-                <li>
-                    <a class="dropdown-item" routerLink="/editar-perfil">
-                        <img src="assets/icones/edit_icon.svg" class="me-1" alt="">
-                        Editar seu perfil
-                    </a>
-                </li>
-            </ul>
-        </div>
-    }
+  <!-- Se não existir um usuário ativo exibe o botão de login -->
+  @if (this.userAtivo == null) {
+  <div class="login-link">
+    <a
+      class="focus-secundario d-flex justify-content-center align-items-center"
+      routerLink="/login"
+    >
+      <img src="assets/icones/icon_white_login.svg" id="icon_login" />
+      <!-- Caso haja um usuário, exibe o nome, caso contrário, escreve login-->
+      <span>Login</span>
+    </a>
+  </div>
+  }
+  <!-- Caso contrário, exibe o dropdown, com links para logout e edição de perfil -->
+  @else {
+  <div class="login-menu dropdown">
+    <a
+      class="focus-secundario dropdown-toggle d-flex justify-content-center align-items-center"
+      data-bs-toggle="dropdown"
+      tabindex="0"
+    >
+      <img src="assets/icones/icon_white_login.svg" id="icon_login" />
+      <!-- Caso haja um usuário, exibe o nome, caso contrário, escreve login-->
+      <span>{{ this.userAtivo }}</span>
+    </a>
+    <ul
+      class="focus-secundario dropdown-menu dropdown-menu-dark row"
+      
+    >
+      <li>
+        <a class="dropdown-item" (click)="btnLogout()">
+          <img src="assets/icones/logout_icon.svg" class="me-1" alt="" />
+          Logout
+        </a>
+      </li>
+      <li>
+        <a class="dropdown-item" routerLink="/editar-perfil">
+          <img src="assets/icones/edit_icon.svg" class="me-1" alt="" />
+          Editar seu perfil
+        </a>
+      </li>
+    </ul>
+  </div>
+  }
 </div>

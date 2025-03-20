@@ -1,11 +1,13 @@
 import { OpcoesMenuAdmin } from "../Admin/OpcoesMenuAdmin.enum";
 
-export class MenuAdminOpcoesLink {
-  path : string = '';
+export class MenuAdminLink{
   nome : string = '';
   img : string = '';
 }
+export class MenuAdminDashOpcoesLink extends MenuAdminLink{
+  path : string = '';
+}
 
-export class MenuAdminSidebarLink extends MenuAdminOpcoesLink{
+export class MenuAdminSidebarLink extends MenuAdminLink{
   opcao : OpcoesMenuAdmin = OpcoesMenuAdmin.Doenca;
 }

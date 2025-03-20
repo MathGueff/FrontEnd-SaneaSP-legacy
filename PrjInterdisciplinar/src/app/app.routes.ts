@@ -35,7 +35,6 @@ export const routes: Routes = [
   {path: 'doenca-detalhada', component:DoencaDetalhesComponent},
   {path: 'doenca-detalhada/:id', component:DoencaDetalhesComponent},
   {path: 'doenca-form', component: FormDoencaComponent},
-  {path: 'responsaveis', component: ResponsaveisComponent},
 
   //Noticia
   {path: 'noticia-inicial', component:NoticiasInicialComponent},
@@ -49,5 +48,6 @@ export const routes: Routes = [
   {path: 'cadastro', component:FormCadastroComponent},
   {path: 'comentario/:idReclamamacao',component:ComentarioCentralComponent},
   {path: 'editar-perfil', component: EdicaoPerfilComponent},
+  {path: 'responsaveis', component: ResponsaveisComponent},
 
 ];

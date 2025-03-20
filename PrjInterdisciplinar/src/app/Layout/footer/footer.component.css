@@ -16,13 +16,18 @@ h5{
 .links-footer a, span{
   color: var(--cor-fonte-branca);
   text-decoration: none;
-  transition: .3s;
+  transition: transform .3s, text-decoration .3s;
   display: inline-block;
 }
 .links-footer a:hover, span:hover{
-  transform: scale(1.1);
+  transform: scale(1.05);
   text-decoration: underline;
 }
+
+.links-footer a:focus-visible, span:focus-visible{
+  outline: var(--outline-tab-secundario);
+}
+
 .links-footer-img a{
   padding-top: 2px;
 }
@@ -31,6 +36,9 @@ h5{
   padding-right: 20px;
 }
 
+.links-footer-img a:focus-visible{
+  outline: var(--outline-tab-secundario);
+}
 
 @media (max-width:1000px) {
   .borda{

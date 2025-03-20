@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MenuUsuario } from '../../models/menu-usuario';
-import { RouterLink} from '@angular/router';
+import { RouterLink, Router} from '@angular/router';
 
 @Component({
   selector: 'app-menu-usuario',
@@ -11,6 +11,12 @@ import { RouterLink} from '@angular/router';
   styleUrl: './menu-usuario.component.css'
 })
 export class MenuUsuarioComponent{
+  constructor(private router: Router) {}
+
+  navigateTo(path: string) {
+    this.router.navigate([path]);
+  }
+
   //Array com os links do menu
   cards : MenuUsuario[] = [
     {path: '/doenca-inicial', nome : 'Doenças', titulo : 'Doenças relacionadas', src : 'assets/icones/icon_black_doenca.svg', info : 'Veja informações sobre as doenças que estão relacionadas a falta de saneamento básico'},

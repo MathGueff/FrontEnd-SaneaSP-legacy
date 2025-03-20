@@ -1,61 +1,110 @@
-<nav id="navbar-header" class="d-flex align-items-center justify-content-between"> <!--Navbar-->
+<nav
+  id="navbar-header"
+  class="d-flex align-items-center justify-content-between"
+>
+  <!--Navbar-->
   <!-- Botão para chamar o OFFCANVAS -->
-  <button class="btn btn-outline-light d-lg-none btn-lg" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasResponsive" aria-controls="offcanvasResponsive">
-    <img src="assets/icones/menu_white_navbar.svg" alt="">
+  <button
+    class="btn btn-outline-light d-lg-none btn-lg"
+    type="button"
+    data-bs-toggle="offcanvas"
+    data-bs-target="#offcanvasResponsive"
+    aria-controls="offcanvasResponsive"
+  >
+    <img src="assets/icones/menu_white_navbar.svg" alt="" />
   </button>
 
   <!-- OFFCANVAS para resoluções menores -->
-  <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasResponsive" aria-labelledby="offcanvasResponsiveLabel">
+  <div
+    class="offcanvas offcanvas-end"
+    tabindex="-1"
+    id="offcanvasResponsive"
+    aria-labelledby="offcanvasResponsiveLabel"
+  >
     <!-- Cabeçalho do offcanvas -->
     <div class="offcanvas-header">
       <h5 class="offcanvas-title" id="offcanvasResponsiveLabel">Acesse:</h5>
-      <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      <button
+        type="button"
+        class="btn-close btn-close-white"
+        data-bs-dismiss="offcanvas"
+        aria-label="Close"
+      ></button>
     </div>
     <!-- Corpo do offcanvas -->
     <div class="offcanvas-body">
-      <div class="container d-flex justify-content-center align-items-center flex-wrap">
+      <div
+        class="container d-flex justify-content-center align-items-center flex-wrap"
+      >
         <div class="row">
           @for (link of links; track $index) {
-            <div class="col-12 pb-4">
-               <!-- Links de navegação do OFFCANVAS -->
-              <a routerLink="{{link.path}}" routerLinkActive="link-navbar-ativo" class="navbar-header-link d-flex justify-content-center align-items-center text-center">
-                <img src="{{link.img}}" alt="{{link.alt}}">
-                <span>{{link.nome}}</span>
-              </a>
-            </div>
-          }
-          @if(this.adminInfo$ | async){
-            <div class="col-12 pb-4">
-              <a routerLink="pagina-admin" routerLinkActive="link-navbar-ativo" class="navbar-header-link d-flex justify-content-center align-items-center text-center">
-                <img src="assets/icones/icon_white_responsavel.svg" alt="Ícone do link para página de Admin">
-                <span>Admin</span>
-              </a>
-            </div>
+          <div class="col-12 pb-4">
+            <!-- Links de navegação do OFFCANVAS -->
+            <a
+              routerLink="{{ link.path }}"
+              routerLinkActive="link-navbar-ativo"
+              class="focus-secundario navbar-header-link d-flex justify-content-center align-items-center text-center"
+            >
+              <img src="{{ link.img }}" alt="{{ link.alt }}" />
+              <span>{{ link.nome }}</span>
+            </a>
+          </div>
+          <!-- Caso o usuário atual seja um admin, mostre o link para a página do administrador -->
+          } @if(this.adminInfo$ | async){
+          <div class="col-12 pb-4">
+            <a
+              routerLink="pagina-admin"
+              routerLinkActive="link-navbar-ativo"
+              class="focus-secundario navbar-header-link d-flex justify-content-center align-items-center text-center"
+            >
+              <img
+                src="assets/icones/icon_white_responsavel.svg"
+                alt="Ícone do link para página de Admin"
+              />
+              <span>Admin</span>
+            </a>
+          </div>
           }
         </div>
       </div>
       <app-login-link></app-login-link>
     </div>
     <!-- Fechamento do corpo do offCanvas -->
-  </div> <!-- Fim do Offcanvas -->
+  </div>
+  <!-- Fim do Offcanvas -->
 
   <!-- Links da navbar -->
-  <ul id="navbar-links" class="d-none d-lg-flex justify-content-evenly align-items-center"> <!--Em telas menores muda para display none -->
-      @for (link of links; track $index) {
-        <li>
-          <a routerLink="{{link.path}}" routerLinkActive="link-navbar-ativo" class="navbar-header-link d-flex justify-content-center align-items-center text-center">
-            <img src="{{link.img}}" alt="{{link.alt}}">
-            <span>{{link.nome}}</span>
-          </a>
-        </li>
-      }
-      @if(this.adminInfo$ | async){
-        <li>
-          <a routerLink="pagina-admin" routerLinkActive="link-navbar-ativo" class="navbar-header-link d-flex justify-content-center align-items-center text-center">
-            <img src="assets/icones/icon_white_responsavel.svg" alt="Ícone do link para página de Admin">
-            <span>Admin</span>
-          </a>
-        </li>
-      }
+  <ul
+    id="navbar-links"
+    class="d-none d-lg-flex justify-content-evenly align-items-center"
+  >
+    <!--Em telas menores muda para display none -->
+    @for (link of links; track $index) {
+    <li>
+      <a
+        routerLink="{{ link.path }}"
+        routerLinkActive="link-navbar-ativo"
+        class="focus-secundario navbar-header-link d-flex justify-content-center align-items-center text-center"
+      >
+        <img src="{{ link.img }}" alt="{{ link.alt }}" />
+        <span>{{ link.nome }}</span>
+      </a>
+    </li>
+    <!-- Caso o usuário atual seja um admin, mostre o link para a página do administrador -->
+    } @if(this.adminInfo$ | async){
+    <li>
+      <a
+        routerLink="pagina-admin"
+        routerLinkActive="link-navbar-ativo"
+        class="focus-secundario navbar-header-link d-flex justify-content-center align-items-center text-center"
+      >
+        <img
+          src="assets/icones/icon_white_responsavel.svg"
+          alt="Ícone do link para página de Admin"
+        />
+        <span>Admin</span>
+      </a>
+    </li>
+    }
   </ul>
 </nav>

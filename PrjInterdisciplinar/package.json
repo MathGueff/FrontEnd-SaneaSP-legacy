@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:PrjIntegrador": "node dist/sanea-sp/server/server.mjs"
+    "serve:ssr:PrjInterdisciplinar": "node dist/sanea-sp/server/server.mjs",
+    "generate": "ng g"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,7 @@
     "jquery": "^3.7.1",
     "rxjs": "~7.8.0",
     "scrollreveal": "^4.0.9",
-    "sweetalert2": "^11.14.5",
+    "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.10"
   },

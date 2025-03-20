@@ -7,7 +7,7 @@
   font-family: var(--familia-primaria);
 }
 
-/* Variáveis do CSS global */
+/* --- Variáveis do CSS global --- */
 :root{
     /* Cores de fundo */
     --cor-primaria: #295A80;
@@ -18,6 +18,11 @@
     /* Cores de componentes */
     --cor-form-login: #DADADA;
     --cor-background: #e8e3e3;
+
+    /* Acessibilidade */
+    --outline-tab-primario: 2px solid var(--cor-primaria);
+    --outline-tab-secundario: 2px solid #fff;
+    --outline-tab-terciario: 2px solid #000;
 
     /* Fontes */
     --familia-primaria: poppins, sans-serif;
@@ -36,7 +41,39 @@
     --header-texto: 1.01rem;
 }
 
-/* Estilos do SweetAlert */
+/* --- Acessibilidade --- */
+
+/* Estilo global para as tags (pode ser sobrescrito utilizando as classes focus-primario, secundario e terciario */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible, 
+textarea:focus-visible, 
+div:focus-visible {
+  outline: var(--outline-tab-primario);
+}
+
+/* Estilo com outline azul escuro */
+.focus-primario:focus-visible{
+  outline: var(--outline-tab-primario);;
+}
+
+/* Estilo com outline branco */
+.focus-secundario:focus-visible{
+  outline: var(--outline-tab-secundario);
+}
+
+/* Estilo com outline preto */
+.focus-terciario:focus-visible{
+  outline: var(--outline-tab-terciario);
+}
+
+/* Sobrescrita do estilo do bootstrap */
+.btn:focus-visible{
+  outline: var(--outline-tab-primario) !important;
+  box-shadow: none !important;
+}
+
+/* --- Estilos do SweetAlert ---  */
 .sweet_popup{
   padding: 10px; 
 }
@@ -64,19 +101,20 @@
   border-radius: 20px;
 }
 
-/* Background das páginas */
+/* --- Background das páginas --- */
 .background{
   background-color: var(--cor-background);
 }
 
-/* CSS padrão para cards */
+/* --- CSS padrão para cards --- */
 .card, .comentario{
   cursor: pointer;
   border: none;
-  transition: 0.6s all ease;
+  transition: 0.6s transform ease, 0.6s opacity ease;
   -webkit-box-shadow: 3px 10px 17px -11px rgba(0,0,0,0.75);
   -moz-box-shadow: 3px 10px 17px -11px rgba(0,0,0,0.75);
   box-shadow: 3px 10px 17px -11px rgba(0,0,0,0.75);
+  text-decoration: none;
 }
 
 .card-header, .header-painel, .header-comentario{
@@ -98,7 +136,7 @@
 .btn-primary{
   background-color: var(--cor-quaternaria) !important;
   border-color: var(--cor-quaternaria) !important;
-  transition: 0.4s all ease !important;
+  transition: 0.6s transform ease, 0.6s opacity ease !important;
   -webkit-box-shadow: 3px 10px 17px -11px rgba(0,0,0,0.75);
   -moz-box-shadow: 3px 10px 17px -11px rgba(0,0,0,0.75);
   box-shadow: 3px 10px 17px -11px rgba(0,0,0,0.75);
@@ -135,7 +173,7 @@
   }
 }
 
-/* CSS padrão dos Formulários */
+/* --- CSS padrão dos Formulários --- */
 /* Div do formulário */
 .form{
   /* Width e Height devem ser definidos no CSS do componente, dentro dessa classe */
@@ -162,6 +200,7 @@
 .form-control:focus, .form-select:focus{
    transform: translate(2px) !important;
    border: 3px solid var(--cor-primaria) !important;
+   outline: none !important;
 }
 
 /* Icones do formulário */
@@ -180,7 +219,7 @@
    height: 46px;
    font-size: 1rem;
    letter-spacing: 1.2px;
-   transition: 0.6s all ease;
+   transition: 0.6s transform ease, 0.6s opacity ease;;
 }
 
 .form-btn:hover{

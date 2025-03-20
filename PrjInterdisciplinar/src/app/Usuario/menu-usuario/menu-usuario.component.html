@@ -6,7 +6,11 @@
       <!-- Div da row-->
       <div class="col-12 p-4 ps-5 pe-5" *ngFor="let card of cards">
         <!-- Div da coluna-->
-        <div routerLink="{{ card.path }}" class="card h-100">
+        <div
+          routerLink="{{ card.path }}"
+          class="card h-100"
+          (keydown.enter)="navigateTo(card.path)"
+        >
           <!-- Div do card-->
           <h5 class="card-header pt-3 pb-3">{{ card.nome }}</h5>
           <div class="card-body">

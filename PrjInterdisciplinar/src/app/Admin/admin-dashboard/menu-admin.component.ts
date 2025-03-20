@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MenuAdminOpcoesLink, MenuAdminSidebarLink } from '../../models/menu-admin';
+import { MenuAdminDashOpcoesLink, MenuAdminSidebarLink } from '../../models/menu-admin';
 import { CommonModule } from '@angular/common';
 import { OpcoesMenuAdmin } from '../OpcoesMenuAdmin.enum';
 import { RouterLink } from '@angular/router';
@@ -12,37 +12,37 @@ import { RouterLink } from '@angular/router';
   styleUrl: './menu-admin.component.css',
 })
 export class MenuAdminComponent {
-  links: MenuAdminSidebarLink[] = [
+  linksSidebar: MenuAdminSidebarLink[] = [
     {
-      path: '/opcoes',
       nome: 'Gerenciar Reclamações',
       img: 'assets/icones/icon_white_reclamacao.svg',
       opcao: OpcoesMenuAdmin.Reclamacao,
     },
-    
     {
-      path: 'opcoes',
       nome: 'Gerenciar notícias do site',
       img: 'assets/icones/icon_white_noticia.svg',
       opcao: OpcoesMenuAdmin.Noticia,
     },
-    
     {
-      path: '/opcoes',
       nome: 'Gerenciar doenças do site',
       img: 'assets/icones/icon_white_doenca.svg',
       opcao: OpcoesMenuAdmin.Doenca,
     },
-    //{path: '/doenca-form', nome : 'Cadastre uma nova doença', img : 'assets/icones/icon_white_doenca.svg'},
     {
-      path: '/opcoes',
       nome: 'Visualizar página sobre o responsável pelo saneamento',
       img: 'assets/icones/icon_white_responsavel.svg',
       opcao: OpcoesMenuAdmin.Responsaveis,
     },
+    {
+      nome: 'Visualizar Log',
+      img: 'assets/icones/icon_white_responsavel.svg',
+      opcao: OpcoesMenuAdmin.Log,
+    },
   ];
  
-  noticia : MenuAdminOpcoesLink[] = [
+  opcaoAtual : OpcoesMenuAdmin = OpcoesMenuAdmin.Reclamacao;
+
+  noticia : MenuAdminDashOpcoesLink[] = [
     {
       path: '/noticia-form',
       nome: 'Cadastrar uma nova notícia',
@@ -70,65 +70,87 @@ export class MenuAdminComponent {
     },
   ]
 
-  doenca : MenuAdminOpcoesLink[] = [
+  doenca : MenuAdminDashOpcoesLink[] = [
     {
-      path: '/noticia-form',
+      path: '/doenca-form',
       nome: 'Cadastrar uma nova doença',
-      img: 'assets/icones/icon_white_noticia.svg',
+      img: 'assets/icones/icon_white_doenca.svg',
     },
     {
-      path: '/noticia-form',
+      path: '/doenca-form',
       nome: 'Editar uma doença',
       img: 'assets/icones/icon_white_doenca.svg',
     },
     {
-      path: '/noticia-form',
+      path: '/doenca-form',
       nome: 'Excluir uma doença',
       img: 'assets/icones/icon_white_doenca.svg',
     },
     {
-      path: '/noticia-form',
+      path: '/doenca-inicial',
       nome: 'Visualizar suas doenças cadastradas',
       img: 'assets/icones/icon_white_doenca.svg',
     },
     {
-      path: '/noticia-inicial',
+      path: '/doenca-inicial',
       nome: 'Visualizar todas doenças',
       img: 'assets/icones/icon_white_doenca.svg',
     },
   ]
 
-  reclamacao : MenuAdminOpcoesLink[] = [
+  reclamacao : MenuAdminDashOpcoesLink[] = [
     {
-      path: '/noticia-form',
+      path: '/reclamacao',
       nome: 'Visualizar todas reclamações',
       img: 'assets/icones/icon_white_reclamacao.svg',
     },
     {
-      path: '/noticia-form',
+      path: '/reclamacao',
       nome: 'Seus comentários',
       img: 'assets/icones/icon_white_reclamacao.svg',
     },
     {
-      path: '/noticia-form',
+      path: '/reclamacao',
       nome: 'Excluir uma reclamação',
       img: 'assets/icones/icon_white_reclamacao.svg',
     },
     {
-      path: '/noticia-form',
+      path: '/',
+      nome: 'Criar nova tag para os usuários',
+      img: 'assets/icones/icon_white_reclamacao.svg',
+    },
+    {
+      path: '/',
       nome: 'Gerar relatório de reclamação',
       img: 'assets/icones/icon_white_reclamacao.svg',
     },
     {
-      path: '/noticia-inicial',
+      path: '/',
       nome: 'Visualizar filtragem geográfica',
       img: 'assets/icones/icon_white_reclamacao.svg',
     },
   ]
 
-  opcoes: MenuAdminOpcoesLink[] = this.reclamacao;
+  responsavel : MenuAdminDashOpcoesLink[] = [
+    {
+      path: '/responsaveis',
+      nome: 'Visualizar página dos responsáveis pelo saneamento básico',
+      img: 'assets/icones/icon_white_responsavel.svg',
+    },
+  ]
 
-  changeOptions(opcao: OpcoesMenuAdmin) {
+  log : MenuAdminDashOpcoesLink[] = [
+    {
+      path: '/',
+      nome: 'Visualizar log de comentários',
+      img: 'assets/icones/icon_white_responsavel.svg',
+    },
+  ]
+
+  opcoes: MenuAdminDashOpcoesLink[] = this.reclamacao;
+
+  mudarOpcaoAtual(opcao: OpcoesMenuAdmin) {
+    this.opcaoAtual = opcao;
     switch (opcao) {
       case OpcoesMenuAdmin.Doenca:
         this.opcoes = this.doenca;
@@ -139,6 +161,14 @@ export class MenuAdminComponent {
       case OpcoesMenuAdmin.Reclamacao:
         this.opcoes = this.reclamacao;
         break;
+      case OpcoesMenuAdmin.Responsaveis:
+        this.opcoes = this.responsavel;
+        break;
+      case OpcoesMenuAdmin.Log:
+        this.opcoes = this.log;
+        break;
+      default:
+          this.opcoes = [];
     }
   }
 }
