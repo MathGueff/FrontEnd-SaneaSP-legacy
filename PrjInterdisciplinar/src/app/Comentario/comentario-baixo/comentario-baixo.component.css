@@ -2,6 +2,10 @@
   --cor-bloco-comentario:#98c1de;
 }
 
+#drop-down{
+  cursor: pointer;
+}
+
 .card-comentario{
   background-color:var(--cor-bloco-comentario);
   border-radius: 5px;
@@ -16,4 +20,8 @@
 .card-comentario .conteudo-comentario p{
   text-align: justify;
   font-size: 0.9rem;
+}
+
+.space-between{
+  justify-content: space-between;  
 }

@@ -10,11 +10,12 @@ import { Component, inject, Input, OnInit } from '@angular/core';
   styleUrl: './comentario-baixo.component.css',
 })
 export class ComentarioBaixoComponent implements OnInit {
+
   @Input() comentario!: Comentario;
 
   userService = inject(UserService);
   autor: string = '';
-
+  
   ngOnInit(): void {
     if (this.comentario.objUsuario && this.comentario.objUsuario.id){
       if (this.comentario.objAdmin === null) {
