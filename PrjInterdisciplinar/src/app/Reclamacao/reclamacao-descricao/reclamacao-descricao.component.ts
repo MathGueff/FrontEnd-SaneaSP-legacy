@@ -4,6 +4,7 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { NotFoundComponent } from '../../Common/not-found/not-found.component';
+import { UserService } from '../../Services/user.service';
 
 @Component({
   selector: 'app-reclamacao-descricao',

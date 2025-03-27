@@ -196,7 +196,6 @@ export class UserService {
   //#endregion
 
   //#region Verificação de Admin
-
   private checkIfAdmin(user: IUser): void {
     this.adminService.isAdmin(user.id).subscribe({
       next: (admin: IAdmin | null) => {
