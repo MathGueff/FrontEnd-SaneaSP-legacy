@@ -13,7 +13,7 @@ import { UserService } from '../../Services/user.service';
 @Component({
   selector: 'app-reclamacao-inicial',
   standalone: true,
-  imports: [CommonModule, ReclamacaoCardComponent, RouterLink, ReactiveFormsModule,NotFoundComponent],
+  imports: [CommonModule, ReclamacaoCardComponent, RouterLink, ReactiveFormsModule, NotFoundComponent],
   templateUrl: './reclamacao-inicial.component.html',
   styleUrl: './reclamacao-inicial.component.css'
 })

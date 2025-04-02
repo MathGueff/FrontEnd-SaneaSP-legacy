@@ -1,6 +1,6 @@
 import { UserService } from './../../Services/user.service';
 import { Comentario } from './../../models/comentario';
-import { Component, inject, Input, OnInit } from '@angular/core';
+import { Component, inject, input, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-comentario-baixo',
@@ -9,7 +9,20 @@ import { Component, inject, Input, OnInit } from '@angular/core';
   templateUrl: './comentario-baixo.component.html',
   styleUrl: './comentario-baixo.component.css',
 })
+
 export class ComentarioBaixoComponent implements OnInit {
+  exibeMenu: boolean = false;
+  public deletaComentario(id: number) {
+    this.userService.deletarComentario(id).subscribe({
+      next: (comentario: Comentario) => {
+        console.log('Comentario deletado com sucesso:', comentario);
+      },
+      error: (error: any) => {
+        console.error('Erro ao deletar comentário:', error);
+      },
+    });
+  }
+
   
   @Input() comentario!: Comentario;
   userService = inject(UserService);

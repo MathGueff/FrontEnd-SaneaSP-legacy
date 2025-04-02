@@ -1,7 +1,12 @@
 <div class="card-comentario h-auto mx-5 d-flex flex-column">
   <div class="user-comentario d-flex flex-row space-between">
-    <span>{{this.autor}}</span><div id="drop-down"><img src="img/paginas/reclamacoes/drop-down.svg" alt="Mais"></div>
-  </div>
+    <span>{{this.autor}}</span><div (click)="exibeMenu = !exibeMenu" id="drop-down"><img src="img/paginas/reclamacoes/drop-down.svg" alt="Mais"></div>
+    <div class="drop-down" *ngIf="exibeMenu">
+      <ul>
+        <li (click)="deletarComentario(comentario.id)" class="drop-down-item">Deletar</li>
+        <li (click)="editarComentario(comentario.id)" class="drop-down-item">Editar</li>
+      </ul>
+    </div>
   <div class="conteudo-comentario mt-1">
     <p>{{comentario.descricaoComentario}}</p>
   </div>

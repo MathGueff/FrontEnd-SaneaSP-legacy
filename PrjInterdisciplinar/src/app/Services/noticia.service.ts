@@ -57,7 +57,7 @@ export class NoticiaService{
     return this.noticias.some(noticia => noticia.titulo != newNoticia);
   }
 
-  /* Criação de uma nova Doença */
+  /* Criação de uma nova Noticia */
   newNoticia(newNoticia : INoticia){
     this.noticias.push(newNoticia);
     console.log(this.noticias);
