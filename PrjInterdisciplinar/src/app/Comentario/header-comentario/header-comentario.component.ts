@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Reclamacao } from '../../models/reclamacao';
 import { Input } from '@angular/core';
+import { Comentario } from '../../models/comentario';
+import { IUser } from '../../models/user.model';
 // import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,6 +15,8 @@ import { Input } from '@angular/core';
   styleUrl: './header-comentario.component.css'
 })
 export class HeaderComentarioComponent {
+  private users: IUser[] = [];
+  private i: number = 0;
   @Input() reclamacao: Reclamacao = new Reclamacao();
 
   reclamacoes: Reclamacao [] = [
@@ -56,5 +60,16 @@ export class HeaderComentarioComponent {
       objTag: "Drenagem",
       objImagem : "img/paginas/reclamacoes/user5.jpg"
     }
+  ];
+
+  comentarios: Comentario [] = [
+    {
+      id: 1,
+      descricaoComentario: "Obrigado pela ajuda, estamos resolvendo o problema",
+      dataComentario: "2024-11-27",
+      objAdmin: "admin",
+      objReclamacao: this.reclamacoes.indexOf(this.reclamacoes[0]),
+      objUsuario: this.users[i],
+    },
   ];
 }
