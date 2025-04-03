@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ComentarioCimaComponent } from './comentario-cima.component';
+import { MainComentarioComponent } from './main-comentario.component';
 
-describe('ComentarioCimaComponent', () => {
-  let component: ComentarioCimaComponent;
-  let fixture: ComponentFixture<ComentarioCimaComponent>;
+describe('MainComentarioComponent', () => {
+  let component: MainComentarioComponent;
+  let fixture: ComponentFixture<MainComentarioComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ComentarioCimaComponent]
+      imports: [MainComentarioComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ComentarioCimaComponent);
+    fixture = TestBed.createComponent(MainComentarioComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
