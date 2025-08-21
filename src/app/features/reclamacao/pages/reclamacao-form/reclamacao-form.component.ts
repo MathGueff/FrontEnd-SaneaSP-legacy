@@ -16,11 +16,10 @@ import { ImageSelectComponent } from "@shared/components/image-select/image-sele
 
 
 @Component({
-  selector: 'app-reclamacao-form',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, RouterLink, TagSelectComponent, ImageSelectComponent],
-  templateUrl: './reclamacao-form.component.html',
-  styleUrl: './reclamacao-form.component.css',
+    selector: 'app-reclamacao-form',
+    imports: [ReactiveFormsModule, CommonModule, RouterLink, TagSelectComponent, ImageSelectComponent],
+    templateUrl: './reclamacao-form.component.html',
+    styleUrl: './reclamacao-form.component.css'
 })
 export class ReclamacaoFormComponent implements OnInit {
 

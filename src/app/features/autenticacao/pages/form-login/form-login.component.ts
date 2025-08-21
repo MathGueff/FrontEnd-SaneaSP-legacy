@@ -11,11 +11,10 @@ import { AuthService } from '@core/services/auth.service';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
 
 @Component({
-  selector: 'app-form-login',
-  standalone: true,
-  imports: [RouterModule, ReactiveFormsModule, CommonModule, FormFieldComponent],
-  templateUrl: './form-login.component.html',
-  styleUrls: ['./form-login.component.css', '../links-redes.css']
+    selector: 'app-form-login',
+    imports: [RouterModule, ReactiveFormsModule, CommonModule, FormFieldComponent],
+    templateUrl: './form-login.component.html',
+    styleUrls: ['./form-login.component.css', '../links-redes.css']
 })
 
 export class FormLoginComponent{

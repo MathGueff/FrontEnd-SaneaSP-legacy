@@ -8,11 +8,10 @@ import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.serv
 import { StatusReclamacao } from '@features/reclamacao/models/reclamacao.model';
 
 @Component({
-  selector: 'app-reclamacao-descricao',
-  standalone: true,
-  imports: [CommonModule,RouterLink,NotFoundComponent],
-  templateUrl: './reclamacao-descricao.component.html',
-  styleUrl: './reclamacao-descricao.component.css'
+    selector: 'app-reclamacao-descricao',
+    imports: [CommonModule, RouterLink, NotFoundComponent],
+    templateUrl: './reclamacao-descricao.component.html',
+    styleUrl: './reclamacao-descricao.component.css'
 })
 export class ReclamacaoDescricaoComponent implements OnInit {
   //Observable de reclamacao

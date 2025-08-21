@@ -12,11 +12,10 @@ import { ICategoria } from '@features/categoria/models/categoria.model';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
 
 @Component({
-  selector: 'app-reclamacao-edicao',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
-  templateUrl: './reclamacao-edicao.component.html',
-  styleUrl: './reclamacao-edicao.component.css'
+    selector: 'app-reclamacao-edicao',
+    imports: [CommonModule, ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
+    templateUrl: './reclamacao-edicao.component.html',
+    styleUrl: './reclamacao-edicao.component.css'
 })
 export class ReclamacaoEdicaoComponent implements OnInit {
     private reclamacaoService = inject(ReclamacaoService);

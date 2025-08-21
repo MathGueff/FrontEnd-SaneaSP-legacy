@@ -19,11 +19,10 @@ import { ITagListFilter } from '../../models/tag-list-filter.model';
 import { ErrorService } from '@core/services/error-handler.service';
 
 @Component({
-  selector: 'app-tag-modal',
-  standalone: true,
-  imports: [ReactiveFormsModule, CommonModule, FormFieldComponent],
-  templateUrl: './tag-modal.component.html',
-  styleUrl: './tag-modal.component.css',
+    selector: 'app-tag-modal',
+    imports: [ReactiveFormsModule, CommonModule, FormFieldComponent],
+    templateUrl: './tag-modal.component.html',
+    styleUrl: './tag-modal.component.css'
 })
 export class TagModalComponent implements AfterViewInit, OnInit{
   // === INPUTS ==============================

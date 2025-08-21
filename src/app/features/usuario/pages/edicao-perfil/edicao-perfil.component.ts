@@ -15,11 +15,10 @@ import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-  selector: 'app-edicao-perfil',
-  standalone: true,
-  imports: [CommonModule, FormFieldComponent, ReactiveFormsModule],
-  templateUrl: './edicao-perfil.component.html',
-  styleUrl: './edicao-perfil.component.css',
+    selector: 'app-edicao-perfil',
+    imports: [CommonModule, FormFieldComponent, ReactiveFormsModule],
+    templateUrl: './edicao-perfil.component.html',
+    styleUrl: './edicao-perfil.component.css'
 })
 export class EdicaoPerfilComponent implements OnInit {
   protected cadastroErrorStatus: RegistrationErrorEnum = RegistrationErrorEnum.None;

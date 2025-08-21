@@ -6,11 +6,10 @@ import { TagService } from '@features/categoria/services/tag.service';
 
 
 @Component({
-  selector: 'app-tag-select',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
-  templateUrl: './tag-select.component.html',
-  styleUrl: './tag-select.component.css'
+    selector: 'app-tag-select',
+    imports: [CommonModule, ReactiveFormsModule],
+    templateUrl: './tag-select.component.html',
+    styleUrl: './tag-select.component.css'
 })
 export class TagSelectComponent implements OnInit {
   private tagService = inject(TagService);

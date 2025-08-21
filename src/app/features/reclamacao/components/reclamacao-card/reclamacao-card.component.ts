@@ -7,11 +7,10 @@ import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 
 @Component({
-  selector: 'app-reclamacao-card',
-  standalone: true,
-  imports: [RouterLink,CommonModule],
-  templateUrl: './reclamacao-card.component.html',
-  styleUrl: './reclamacao-card.component.css'
+    selector: 'app-reclamacao-card',
+    imports: [RouterLink, CommonModule],
+    templateUrl: './reclamacao-card.component.html',
+    styleUrl: './reclamacao-card.component.css'
 })
 export class ReclamacaoCardComponent   {
   @Input () card !: IReclamacao;
