@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, Input } from '@angular/core';
 import { FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
@@ -27,7 +27,7 @@ import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
  */
 @Component({
     selector: 'app-form-field',
-    imports: [ReactiveFormsModule, CommonModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './form-field.component.html',
     styleUrl: './form-field.component.css'
 })

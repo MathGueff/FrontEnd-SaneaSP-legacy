@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { FormFieldComponent } from '@shared/components/form-field/form-field.component';
 import { UserService } from '@features/usuario/services/user.service';
@@ -16,7 +16,7 @@ import { AuthService } from '@core/services/auth.service';
 
 @Component({
     selector: 'app-edicao-perfil',
-    imports: [CommonModule, FormFieldComponent, ReactiveFormsModule],
+    imports: [FormFieldComponent, ReactiveFormsModule],
     templateUrl: './edicao-perfil.component.html',
     styleUrl: './edicao-perfil.component.css'
 })

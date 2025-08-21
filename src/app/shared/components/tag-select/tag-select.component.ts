@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, EventEmitter, inject, Input, OnInit, Output } from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { ICategoria } from '@features/categoria/models/categoria.model';
@@ -7,7 +7,7 @@ import { TagService } from '@features/categoria/services/tag.service';
 
 @Component({
     selector: 'app-tag-select',
-    imports: [CommonModule, ReactiveFormsModule],
+    imports: [ReactiveFormsModule],
     templateUrl: './tag-select.component.html',
     styleUrl: './tag-select.component.css'
 })

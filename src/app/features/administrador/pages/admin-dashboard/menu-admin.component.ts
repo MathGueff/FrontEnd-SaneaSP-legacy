@@ -1,5 +1,5 @@
 import { Component, ElementRef, HostListener, OnInit, ViewChild } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { RouterLink } from '@angular/router';
 import { Router } from '@angular/router';
 import { AdminSidebarOptions} from '@features/administrador/models/admin-sidebar-options.enum';
@@ -10,7 +10,7 @@ import { AuthService } from '@core/services/auth.service';
 
 @Component({
     selector: 'app-menu-admin',
-    imports: [CommonModule, RouterLink, TagModalComponent],
+    imports: [RouterLink, TagModalComponent],
     templateUrl: './menu-admin.component.html',
     styleUrl: './menu-admin.component.css'
 })

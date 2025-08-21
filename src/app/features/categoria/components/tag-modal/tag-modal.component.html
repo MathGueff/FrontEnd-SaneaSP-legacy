@@ -4,7 +4,7 @@
   tabindex="-1"
   aria-labelledby="modalTag"
   #modalTag
->
+  >
   <div class="modal-dialog">
     <div class="modal-content">
       <form [formGroup]="FormGroupSelected">
@@ -37,59 +37,59 @@
                   formValidatorsEnum.MinLength
                 ]"
               ></app-form-field>
-            } 
-            @else if (modalTypeSelected == modalTypes.Exclusao 
-              || modalTypeSelected == modalTypes.Edicao) 
+            }
+            @else if (modalTypeSelected == modalTypes.Exclusao
+            || modalTypeSelected == modalTypes.Edicao)
             {
-              @if(!this.tagPreloaded){
-                <button 
+            @if(!this.tagPreloaded){
+              @if (tagSelected) {
+                <button
                   type="button"
-                  *ngIf="tagSelected" 
-                  class="btn btn-primary focus-terciario me-2" 
-                  id="botao-voltar-header" (click)="resetSearchForm()"> 
-                    <img src="assets/icones/operacoes/white/return_icon.svg" alt="">
+                  class="btn btn-primary focus-terciario me-2"
+                  id="botao-voltar-header" (click)="resetSearchForm()">
+                  <img src="assets/icones/operacoes/white/return_icon.svg" alt="">
                 </button>
-                <span
-                  >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}} 
-                    a categoria:<strong> passo {{ tagSelected ? "2" : "1" }} de
-                  2</strong>
-                </span>
-                <hr />
               }
-             
+              <span
+                >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}}
+                a categoria:<strong> passo {{ tagSelected ? "2" : "1" }} de
+              2</strong>
+            </span>
+            <hr />
+          }
 
-              @if(!tagSelected){
-                <app-form-field
-                  [formGroup]="formPesquisaTag"
-                  formName="form-pesquisa-tag"
-                  controlName="nomePesquisaTag"
-                  icon="assets/icones/operacoes/black/search_icon.svg"
-                  label="Pesquise pelo nome da categoria:"
-                  placeholder="Digite o nome da categoria:"
-                  fieldType="input"
-                  (input)="onInputTag()"
-                  [required]="true"
-                  [validators]="[formValidatorsEnum.Required]"
-                ></app-form-field>
 
-                <!-- Compartilha a subscription para não precisar ficar recriando a comparação -->
-                <ng-container *ngIf="tagList$ | async as tags">
-                <!-- Texto informativo que aparece apenas enquanto não houver texto inserido -->
-                @if(this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
-                  <div
-                    class="texto-informativo d-flex justify-content-center align-items-center mt-2 gap-2"
+          @if(!tagSelected){
+            <app-form-field
+              [formGroup]="formPesquisaTag"
+              formName="form-pesquisa-tag"
+              controlName="nomePesquisaTag"
+              icon="assets/icones/operacoes/black/search_icon.svg"
+              label="Pesquise pelo nome da categoria:"
+              placeholder="Digite o nome da categoria:"
+              fieldType="input"
+              (input)="onInputTag()"
+              [required]="true"
+              [validators]="[formValidatorsEnum.Required]"
+            ></app-form-field>
+
+            <!-- Compartilha a subscription para não precisar ficar recriando a comparação -->
+            @if (tagList$ | async; as tags) {
+              <!-- Texto informativo que aparece apenas enquanto não houver texto inserido -->
+              @if(this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
+                <div
+                  class="texto-informativo d-flex justify-content-center align-items-center mt-2 gap-2"
                   >
-                    <img
-                      src="assets/icones/black/info_icon.svg"
-                      alt="ícone de informação"
+                  <img
+                    src="assets/icones/black/info_icon.svg"
+                    alt="ícone de informação"
                     />
                     <span>Filtre pelo nome e selecione abaixo para começar a editar</span>
                   </div>
                 }
-                  
-                @if(tags?.length <= 1 
+                @if(tags?.length <= 1
                   && this.formPesquisaTag.controls.nomePesquisaTag.value.length > 0)
-                {
+                  {
                   <div class="search-feedback-container
                      d-flex text-center justify-content-center mt-2 p-1">
                     <img
@@ -99,171 +99,172 @@
                           : 'error'
                       }}_icon.svg"
                       alt=""
-                    />
-                    <span>
-                      {{
+                      />
+                      <span>
+                        {{
                         tags.length == 1
-                          ? "Selecione abaixo para começar a editar"
-                          : "Nenhuma categoria encontrada!"
-                      }}
-                    </span>
-                  </div>
-                }
-
-                <!-- Lista de tags disponíveis para seleção -->
-                @if(tags?.length > 0){
-                  <hr />
-                  
-                  @if(
-                    (tags?.length != 1 && this.formPesquisaTag.controls.nomePesquisaTag.value.length > 0) 
-                    || this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
+                        ? "Selecione abaixo para começar a editar"
+                        : "Nenhuma categoria encontrada!"
+                        }}
+                      </span>
+                    </div>
+                  }
+                  <!-- Lista de tags disponíveis para seleção -->
+                  @if(tags?.length > 0){
+                    <hr />
+                    @if(
+                      (tags?.length != 1 && this.formPesquisaTag.controls.nomePesquisaTag.value.length > 0)
+                      || this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0){
                       <div class="d-flex justify-content-around align-items-center">
                         <span
                           >Categorias encontradas: (mostrando {{ tags.length }} de
                           {{ tagCount$ | async }})</span
-                        >
-
-                        <button
-                          *ngIf="isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0"
-                          class="btn btn-primary ms-2" (click)="expandSearchList()">
-                          <img class="btn-icon" src="assets/icones/operacoes/white/collapse_icon.svg" alt="">
-                        </button>
+                          >
+                          @if (isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0) {
+                            <button
+                              class="btn btn-primary ms-2" (click)="expandSearchList()">
+                              <img class="btn-icon" src="assets/icones/operacoes/white/collapse_icon.svg" alt="">
+                            </button>
+                          }
+                        </div>
+                      }
+                      <!-- Lista de tags encontradas com o filtro -->
+                      <ul class="list-group tag-list m-2">
+                        @for (tagPesquisa of tags; track $index) {
+                          <li
+                            (click)="setTagSelected(tagPesquisa.nome)"
+                            (keydown.enter)="setTagSelected(tagPesquisa.nome)"
+                            class="list-group-item"
+                            tabindex="0"
+                            >
+                            {{ tagPesquisa.nome }}
+                          </li>
+                        }
+                      </ul>
+                      <div class="d-flex justify-content-center w-100">
+                        @if (!isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0) {
+                          <button
+                            type="button"
+                            class="btn btn-primary ms-2" (click)="expandSearchList()">
+                            <img class="btn-icon" src="assets/icones/operacoes/white/expand_icon.svg" alt="">
+                          </button>
+                        }
+                        @if (isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0) {
+                          <button
+                            type="button"
+                            class="btn btn-primary ms-2" (click)="expandSearchList()">
+                            <img class="btn-icon" src="assets/icones/operacoes/white/collapse_icon.svg" alt="">
+                          </button>
+                        }
                       </div>
-                  }
-                  <!-- Lista de tags encontradas com o filtro -->
-                  <ul class="list-group tag-list m-2">
-                    @for (tagPesquisa of tags; track $index) {
-                    <li
-                      (click)="setTagSelected(tagPesquisa.nome)"
-                      (keydown.enter)="setTagSelected(tagPesquisa.nome)"
-                      class="list-group-item"
-                      tabindex="0"
-                    >
-                      {{ tagPesquisa.nome }}
-                    </li>
                     }
-                  </ul>
-                  <div class="d-flex justify-content-center w-100">
-                    <button
-                      *ngIf="!isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0"
-                      type="button"
-                      class="btn btn-primary ms-2" (click)="expandSearchList()">
-                      <img class="btn-icon" src="assets/icones/operacoes/white/expand_icon.svg" alt="">
-                    </button> 
-
-                     <button
-                        *ngIf="isExpandedTagList && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0"
-                        type="button"
-                        class="btn btn-primary ms-2" (click)="expandSearchList()">
-                        <img class="btn-icon" src="assets/icones/operacoes/white/collapse_icon.svg" alt="">
-                      </button>
-                  </div>
-                }
-                <!-- Para quando não houver nenhuma tag cadastrada na tabela -->
-                @else if (tags.length == 0  
-                  && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0) {
-                  <hr/>
-                  <div
-                    class="d-flex justify-content-center align-items-center text-center"
-                  >
-                    <span
-                      >Nenhuma categoria criada. Para começar a pesquisar, cadastre uma.
-                    </span
-                    >
-                  </div>
-                }
-                </ng-container>
-              } @else {
-                @if(FormGroupSelected == formEditTag){
-                  <app-form-field
-                    [formGroup]="formEditTag"
-                    formName="form-edit-tag"
-                    controlName="nomeEditTag"
-                    icon="assets/icones/black/tag_icon.svg"
-                    label="Nome da categoria:"
-                    placeholder="Digite o novo nome da categoria"
-                    fieldType="input"
-                    [required]="true"
+                    <!-- Para quando não houver nenhuma tag cadastrada na tabela -->
+                    @else if (tags.length == 0
+                    && this.formPesquisaTag.controls.nomePesquisaTag.value.length == 0) {
+                    <hr/>
+                    <div
+                      class="d-flex justify-content-center align-items-center text-center"
+                      >
+                      <span
+                        >Nenhuma categoria criada. Para começar a pesquisar, cadastre uma.
+                        </span
+                        >
+                      </div>
+                    }
+                  }
+                } @else {
+                  @if(FormGroupSelected == formEditTag){
+                    <app-form-field
+                      [formGroup]="formEditTag"
+                      formName="form-edit-tag"
+                      controlName="nomeEditTag"
+                      icon="assets/icones/black/tag_icon.svg"
+                      label="Nome da categoria:"
+                      placeholder="Digite o novo nome da categoria"
+                      fieldType="input"
+                      [required]="true"
                     [validators]="[
                       formValidatorsEnum.Required,
                       formValidatorsEnum.MinLength
                     ]"
-                  ></app-form-field>
+                    ></app-form-field>
 
-                  @if(!this.tagPreloaded){
-                    <div
-                      class="texto-informativo d-flex justify-content-center align-items-center mt-2"
-                    >
-                      <img
-                        src="assets/icones/black/info_icon.svg"
-                        alt="ícone de informação"
-                      />
-                      <span>Clique no botão de voltar para pesquisar por outra categoria</span>
-                    </div>
+                    @if(!this.tagPreloaded){
+                      <div
+                        class="texto-informativo d-flex justify-content-center align-items-center mt-2"
+                        >
+                        <img
+                          src="assets/icones/black/info_icon.svg"
+                          alt="ícone de informação"
+                          />
+                          <span>Clique no botão de voltar para pesquisar por outra categoria</span>
+                        </div>
+                      }
+
+                    }
+                    @else if(FormGroupSelected == formExclusaoTag){
+                    <app-form-field
+                      [formGroup]="formExclusaoTag"
+                      formName="form-exclusao-tag"
+                      controlName="nomeExclusaoTag"
+                      icon="assets/icones/black/tag_icon.svg"
+                      label="Nome da categoria:"
+                      fieldType="input"
+                    ></app-form-field>
                   }
-                 
                 }
-                @else if(FormGroupSelected == formExclusaoTag){
-                  <app-form-field
-                    [formGroup]="formExclusaoTag"
-                    formName="form-exclusao-tag"
-                    controlName="nomeExclusaoTag"
-                    icon="assets/icones/black/tag_icon.svg"
-                    label="Nome da categoria:"
-                    fieldType="input"
-                  ></app-form-field>
-                }
-              } 
+              }
+            </div>
+          </div>
+          <div class="modal-footer d-flex justify-content-center justify-content-md-end">
+            @if(!this.tagPreloaded){
+              @if (tagSelected) {
+                <button
+                  type="button"
+                  class="btn btn-quaternary"
+                  id="botao-voltar-footer"
+                  (click)="resetSearchForm()"
+                  >
+                  <img class="btn-icon" src="assets/icones/operacoes/white/return_icon.svg" alt="Ícone de voltar">
+                  Voltar
+                </button>
+              }
+            }
+            <button
+              type="button"
+              class="btn btn-terciary"
+              data-bs-dismiss="modal"
+              >
+              <img class="btn-icon" src="assets/icones/operacoes/black/cancel_icon.svg" alt="Ícone de voltar">
+              Cancelar
+            </button>
+            @if (tagSelected || modalTypeSelected == modalTypes.Adicao) {
+              <button
+                type="submit"
+                (click)="onSubmit()"
+                class="btn btn-{{modalTypeSelected == modalTypes.Exclusao ? 'secondary' : 'primary'}}"
+                >
+                <img class="btn-icon" src="assets/icones/operacoes/white/{{ModalInfo.icon}}_icon.svg" alt="Ícone de voltar">
+                {{ ModalInfo.buttonText }}
+              </button>
             }
           </div>
-        </div>
-        <div class="modal-footer d-flex justify-content-center justify-content-md-end">
-          @if(!this.tagPreloaded){
-            <button
-              *ngIf="tagSelected"
-              type="button"
-              class="btn btn-quaternary"
-              id="botao-voltar-footer"
-              (click)="resetSearchForm()"
-            >
-              <img class="btn-icon" src="assets/icones/operacoes/white/return_icon.svg" alt="Ícone de voltar">
-              Voltar
-            </button>
-          }
-          <button
-            type="button"
-            class="btn btn-terciary"
-            data-bs-dismiss="modal"
-          >
-            <img class="btn-icon" src="assets/icones/operacoes/black/cancel_icon.svg" alt="Ícone de voltar">
-            Cancelar
-          </button>
-          <button
-            type="submit"
-            (click)="onSubmit()"
-            class="btn btn-{{modalTypeSelected == modalTypes.Exclusao ? 'secondary' : 'primary'}}"
-            *ngIf="tagSelected || modalTypeSelected == modalTypes.Adicao"
-          >
-           <img class="btn-icon" src="assets/icones/operacoes/white/{{ModalInfo.icon}}_icon.svg" alt="Ícone de voltar">
-            {{ ModalInfo.buttonText }}
-          </button>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Botões para abrir e fechar o modal via código -->
-<button
-  class="d-none"
-  [attr.data-bs-target]="'#modalTag'"
-  [attr.data-bs-toggle]="'modal'"
-  #botaoChamarModal
-></button>
+  <!-- Botões para abrir e fechar o modal via código -->
+  <button
+    class="d-none"
+    [attr.data-bs-target]="'#modalTag'"
+    [attr.data-bs-toggle]="'modal'"
+    #botaoChamarModal
+  ></button>
 
-<button
-  class="d-none"
-  [attr.data-bs-target]="'#modalTag'"
-  [attr.data-bs-toggle]="'modal'"
-  #botaoFecharModal
-></button>
+  <button
+    class="d-none"
+    [attr.data-bs-target]="'#modalTag'"
+    [attr.data-bs-toggle]="'modal'"
+    #botaoFecharModal
+  ></button>

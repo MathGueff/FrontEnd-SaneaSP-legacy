@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -13,7 +13,7 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
 
 @Component({
     selector: 'app-reclamacao-edicao',
-    imports: [CommonModule, ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
+    imports: [ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
     templateUrl: './reclamacao-edicao.component.html',
     styleUrl: './reclamacao-edicao.component.css'
 })

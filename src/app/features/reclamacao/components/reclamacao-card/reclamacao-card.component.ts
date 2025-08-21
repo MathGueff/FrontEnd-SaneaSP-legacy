@@ -1,14 +1,14 @@
 import { Component, EventEmitter, inject, Input, Output} from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
-import { CommonModule } from '@angular/common';
+
 import { IUser } from '@features/usuario/models/usuario.model';
 import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 
 @Component({
     selector: 'app-reclamacao-card',
-    imports: [RouterLink, CommonModule],
+    imports: [RouterLink],
     templateUrl: './reclamacao-card.component.html',
     styleUrl: './reclamacao-card.component.css'
 })

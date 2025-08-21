@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,7 +14,7 @@ import { AuthService } from '@core/services/auth.service';
 
 @Component({
     selector: 'app-form-cadastro',
-    imports: [RouterLink, CommonModule, FormFieldComponent, ReactiveFormsModule],
+    imports: [RouterLink, FormFieldComponent, ReactiveFormsModule],
     templateUrl: './form-cadastro.component.html',
     styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
 })
