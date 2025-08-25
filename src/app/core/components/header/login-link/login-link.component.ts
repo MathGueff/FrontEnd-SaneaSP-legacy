@@ -8,7 +8,8 @@ import { CommonModule } from '@angular/common';
     selector: 'app-login-link',
     imports: [RouterLink, CommonModule],
     templateUrl: './login-link.component.html',
-    styleUrl: './login-link.component.css'
+    styleUrl: './login-link.component.css',
+    standalone:true
 })
 export class LoginLinkComponent {
   userAtivo : string | null = null;
