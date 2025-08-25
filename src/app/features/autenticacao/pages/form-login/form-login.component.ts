@@ -14,7 +14,8 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
     selector: 'app-form-login',
     imports: [RouterModule, ReactiveFormsModule, FormFieldComponent],
     templateUrl: './form-login.component.html',
-    styleUrls: ['./form-login.component.css', '../links-redes.css']
+    styleUrls: ['./form-login.component.css', '../links-redes.css'],
+    standalone:true
 })
 
 export class FormLoginComponent{

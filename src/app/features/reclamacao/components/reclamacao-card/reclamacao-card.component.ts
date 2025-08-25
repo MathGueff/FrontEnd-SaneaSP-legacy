@@ -10,7 +10,8 @@ import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.serv
     selector: 'app-reclamacao-card',
     imports: [RouterLink],
     templateUrl: './reclamacao-card.component.html',
-    styleUrl: './reclamacao-card.component.css'
+    styleUrl: './reclamacao-card.component.css',
+    standalone:true
 })
 export class ReclamacaoCardComponent   {
   @Input () card !: IReclamacao;

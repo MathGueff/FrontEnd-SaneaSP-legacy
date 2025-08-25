@@ -41,23 +41,24 @@
             @else if (modalTypeSelected == modalTypes.Exclusao
             || modalTypeSelected == modalTypes.Edicao)
             {
-            @if(!this.tagPreloaded){
-              @if (tagSelected) {
-                <button
-                  type="button"
-                  *ngIf="tagSelected" 
-                  class="btn btn-primary focus-terciario me-2" 
-                  id="botao-voltar-header" (click)="resetSearchForm()"> 
-                    <img src="icons/ui/white/return_icon.svg" alt="">
-                </button>
-              }
+              @if(!this.tagPreloaded){
+                @if (tagSelected) {
+                  <button
+                    type="button"
+                    *ngIf="tagSelected" 
+                    class="btn btn-primary focus-terciario me-2" 
+                    id="botao-voltar-header" (click)="resetSearchForm()"> 
+                      <img src="assets/icones/operacoes/white/return_icon.svg" alt="">
+                  </button>
+                }
               <span
-                >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}}
-                a categoria:<strong> passo {{ tagSelected ? "2" : "1" }} de
-              2</strong>
-            </span>
-            <hr />
-          }
+                  >{{modalTypeSelected == modalTypes.Edicao ? 'Editando' : 'Excluindo'}}
+                  a categoria:<strong> passo {{ tagSelected ? "2" : "1" }} de
+                2</strong>
+              </span>
+              <hr />
+              }
+            }
 
 
               @if(!tagSelected){
@@ -171,7 +172,6 @@
                     >
                   </div>
                 }
-                </ng-container>
               } @else {
                 @if(FormGroupSelected == formEditTag){
                   <app-form-field

@@ -15,7 +15,8 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
     selector: 'app-reclamacao-edicao',
     imports: [ReactiveFormsModule, NotFoundComponent, TagSelectComponent, ImageSelectComponent],
     templateUrl: './reclamacao-edicao.component.html',
-    styleUrl: './reclamacao-edicao.component.css'
+    styleUrl: './reclamacao-edicao.component.css',
+    standalone:true
 })
 export class ReclamacaoEdicaoComponent implements OnInit {
     private reclamacaoService = inject(ReclamacaoService);

@@ -6,7 +6,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     selector: 'app-image-select',
     imports: [ReactiveFormsModule],
     templateUrl: './image-select.component.html',
-    styleUrl: './image-select.component.css'
+    styleUrl: './image-select.component.css',
+    standalone:true
 })
 export class ImageSelectComponent {
   src: any = null;

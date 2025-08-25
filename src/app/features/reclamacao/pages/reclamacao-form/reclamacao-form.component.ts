@@ -19,7 +19,8 @@ import { ImageSelectComponent } from "@shared/components/image-select/image-sele
     selector: 'app-reclamacao-form',
     imports: [ReactiveFormsModule, RouterLink, TagSelectComponent, ImageSelectComponent],
     templateUrl: './reclamacao-form.component.html',
-    styleUrl: './reclamacao-form.component.css'
+    styleUrl: './reclamacao-form.component.css',
+    standalone:true
 })
 export class ReclamacaoFormComponent implements OnInit {
 

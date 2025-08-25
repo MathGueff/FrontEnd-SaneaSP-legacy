@@ -12,7 +12,8 @@ import { ErrorService } from '@core/services/error-handler.service';
     selector: 'app-update-tag',
     imports: [CommonModule, TagModalComponent, RouterModule],
     templateUrl: './tag-tabela.component.html',
-    styleUrl: './tag-tabela.component.css'
+    styleUrl: './tag-tabela.component.css',
+    standalone:true
 })
 export class TagTabelaComponent implements OnInit{
 

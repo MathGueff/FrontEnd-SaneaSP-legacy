@@ -18,7 +18,8 @@ import { AuthService } from '@core/services/auth.service';
     selector: 'app-edicao-perfil',
     imports: [FormFieldComponent, ReactiveFormsModule],
     templateUrl: './edicao-perfil.component.html',
-    styleUrl: './edicao-perfil.component.css'
+    styleUrl: './edicao-perfil.component.css',
+    standalone:true
 })
 export class EdicaoPerfilComponent implements OnInit {
   protected cadastroErrorStatus: RegistrationErrorEnum = RegistrationErrorEnum.None;
