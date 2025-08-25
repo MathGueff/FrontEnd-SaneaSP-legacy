@@ -144,7 +144,7 @@ export class TagModalComponent implements AfterViewInit, OnInit{
   get ModalInfo(): IModalTagInfos {
     /** 
      * Ícones são usados com 
-     * - prefixo assets/icones/operacoes/white
+     * - prefixo icons/actions/white
      * - sufixo _icon.svg, por isso uso apenas o nome
      */
     const modalInfoMap: Record<ModalType, IModalTagInfos> = {
@@ -156,7 +156,7 @@ export class TagModalComponent implements AfterViewInit, OnInit{
       [ModalType.Adicao]: {
         title: 'Cadastre uma nova categoria',
         buttonText: 'Salvar categoria',
-        icon: 'confirm',
+        icon: 'add',
       },
       [ModalType.Edicao]: {
         title: 'Edite a categoria',

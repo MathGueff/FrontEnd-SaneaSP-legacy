@@ -39,7 +39,7 @@ export class FormLoginComponent{
     { 
       controlName:'email', 
       type : 'email',
-      icon:'assets/login/email_icon.svg', 
+      icon:'images/login/email_icon.svg', 
       label:'Email:', 
       placeholder: 'Email de login', 
       required: true, 
@@ -48,7 +48,7 @@ export class FormLoginComponent{
     { 
       controlName:'senha', 
       type : 'password',
-      icon:'assets/login/senha_icon.svg', 
+      icon:'images/login/senha_icon.svg', 
       label:'Senha:', 
       placeholder: 'Senha de login', 
       required: true, 

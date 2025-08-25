@@ -4,11 +4,12 @@ import { inject, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { ICreateReclamacao, IReclamacao } from "@features/reclamacao/models/reclamacao.model";
 import { AuthService } from "@core/services/auth.service";
+import { environment } from 'environments/environment';
 
 @Injectable ({providedIn:'root'})
 export class ReclamacaoService{
   //
-  private urlApi:string = "https://backend-saneasp.onrender.com/denuncia";
+  private urlApi:string = environment.domain +"denuncia";
 
   private authService = inject(AuthService);
   private listReclamcao !: IReclamacao[];

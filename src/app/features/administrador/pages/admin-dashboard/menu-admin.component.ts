@@ -63,22 +63,22 @@ export class MenuAdminComponent implements OnInit {
   linksSidebar: ILinkSidebarAdmin[] = [
     {
       name: 'Gerenciar reclamações',
-      img: 'assets/icones/white/reclamacao_icon.svg',
+      img: 'icons/shared/white/reclamacao_icon.svg',
       opcao: AdminSidebarOptions.Reclamacao,
     },
     {
       name: 'Gerenciar comentários',
-      img: 'assets/icones/white/reclamacao_icon.svg',
+      img: 'icons/shared/white/reclamacao_icon.svg',
       opcao: AdminSidebarOptions.Comentario,
     },
     {
       name: 'Gerenciar categorias do site',
-      img: 'assets/icones/white/tag_icon.svg',
+      img: 'icons/shared/white/tag_icon.svg',
       opcao: AdminSidebarOptions.Tag,
     },
     {
       name: 'Log',
-      img: 'assets/icones/white/log_icon.svg',
+      img: 'icons/shared/white/log_icon.svg',
       opcao: AdminSidebarOptions.Log,
     },
   ];
@@ -93,25 +93,25 @@ export class MenuAdminComponent implements OnInit {
         type: 'link',
         path: '/reclamacao',
         name: 'Visualizar todas reclamações',
-        img: 'assets/icones/operacoes/white/view_icon.svg',
+        img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'link',
         path: '/reclamacao',
         name: 'Excluir uma reclamação',
-        img: 'assets/icones/operacoes/white/delete_icon.svg',
+        img: 'icons/actions/white/delete_icon.svg',
       },
       {
         type: 'link',
         path: '/',
         name: 'Gerar relatório de reclamação',
-        img: 'assets/icones/white/log_icon.svg',
+        img: 'icons/shared/white/log_icon.svg',
       },
       {
         type: 'link',
         path: '/',
         name: 'Visualizar filtragem geográfica',
-        img: 'assets/icones/white/geo_icon.svg',
+        img: 'icons/shared/white/geo_icon.svg',
       },
     ],
     [AdminSidebarOptions.Comentario]: [
@@ -119,25 +119,25 @@ export class MenuAdminComponent implements OnInit {
         type: 'link',
         path: '/reclamacao',
         name: 'Ver seus comentários',
-        img: 'assets/icones/operacoes/white/view_icon.svg',
+        img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'link',
         path: '/reclamacao',
         name: 'Adicionar comentário',
-        img: 'assets/icones/operacoes/white/add_icon.svg',
+        img: 'icons/actions/white/add_icon.svg',
       },
       {
         type: 'link',
         path: '/reclamacao',
         name: 'Editar comentário',
-        img: 'assets/icones/operacoes/white/edit_icon.svg',
+        img: 'icons/actions/white/edit_icon.svg',
       },
       {
         type: 'link',
         path: '/reclamacao',
         name: 'Remover um comentário',
-        img: 'assets/icones/operacoes/white/delete_icon.svg',
+        img: 'icons/actions/white/delete_icon.svg',
       },
     ],
     [AdminSidebarOptions.Tag] : [
@@ -145,25 +145,25 @@ export class MenuAdminComponent implements OnInit {
         type: 'link',
         path: '/tag-tabela',
         name: 'Visualizar todas as categorias',
-        img: 'assets/icones/operacoes/white/view_icon.svg',
+        img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'modal',
         tipoModal: ModalType.Adicao,
         name: 'Criar nova categoria',
-        img: 'assets/icones/operacoes/white/add_icon.svg',
+        img: 'icons/actions/white/add_icon.svg',
       },
       {
         type: 'modal',
         tipoModal: ModalType.Edicao,
         name: 'Editar uma categoria',
-        img: 'assets/icones/operacoes/white/edit_icon.svg',
+        img: 'icons/actions/white/edit_icon.svg',
       },
       {
         type: 'modal',
         tipoModal: ModalType.Exclusao,
         name: 'Excluir uma categoria',
-        img: 'assets/icones/operacoes/white/delete_icon.svg',
+        img: 'icons/actions/white/delete_icon.svg',
       },
     ],
     [AdminSidebarOptions.Log]: [
@@ -171,7 +171,7 @@ export class MenuAdminComponent implements OnInit {
         type: 'link',
         path: '/',
         name: 'Visualizar log de comentários',
-        img: 'assets/icones/white/log_icon.svg',
+        img: 'icons/shared/white/log_icon.svg',
       },
     ]
   };

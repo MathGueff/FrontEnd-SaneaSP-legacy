@@ -1,10 +1,11 @@
 import { IUser } from '@features/usuario/models/usuario.model';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
-  private API_URL = "https://backend-saneasp.onrender.com/user"
+  private API_URL =  environment.domain + "user"
 
   constructor(private httpClient : HttpClient) {}
 

@@ -47,23 +47,23 @@
     <div class="row justify-content-center">
       <!-- Imagem do card -->
       <div class="card-image-div col-lg-2 col-md-12 d-flex justify-content-lg-center">
-        <div id="carouselImage" class="carousel slide">
-          <div class="carousel-inner">
-            @for (imagem of card.Imagens; track imagem.id; let firstImage = $first ) {
-              @if(firstImage){
-                <div class="carousel-item active">
-                  <img src="img/paginas/reclamacoes/{{ imagem.nome }}" class="card-icon-large" alt="Imagem da Reclamação">
-                </div>
+          <div id="carouselImage" class="carousel slide">
+            <div class="carousel-inner">
+              @for (imagem of card.Imagens; track imagem.id; let firstImage = $first ) {
+                @if(firstImage){
+                  <div class="carousel-item active">
+                    <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large" alt="Imagem da Reclamação">
+                  </div>
+                }
+                @else {
+                  <div class="carousel-item">
+                    <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large" alt="Imagem da Reclamação">
+                  </div>
+                }
+              } @empty {
+                <img src="image-not-found.svg" alt="icone" class="card-icon-large">
               }
-              @else {
-              <div class="carousel-item">
-                <img src="img/paginas/reclamacoes/{{ imagem.nome }}" class="card-icon-large" alt="Imagem da Reclamação">
-              </div>
-            }
-            } @empty {
-            <img src="image-not-found.svg" alt="icone" class="card-icon-large">
-          }
-        </div>
+            </div>
 
         @if(card.Imagens.length > 1){
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">

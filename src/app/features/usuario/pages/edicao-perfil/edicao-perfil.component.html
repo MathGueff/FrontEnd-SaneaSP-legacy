@@ -51,12 +51,10 @@
         }
         <!-- Método checkIfFormError retorna true caso o erro específico esteja ocorrendo (parametro é o valor de string do enum)-->
 
-        <!-- Caso as senhas não coincidam -->
-        @if (checkIfFormError('invalid-password')) {
-          <span class="texto-validacao-erro-form mb-1">
-            <img src="assets/login/erro_icon.svg" alt=""> Senhas não coincidem
-          </span>
-        }
+      <!-- Caso as senhas não coincidam -->
+      <span *ngIf="checkIfFormError('invalid-password')" class="texto-validacao-erro-form mb-1">
+        <img src="assets/login/erro_icon.svg" alt=""> Senhas não coincidem
+      </span>
 
         <!-- Caso já exista um usuário -->
         @if (checkIfFormError('user-exists')) {

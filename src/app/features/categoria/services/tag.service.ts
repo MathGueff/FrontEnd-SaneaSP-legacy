@@ -6,11 +6,12 @@ import { ITagCadastro } from '@features/categoria/models/tag-cadastro.model';
 import { ITagListFilter } from '@features/categoria/models/tag-list-filter.model';
 import { IResponseList } from '@shared/models/response.model';
 import { AuthService } from '@core/services/auth.service';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class TagService {
   //
-  private apiUrl = 'https://backend-saneasp.onrender.com/categoria';
+  private apiUrl = environment.domain + 'categoria';
   constructor(
     private httpClient: HttpClient,
     private authService: AuthService

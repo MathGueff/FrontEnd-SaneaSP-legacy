@@ -5,10 +5,11 @@ import { IUser } from '@features/usuario/models/usuario.model';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
 import { LocalStorageService } from '@core/services/local-storage.service';
 import { ErrorService } from './error-handler.service';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private API_URL = 'https://backend-saneasp.onrender.com/auth';
+  private API_URL = environment.domain + 'auth';
 
   /* Observable para avisar quando um novo usuário é logado */
   private currentUserSubject = new BehaviorSubject<IUser | null>(null);

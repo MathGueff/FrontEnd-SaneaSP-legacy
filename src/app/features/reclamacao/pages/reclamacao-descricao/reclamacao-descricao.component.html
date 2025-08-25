@@ -1,25 +1,25 @@
 <!-- Verifica se encontrou a reclamação -->
 @if (existReclamcao) {
-  @if (reclamacao$ | async; as reclamacao) {
-    <section class="painel m-5 justifica rounded background">
-      <header class="header-painel row justify-content-between p-4 mx-0 h-auto">
-        <div id="carouselImage" class="carousel slide col-3">
-          <div class="carousel-inner w-100">
-            @for (imagem of reclamacao.Imagens; track imagem.id; let firstImage =
-              $first ) { @if(firstImage){
-              <div class="carousel-item active text-center w-100">
-                <img src="img/paginas/reclamacoes/{{ imagem.nome }}" class="card-icon-large imgPainel"
-                  alt="Imagem da Denúncia" />
-                </div>
-              } @else {
-                <div class="carousel-item text-center w-100">
-                  <img src="img/paginas/reclamacoes/{{ imagem.nome }}" class="card-icon-large imgPainel"
-                    alt="Imagem da Denúncia" />
-                  </div>
-                  } } @empty {
-                  <img src="image-not-found.svg" alt="icone" class="card-icon-large imgPainel" />
-                }
-              </div>
+@if (reclamacao$ | async; as reclamacao) {
+<section class="painel m-5 justifica rounded background">
+  <header class="header-painel row justify-content-between p-4 mx-0 h-auto">
+    <div id="carouselImage" class="carousel slide col-3">
+      <div class="carousel-inner w-100">
+        @for (imagem of reclamacao.Imagens; track imagem.id; let firstImage =
+        $first ) { @if(firstImage){
+        <div class="carousel-item active text-center w-100">
+          <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large imgPainel"
+            alt="Imagem da Denúncia" />
+        </div>
+        } @else {
+        <div class="carousel-item text-center w-100">
+          <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large imgPainel"
+            alt="Imagem da Denúncia" />
+        </div>
+        } } @empty {
+        <img src="image-not-found.svg" alt="icone" class="card-icon-large imgPainel" />
+        }
+      </div>
 
               @if(reclamacao.Imagens.length > 1){
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">

@@ -19,6 +19,6 @@ export class NavbarComponent {
   loginInfo$ =  this.authService.currentUser$;
   //Array com links de navegação da navbar
   links : NavbarLink[] =[
-    {path: '/reclamacao', img: 'assets/icones/white/reclamacao_icon.svg', alt : 'Ícone do link para página de Reclamação', nome : 'Reclamação'}
+    {path: '/reclamacao', img: 'icons/shared/white/reclamacao_icon.svg', alt : 'Ícone do link para página de Reclamação', nome : 'Reclamação'}
   ];
 }
