@@ -48,13 +48,13 @@
           }
         </select>
       }
-      @if (type == 'password' || this.showPassword == true)
-        {
-        <div class="show_password ms-1" (click)="changeType()" >
-          <img class="icon show_password_icon me-1" src="assets/login/{{!showPassword ? 'show_password_icon' : 'hide_password_icon'}}.svg">
-          <span class="form-text">{{!showPassword ? 'Mostrar senha' : 'Esconder senha'}}</span>
-        </div>
-      }
+    }
+    @if (type == 'password' || this.showPassword == true)
+      {
+      <div class="show_password ms-1" (click)="changeType()" >
+        <img class="icon show_password_icon me-1" src="assets/login/{{!showPassword ? 'show_password_icon' : 'hide_password_icon'}}.svg">
+        <span class="form-text">{{!showPassword ? 'Mostrar senha' : 'Esconder senha'}}</span>
+      </div>
     }
   </div>
 

@@ -29,7 +29,8 @@ import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
     selector: 'app-form-field',
     imports: [ReactiveFormsModule],
     templateUrl: './form-field.component.html',
-    styleUrl: './form-field.component.css'
+    styleUrl: './form-field.component.css',
+    standalone:true
 })
 export class FormFieldComponent{
   @Input() formGroup !: FormGroup; //Form gruop utilizado no componente pai
