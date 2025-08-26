@@ -1,3 +1,4 @@
+import { EmailService } from './email.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, switchMap, tap } from 'rxjs';
@@ -23,7 +24,8 @@ export class AuthService {
     private httpClient: HttpClient,
     private sweetAlertService: SweetAlertService,
     private localStorageService : LocalStorageService,
-    private errorService : ErrorService){
+    private errorService : ErrorService,
+    private emailService : EmailService){
     this.initializeAuth()
   }
 
@@ -57,6 +59,13 @@ export class AuthService {
 
   /* Criação de um novo usuário */
   public register(newUser: IUser) {
+    this.emailService.sendEmail({
+      subject: 'Novo usuário',
+      to: newUser.email,
+      message: 'Um novo usuário foi criado no site SaneaSP'
+    }).subscribe(response => {
+      alert('Email enviado!');
+    });
     return this.httpClient.post<IUser>(`${this.API_URL}/register`, newUser);
   }
 
