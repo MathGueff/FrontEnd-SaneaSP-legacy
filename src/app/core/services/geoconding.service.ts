@@ -1,25 +1,30 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
+import { GeoJsonFeature } from '@shared/models/geo-json.model';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable({ providedIn: 'root' })
 export class GeocodingService {
-  private NOMINATIM_URL = 'https://nominatim.openstreetmap.org/search';
+  private apiKey = 'YOUR_API_KEY'; // substitua pela sua chave
+  private apiUrl = 'https://us1.locationiq.com/v1/search.php';
 
   constructor(private http: HttpClient) {}
 
-  searchAddress(street: string,number:string,city:string): Observable<{ lat: number; lon: number } | null> {
-    const url = `${this.NOMINATIM_URL}https://nominatim.openstreetmap.org/search?street=${street}+${number}&city=${city}&state=SP&country=Brasil&?format=json&q=${encodeURIComponent(street)}`;
+  geolocation(endereco: string): Observable<GeoJsonFeature | null> {
+    const url = `${this.apiUrl}?key=${this.apiKey}&q=${encodeURIComponent(endereco)}&format=json`;
 
     return this.http.get<any[]>(url).pipe(
       map(results => {
         if (results.length > 0) {
+          const { lat, lon, display_name } = results[0];
           return {
-            lat: parseFloat(results[0].lat),
-            lon: parseFloat(results[0].lon)
-          };
+            type: 'Feature',
+            geometry: {
+              type: 'Point',
+              coordinates: [parseFloat(lon), parseFloat(lat)] // GeoJSON usa [lon, lat]
+            },
+            properties: { display_name }
+          }as GeoJsonFeature;
         }
         return null;
       })

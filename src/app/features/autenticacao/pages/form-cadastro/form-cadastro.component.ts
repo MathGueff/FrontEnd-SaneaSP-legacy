@@ -23,6 +23,7 @@ import { MapComponent } from "@shared/components/map/map.component";
   imports: [RouterLink, FormFieldComponent, ReactiveFormsModule, MapComponent],
   templateUrl: "./form-cadastro.component.html",
   styleUrls: ["./form-cadastro.component.css", "../links-redes.css"],
+  standalone: true
 })
 export class FormCadastroComponent implements OnInit {
   private formBuilderService = inject(NonNullableFormBuilder);
@@ -32,7 +33,7 @@ export class FormCadastroComponent implements OnInit {
   private toastService = inject(ToastService);
   private sweetAlertService = inject(SweetAlertService);
   private geocodingService = inject(GeocodingService);
-  public  coordanates!:{lat:number,lon:number};
+  public coordanates!: { lat: number, lon: number };
 
   formName: string = "cadastro"; //Nome do formulário para concatenar ao nome do control (email-cadastro)
   passwordMinLength = 6;
@@ -227,19 +228,19 @@ export class FormCadastroComponent implements OnInit {
   ngOnInit() {
     //
     this.formCadastro.valueChanges.subscribe((form) => {
-     
-      let street = `${form.logradouro}`;
-      let number = `${form.numero}`;
-      let city = `Sorocaba`
+      if (form.logradouro || form.cep) {
+        let street = `${form.logradouro}`;
+        let number = `${form.numero}`;
+        let city = `Sorocaba`
 
-      this.geocodingService.searchAddress(street,number,city).subscribe((res) => {
-        console.log(res)
-        // if(res){
-        //   this.coordanates = res;
-        // }
+        this.geocodingService.geolocation("Av. Paulista 1578, São Paulo").subscribe((res) => {
+          console.log(res?.geometry.coordinates)
+          // if(res){
+          //   this.coordanates = res;
+          // }
 
-      });
-
+        });
+      }
     });
     //VIACEP
     this.formCadastro.controls.cep.valueChanges.subscribe(() => {

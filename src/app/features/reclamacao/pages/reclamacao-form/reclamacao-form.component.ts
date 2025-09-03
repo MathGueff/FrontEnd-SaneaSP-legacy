@@ -18,7 +18,7 @@ import { MapComponent } from "@shared/components/map/map.component";
 
 @Component({
     selector: 'app-reclamacao-form',
-    imports: [ReactiveFormsModule, RouterLink, TagSelectComponent, ImageSelectComponent, MapComponent],
+    imports: [ReactiveFormsModule, RouterLink, TagSelectComponent, ImageSelectComponent],
     templateUrl: './reclamacao-form.component.html',
     styleUrl: './reclamacao-form.component.css',
     standalone:true
