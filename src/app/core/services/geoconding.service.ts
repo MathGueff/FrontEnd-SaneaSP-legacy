@@ -2,10 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, map } from 'rxjs';
 import { GeoJsonFeature } from '@shared/models/geo-json.model';
+import { environment } from 'environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class GeocodingService {
-  private apiKey = 'YOUR_API_KEY'; // substitua pela sua chave
+  private apiKey = environment.locationiqKey; // substitua pela sua chave
   private apiUrl = 'https://us1.locationiq.com/v1/search.php';
 
   constructor(private http: HttpClient) {}

@@ -235,9 +235,9 @@ export class FormCadastroComponent implements OnInit {
 
         this.geocodingService.geolocation("Av. Paulista 1578, São Paulo").subscribe((res) => {
           console.log(res?.geometry.coordinates)
-          // if(res){
-          //   this.coordanates = res;
-          // }
+          if(res){
+            this.coordanates = res.geometry.coordinates;
+          }
 
         });
       }

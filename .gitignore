@@ -242,3 +242,5 @@ dist
 
 .editorconfig
 .vscode
+
+environment.ts
