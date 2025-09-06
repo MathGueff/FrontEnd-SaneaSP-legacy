@@ -17,6 +17,7 @@ import { ToastService } from "@shared/services/toast.service";
 import { SweetAlertService } from "@shared/services/sweet-alert.service";
 import { AuthService } from "@core/services/auth.service";
 import { MapComponent } from "@shared/components/map/map.component";
+import { GeoJsonFeature } from "@shared/models/geo-json.model";
 
 @Component({
   selector: "app-form-cadastro",
@@ -33,7 +34,7 @@ export class FormCadastroComponent implements OnInit {
   private toastService = inject(ToastService);
   private sweetAlertService = inject(SweetAlertService);
   private geocodingService = inject(GeocodingService);
-  public coordanates!: { lat: number, lon: number };
+  public coordanates!: GeoJsonFeature;
 
   formName: string = "cadastro"; //Nome do formulário para concatenar ao nome do control (email-cadastro)
   passwordMinLength = 6;
@@ -236,7 +237,7 @@ export class FormCadastroComponent implements OnInit {
         this.geocodingService.geolocation("Av. Paulista 1578, São Paulo").subscribe((res) => {
           console.log(res?.geometry.coordinates)
           if(res){
-            this.coordanates = res.geometry.coordinates;
+            this.coordanates = res;
           }
 
         });
