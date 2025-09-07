@@ -178,12 +178,13 @@ export class FormCadastroComponent implements OnInit {
           endereco: userAddress,
           telefone: this.formCadastro.controls.telefone.value || undefined,
           cpf: this.formCadastro.controls.cpf.value || undefined,
-          nivel: 0  //Nivel default
+          nivel: 0,
+          verified: false
         }
 
         this.authService.register(newUser)?.subscribe({
           next : () => {
-            this.sweetAlertService.showMessage('Cadastro realizado com sucesso');
+            this.sweetAlertService.showMessage('Para concluir seu cadastro, verifique seu E-mail');
             //Retorna à pagina de login para que o usuário possa logar
             this.router.navigate(['/login']);
           },
