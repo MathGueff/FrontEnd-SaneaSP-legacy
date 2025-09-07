@@ -13,10 +13,10 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-    selector: 'app-form-cadastro',
-    imports: [RouterLink, FormFieldComponent, ReactiveFormsModule],
-    templateUrl: './form-cadastro.component.html',
-    styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
+  selector: 'app-form-cadastro',
+  imports: [RouterLink, FormFieldComponent, ReactiveFormsModule],
+  templateUrl: './form-cadastro.component.html',
+  styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
 })
 
 export class FormCadastroComponent implements OnInit {
@@ -183,7 +183,7 @@ export class FormCadastroComponent implements OnInit {
         }
 
         this.authService.register(newUser)?.subscribe({
-          next : () => {
+          next: () => {
             this.sweetAlertService.showMessage('Para concluir seu cadastro, verifique seu E-mail');
             //Retorna à pagina de login para que o usuário possa logar
             this.router.navigate(['/login']);
