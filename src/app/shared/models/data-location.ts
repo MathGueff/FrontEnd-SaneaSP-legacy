@@ -1,7 +1,7 @@
 export interface DataLocation{
     lat: number,
     lon: number,
-    address:{
+    address?:{
         road: string,
         city: string
     }
