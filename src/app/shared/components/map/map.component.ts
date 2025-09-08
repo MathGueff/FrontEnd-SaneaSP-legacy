@@ -1,6 +1,5 @@
 import { isPlatformBrowser } from "@angular/common";
 import { AfterViewInit, Component, Inject, Input, PLATFORM_ID } from "@angular/core";
-import { GeoJsonFeature } from "@shared/models/geo-json.model";
 
 @Component({
   selector: "app-map",
@@ -12,7 +11,8 @@ import { GeoJsonFeature } from "@shared/models/geo-json.model";
 })
 export class MapComponent implements AfterViewInit {
   private isBrowser!: boolean;
-  @Input() geoJson ?: GeoJsonFeature;
+  @Input() lat ?: number;
+  @Input() lon ?: number;
   constructor(@Inject(PLATFORM_ID) private platformId: Object){
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
@@ -21,9 +21,11 @@ export class MapComponent implements AfterViewInit {
       return;
     }
     const L = await import('leaflet');
-    const map = L.map('map').setView([0,0],13);
-    L.geoJSON(this.geoJson).addTo(map);
-
+    let map = L.map('map')
+    
+    if(this.lat && this.lon){
+      map.setView([this.lat,this.lon],13);
+    }
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: '© OpenStreetMap contributors'
