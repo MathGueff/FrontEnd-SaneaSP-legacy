@@ -15,29 +15,31 @@ import { ReclamacaoEdicaoComponent } from '@features/reclamacao/pages/reclamacao
 import { TagTabelaComponent } from '@features/categoria/pages/tag-tabela/tag-tabela.component';
 import { AuthGuard } from '@core/guards/auth.guard';
 import { AdminGuard } from '@core/guards/auth-admin.guard';
+import { ConfirmationCadastroComponent } from '@features/autenticacao/pages/confirmation-cadastro/confirmation-cadastro.component';
 
 
 export const routes: Routes = [
   //Home
-  {path: '', component:MenuUsuarioComponent},
-  {path: 'pagina-admin', component:MenuAdminComponent, canActivate: [AdminGuard]},
+  { path: '', component: MenuUsuarioComponent },
+  { path: 'pagina-admin', component: MenuAdminComponent, canActivate: [AdminGuard] },
 
   //Reclamações
-  {path: 'reclamacao', component: ReclamacaoInicialComponent},
-  {path: 'reclamacao/reclamacao-form', component: ReclamacaoFormComponent, canActivate: [AuthGuard]},
-  {path: 'suas-reclamacoes/:id',component:ReclamacaoEdicaoComponent, canActivate: [AuthGuard]},
-  {path: 'reclamacao/reclamacao-descricao/:id',component:ReclamacaoDescricaoComponent},
-  {path: 'suas-reclamacoes', component: ReclamacaoUsuariosComponent, canActivate: [AuthGuard]},
-  {path: 'suas-reclamacoes/reclamacao-descricao/:id',component:ReclamacaoDescricaoComponent, canActivate: [AuthGuard]},
+  { path: 'reclamacao', component: ReclamacaoInicialComponent },
+  { path: 'reclamacao/reclamacao-form', component: ReclamacaoFormComponent, canActivate: [AuthGuard] },
+  { path: 'suas-reclamacoes/:id', component: ReclamacaoEdicaoComponent, canActivate: [AuthGuard] },
+  { path: 'reclamacao/reclamacao-descricao/:id', component: ReclamacaoDescricaoComponent },
+  { path: 'suas-reclamacoes', component: ReclamacaoUsuariosComponent, canActivate: [AuthGuard] },
+  { path: 'suas-reclamacoes/reclamacao-descricao/:id', component: ReclamacaoDescricaoComponent, canActivate: [AuthGuard] },
 
   //Tags
-  {path: 'tag-tabela', component: TagTabelaComponent, canActivate: [AdminGuard]},
+  { path: 'tag-tabela', component: TagTabelaComponent, canActivate: [AdminGuard] },
 
   //Outros
-  {path: 'sobre-nos', component:SobrenosComponent},
-  {path: 'login', component:FormLoginComponent},
-  {path: 'cadastro', component:FormCadastroComponent},
-  {path: 'comentario/:idReclamamacao',component:ComentarioCentralComponent},
-  {path: 'editar-perfil', component: EdicaoPerfilComponent, canActivate: [AuthGuard]},
-  {path: 'responsaveis', component: ResponsaveisComponent},
+  { path: 'confirmar-cadastro', component: ConfirmationCadastroComponent },
+  { path: 'sobre-nos', component: SobrenosComponent },
+  { path: 'login', component: FormLoginComponent },
+  { path: 'cadastro', component: FormCadastroComponent },
+  { path: 'comentario/:idReclamamacao', component: ComentarioCentralComponent },
+  { path: 'editar-perfil', component: EdicaoPerfilComponent, canActivate: [AuthGuard] },
+  { path: 'responsaveis', component: ResponsaveisComponent },
 ];
