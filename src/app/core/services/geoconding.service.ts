@@ -11,8 +11,8 @@ export class GeocodingService {
   constructor(private http: HttpClient) {}
 
   geolocation(endereco: string): Observable<DataLocation> {
-   // const url = `http://localhost:3000/location/geoconding?endereco=${encodeURIComponent(endereco)}`;
+   const url = `http://localhost:3000/location/geoconding?endereco=${encodeURIComponent(endereco)}, São Paulo, Brazil`;
 
-    return this.http.get<DataLocation>("http://localhost:3000/location/geoconding?endereco= Rua Comendador Vicente do Amaral, 334, Sorocaba, São Paulo, Brazil")
+    return this.http.get<DataLocation>(url)
   }
 }

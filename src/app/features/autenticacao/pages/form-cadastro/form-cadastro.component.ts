@@ -1,6 +1,6 @@
 import { GeocodingService } from "./../../../../core/services/geoconding.service";
 
-import { Component, inject, OnInit } from "@angular/core";
+import { Component, inject, OnInit, ViewChild } from "@angular/core";
 import { Router, RouterLink } from "@angular/router";
 import {
   NonNullableFormBuilder,
@@ -36,6 +36,7 @@ export class FormCadastroComponent implements OnInit {
   private geocodingService = inject(GeocodingService);
   public coordanates !: DataLocation;
 
+  @ViewChild(MapComponent) map !: MapComponent
   formName: string = "cadastro"; //Nome do formulário para concatenar ao nome do control (email-cadastro)
   passwordMinLength = 6;
 
@@ -227,28 +228,22 @@ export class FormCadastroComponent implements OnInit {
   }
 
   ngOnInit() {
-    //
-    this.coordanates = {
-      lat: -23.5062,
-      lon: -47.4559
-    }
 
     this.formCadastro.valueChanges.subscribe((form) => {
       if (form.logradouro || form.cep) {
         let street = `${form.logradouro}`;
         let number = `${form.numero}`;
-        let city = `Sorocaba`
+        let city = `${form.localidade}`
 
-
-        
-        // this.geocodingService.geolocation(`${street}, ${number}, ${city}, São Paulo, Brazil`).subscribe({
-        //   next:(result)=>{
-        //     this.coordanates = result;
-        //   },
-        //   error:(err)=>{
-        //     this.sweetAlertService.showMessage('Erro ao procurar a coordenada: ' + err)
-        //   }
-        // })
+        this.geocodingService.geolocation(`${street}, ${number}, ${city}, São Paulo, Brazil`).subscribe({
+          next:(coordanates)=>{
+            this.map.setMap(coordanates.lat,coordanates.lon,13);
+            this.map.setMaker(coordanates.lat,coordanates.lon);
+          },
+          error:(err)=>{
+            this.sweetAlertService.showMessage('Erro ao procurar a coordenada: ' + err)
+          }
+        })
       }
     });
     //VIACEP

@@ -1,5 +1,12 @@
 import { isPlatformBrowser } from "@angular/common";
-import { AfterViewInit, Component, Inject, Input, PLATFORM_ID } from "@angular/core";
+import {
+  AfterViewInit,
+  Component,
+  Inject,
+  Input,
+  PLATFORM_ID,
+} from "@angular/core";
+import { Map } from "leaflet";
 
 @Component({
   selector: "app-map",
@@ -7,46 +14,56 @@ import { AfterViewInit, Component, Inject, Input, PLATFORM_ID } from "@angular/c
   template: `<div id="map"></div>`,
   styleUrl: "./map.component.css",
   standalone: true,
-  host: { ngSkipHydration: 'true' }
+  host: { ngSkipHydration: "true" },
 })
 export class MapComponent implements AfterViewInit {
   private isBrowser!: boolean;
   @Input() lat: number = 23.55052;
   @Input() lon: number = -46.633308;
- 
+  private L: any;
+  private map!: Map;
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(this.platformId);
   }
   async ngAfterViewInit() {
     if (isPlatformBrowser(this.platformId)) {
       // Importar dinamicamente apenas no browser
-      const L = await import('leaflet');
+      this.L = await import("leaflet");
 
-        (L.Icon.Default as any).mergeOptions({
-        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      });
+      this.initMap(this.L);
 
-      // Corrigir problema de ícones do Leaflet no Angular
-      (L.Icon.Default as any).mergeOptions({
-        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
-        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
-        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
-      });
-
-      const container = L.DomUtil.get('map');
+      const container = this.L.DomUtil.get("map");
       if (container != null) {
         (container as any)._leaflet_id = null; // força reset do container
       }
-      const map = L.map('map').setView([this.lat, this.lon], 13);
-
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors'
-      }).addTo(map);
-
-      L.marker([this.lat, this.lon]).addTo(map);
     }
   }
+  private initMap(L: any) {
+    const DefaultIcon = this.L.icon({
+      iconRetinaUrl:
+        "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+      iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+      shadowUrl:
+        "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+      iconSize: [25, 41], // largura, altura
+      iconAnchor: [12, 41], // ponto que fica na coordenada
+      popupAnchor: [1, -34], // onde o popup vai abrir
+      shadowSize: [41, 41], // tamanho da sombra
+    });
 
+    this.map = L.map("map", {
+      center: [-22.2963, -48.5587],
+      zoom: 5.5,
+    });
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      attribution: "© OpenStreetMap contributors",
+    }).addTo(this.map);
+    L.Marker.prototype.options.icon = DefaultIcon;
+  }
+  public setMap(lat: number, lon: number, zoom?: number) {
+    this.map.setView([lat, lon], zoom || 13);
+  }
+  public setMaker(lat: number, lon: number) {
+    this.L.marker([lat, lon]).addTo(this.map);
+  }
 }
