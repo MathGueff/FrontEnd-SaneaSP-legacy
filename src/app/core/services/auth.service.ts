@@ -20,20 +20,20 @@ export class AuthService {
     map(user => user?.nivel === 1)
   );
 
-  constructor( 
+  constructor(
     private httpClient: HttpClient,
     private sweetAlertService: SweetAlertService,
-    private localStorageService : LocalStorageService,
-    private errorService : ErrorService,
-    private emailService : EmailService){
+    private localStorageService: LocalStorageService,
+    private errorService: ErrorService,
+    private emailService: EmailService) {
     this.initializeAuth()
   }
 
   /* Realiza o login ao iniciar o site (ou recarregar) */
-  private initializeAuth(){
+  private initializeAuth() {
     const token = this.getAuthToken();
 
-    if(token){
+    if (token) {
       this.fetchUser().subscribe(); // Atualiza o usuário ativo após realizar req
     }
     else
@@ -69,8 +69,23 @@ export class AuthService {
     return this.httpClient.post<IUser>(`${this.API_URL}/register`, newUser);
   }
 
+
+  // Confirmação de cadastro
+  public confirmRegistration(token: string) {
+    return this.httpClient.get(`${this.API_URL}/confirm/${token}`).pipe(
+      tap(() => {
+        this.sweetAlertService.showMessage('✅ Cadastro confirmado com sucesso!', false);
+      }),
+      catchError(err => {
+        // Aqui funciona como um "try/catch" para o Observable
+        this.errorService.handleError(err);
+        throw err;
+      })
+    );
+  }
+
   /* Adquire dados do usuário atual utilizando o token JWT gerado */
-  public fetchUser() : Observable<IUser>{
+  public fetchUser(): Observable<IUser> {
     const token = this.getAuthToken();
 
     let headers = new HttpHeaders();
@@ -97,7 +112,7 @@ export class AuthService {
     this.currentUserSubject.next(user);
   }
 
-  public clearAuth(){
+  public clearAuth() {
     this.removeAuthToken();
     this.currentUserSubject.next(null);
   }
@@ -108,12 +123,12 @@ export class AuthService {
   }
 
   /* Define o token JWT armazenado no localStorage */
-  public setAuthToken(token : string){
-    this.localStorageService.set('access-token',token)
+  public setAuthToken(token: string) {
+    this.localStorageService.set('access-token', token)
   }
 
   /* Remove o token JWT armazenado no localStorage */
-  public removeAuthToken(){
+  public removeAuthToken() {
     this.localStorageService.remove('access-token')
   }
 }
