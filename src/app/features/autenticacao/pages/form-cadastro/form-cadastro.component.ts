@@ -13,10 +13,10 @@ import { SweetAlertService } from '@shared/services/sweet-alert.service';
 import { AuthService } from '@core/services/auth.service';
 
 @Component({
-    selector: 'app-form-cadastro',
-    imports: [RouterLink, FormFieldComponent, ReactiveFormsModule],
-    templateUrl: './form-cadastro.component.html',
-    styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
+  selector: 'app-form-cadastro',
+  imports: [RouterLink, FormFieldComponent, ReactiveFormsModule],
+  templateUrl: './form-cadastro.component.html',
+  styleUrls: ['./form-cadastro.component.css', '../links-redes.css']
 })
 
 export class FormCadastroComponent implements OnInit {
@@ -178,19 +178,24 @@ export class FormCadastroComponent implements OnInit {
           endereco: userAddress,
           telefone: this.formCadastro.controls.telefone.value || undefined,
           cpf: this.formCadastro.controls.cpf.value || undefined,
-          nivel: 0  //Nivel default
+          nivel: 0,
+          verified: false
         }
 
-        this.authService.register(newUser)?.subscribe({
-          next : () => {
-            this.sweetAlertService.showMessage('Cadastro realizado com sucesso');
-            //Retorna à pagina de login para que o usuário possa logar
+        this.authService.register(newUser).subscribe({
+          next: () => {
+            this.sweetAlertService.showMessage('Para concluir seu cadastro, verifique seu E-mail');
             this.router.navigate(['/login']);
           },
           error: (e) => {
-            this.sweetAlertService.showMessage(e.error.message, e.error.error);
+            // Extrai a mensagem de erro do backend
+            const errorMessage = e?.error?.message || e?.message || 'Ocorreu um erro inesperado';
+            this.sweetAlertService.showMessage(errorMessage, true);
+            console.error('Erro no cadastro:', e);
           }
         });
+
+
       }
       else {
         //Informa erro de senhas não coincidentes
