@@ -12,5 +12,6 @@ export interface IUser {
     telefone?: string,
     cpf?: string,
     endereco?: IEndereco,
-    nivel?: number
+    nivel?: number,
+    verified: boolean
 }
