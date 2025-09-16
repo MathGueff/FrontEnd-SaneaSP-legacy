@@ -21,6 +21,7 @@ export class GraphComponent {
   private chart!: Chart;
 
   ngAfterViewInit(): void {
+    Chart.register(...registerables);
     this.renderChart();
   }
 
