@@ -6,27 +6,12 @@ import { GraphComponent } from '@shared/components/graph/graph.component';
 
 @Component({
     selector: 'app-menu-usuario',
-    imports: [RouterLink, GraphComponent],
+    imports: [RouterLink],
     templateUrl: './menu-usuario.component.html',
-    styleUrl: './menu-usuario.component.css'
+    styleUrl: './menu-usuario.component.css',
+    standalone:true
 })
-export class MenuUsuarioComponent{
-    public barData = {
-    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai'],
-     datasets: [
-      { label: 'Vendas', data: [12, 19, 3, 5, 2], backgroundColor: 'rgba(54, 162, 235, 0.6)' },
-    ],
-  };
-
-  public pieData = {
-    labels: ['Chrome', 'Firefox', 'Edge', 'Safari'],
-    datasets: [
-      { data: [60, 20, 10, 10], backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56', '#4BC0C0'] },
-    ],
-  };
-
-  public chartOptions = { responsive: true };
-  
+export class MenuUsuarioComponent{  
   constructor(private router: Router) {}
 
   navigateTo(path: string) {
