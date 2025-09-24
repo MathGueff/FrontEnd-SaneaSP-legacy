@@ -36,7 +36,7 @@ export class GraphComponent {
   private renderChart(): void {
     if (!this.chartCanvas) return;
 
-    const config: ChartConfiguration = {
+    const config = {
       type: this.type,
       data: this.data,
       options: this.options,
