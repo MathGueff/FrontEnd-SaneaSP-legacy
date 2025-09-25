@@ -1,7 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { GraphComponent } from "@shared/components/graph/graph.component";
 import { IDataGraph } from '@shared/components/graph/graph.model';
-import { DataGraph } from '@shared/services/dataGraph.service';
+import { BigPoints, DataGraph } from '@shared/services/dataGraph.service';
 
 
 
@@ -15,23 +15,15 @@ import { DataGraph } from '@shared/services/dataGraph.service';
 })
 export class RelatorioComponent implements OnInit {
   private dataGraph = inject(DataGraph);
+  graph!:IDataGraph;
   ngOnInit(): void {
     this.dataGraph.getBigPoints(10).subscribe({
       next:(datas)=>{
         console.log(datas)
+        this.graph = this.dataGraph.convertBigPointInChar(datas);
+        
       }
     });
   }
 
-  data: IDataGraph = {
-    labels: ['Sorocaba', 'Votorantim'],
-    datasets:
-      [{
-        label: "Numero de chamados",
-        data: [20, 30],
-        backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(255, 159, 64, 0.2)'],
-        borderColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)'],
-        borderWidth: 1
-      }]
-  }
 }
