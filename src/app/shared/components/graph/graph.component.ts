@@ -1,4 +1,5 @@
-import { Component, ElementRef, Input, SimpleChanges, ViewChild } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
+import { Component, ElementRef, Inject, Input, PLATFORM_ID, SimpleChanges, ViewChild } from '@angular/core';
 import { Chart, ChartConfiguration, ChartType, registerables } from 'chart.js';
 
 @Component({
@@ -18,11 +19,15 @@ export class GraphComponent {
   };
   @Input() options: ChartConfiguration['options'] = { responsive: true }; // opções
 
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) { }
+
   private chart!: Chart;
 
   ngAfterViewInit(): void {
-    Chart.register(...registerables);
-    this.renderChart();
+    if (isPlatformBrowser(this.platformId)) {
+      Chart.register(...registerables);
+      this.renderChart();
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {

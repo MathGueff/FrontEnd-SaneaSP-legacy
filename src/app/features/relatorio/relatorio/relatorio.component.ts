@@ -1,8 +1,8 @@
-
-
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { GraphComponent } from "@shared/components/graph/graph.component";
 import { IDataGraph } from '@shared/components/graph/graph.model';
+import { DataGraph } from '@shared/services/dataGraph.service';
+
 
 
 
@@ -13,7 +13,15 @@ import { IDataGraph } from '@shared/components/graph/graph.model';
   styleUrl: './relatorio.component.css',
   standalone: true
 })
-export class RelatorioComponent {
+export class RelatorioComponent implements OnInit {
+  private dataGraph = inject(DataGraph);
+  ngOnInit(): void {
+    this.dataGraph.getBigPoints(10).subscribe({
+      next:(datas)=>{
+        console.log(datas)
+      }
+    });
+  }
 
   data: IDataGraph = {
     labels: ['Sorocaba', 'Votorantim'],
