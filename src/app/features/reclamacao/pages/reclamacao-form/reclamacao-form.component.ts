@@ -13,6 +13,7 @@ import { ICreateReclamacao } from '@features/reclamacao/models/reclamacao.model'
 import { ICategoria } from '@features/categoria/models/categoria.model';
 import { TagSelectComponent } from "@shared/components/tag-select/tag-select.component";
 import { ImageSelectComponent } from "@shared/components/image-select/image-select.component";
+import { MapComponent } from "@shared/components/map/map.component";
 
 
 @Component({

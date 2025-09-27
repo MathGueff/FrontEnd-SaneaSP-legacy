@@ -4,13 +4,17 @@ import { HeaderComponent } from "@core/components/header/header.component";
 import { FooterComponent } from '@core/components/footer/footer.component';
 
 import { ToastComponent } from "./shared/components/toast/toast.component";
+import { MapComponent } from '@shared/components/map/map.component';
+
+
 
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent],
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent,MapComponent],
     templateUrl: './app.component.html',
-    styleUrl: './app.component.css'
+    styleUrl: './app.component.css',
+    standalone:true,
 })
 export class AppComponent {
   title = 'PrjInterdisciplinar';
