@@ -1,10 +1,8 @@
-import { IDataset } from './../components/graph/graph.model';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { environment } from 'environments/environment';
 import { IDataGraph } from '@shared/components/graph/graph.model';
-import { Colors, Chart } from 'chart.js';
 export interface BigPoints{
     cidade: string,
     bairro ?: string,
@@ -28,7 +26,7 @@ export class DataGraph{
             labels:[],
             datasets:[
                 {
-                    label:'rank da Bairros/Cidades Urgentes',
+                    label:'Pontuação',
                     data:[],
                     backgroundColor:[],
                     borderColor:[],
@@ -36,14 +34,13 @@ export class DataGraph{
                 }
             ]
         };
-        bigPoint.map((data)=>{
+        bigPoint.forEach((data)=>{
             if(data.bairro){
                 graph.labels.push(data.bairro);
             }
             else{
                 graph.labels.push(data.cidade);
             }
-            console.log(Number(data.pontuacao))
             graph.datasets[0].data.push(Number(data.pontuacao));
             graph.datasets[0].backgroundColor!.push('red');
             graph.datasets[0].borderColor?.push('red');

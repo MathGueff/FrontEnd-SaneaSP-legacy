@@ -1,80 +1,61 @@
-<div class="container mt-4">
+<div class="container my-3">
   <!-- Título -->
-  <div class="row mb-4">
-    <div class="col text-center">
-      <h2 class="fw-bold">Relatório de Denúncias</h2>
-      <p class="text-muted">
-        Selecione os filtros abaixo para gerar o relatório
-      </p>
+  <div class="row mb-2">
+    <div class="col">
+      <h1 class="fw-bold">Relatório de Denúncias</h1>
+      <hr>
     </div>
   </div>
 
   <!-- Filtros -->
-  <form
-    [formGroup]="filtrosForm"
-    (ngSubmit)="aplicarFiltros()"
-    class="row d-flex flex-column gap-3 w-50 align-content-center"
-  >
-    <!-- Limite -->
-    <div class="d-flex flex-column">
-      <label for="limite" class="form-label">Limite de registros</label>
-      <input
-        type="number"
-        id="limite"
-        class="form-control"
-        formControlName="limite"
-        min="1"
-      />
-    </div>
-    <!-- Checkbox para habilitar filtro por cidade -->
-    <div class="form-check">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        id="habilitarCidade"
-        formControlName="habilitarCidade"
-      />
-      <label class="form-check-label" for="habilitarCidade">
-        Filtrar por cidade
-      </label>
-    </div>
-    <!-- Campo de cidade (condicional) -->
-    @if (filtrosForm.value.habilitarCidade) {
-    <div class="d-flex flex-column">
-      <label for="cidade" class="form-label">Cidade</label>
-      <select id="cidade" class="form-select" formControlName="cidade">
-        <option value="" disabled>Selecione a cidade</option>
-        @for (cidade of cidades; track $index) {
-        <option [value]="cidade">{{ cidade }}</option>
-        }
-      </select>
-    </div>
-    }
-    <!-- Botões -->
-    <div class="d-flex gap-2">
-      <button
-        type="submit"
-        class="btn btn-primary flex-grow-1"
-        [disabled]="filtrosForm.invalid"
-      >
-        Aplicar Filtros
-      </button>
-      <button
-        type="button"
-        class="btn btn-outline-secondary flex-grow-1"
-        (click)="resetarFiltros()"
-      >
-        Limpar
-      </button>
-    </div>
-  </form>
+  <div class="d-flex w-100 justify-content-center">
+    <form [formGroup]="filtrosForm" (ngSubmit)="aplicarFiltros()" class="d-flex flex-column w-50 mb-3 gap-3">
+      <!-- Limite -->
+      <p class="text-center fw-bold">
+        Selecione os filtros abaixo para gerar o relatório
+      </p>
+      <div class="d-flex flex-column">
+        <label for="limite" class="form-label">Limite de registros</label>
+        <input type="number" id="limite" class="form-control" formControlName="limite" min="1" required />
+      </div>
+      <!-- Checkbox para habilitar filtro por cidade -->
+      <div class="form-check">
+        <input class="form-check-input border-black" type="checkbox" id="habilitarCidade"
+          formControlName="habilitarCidade" />
+        <label class="form-check-label" for="habilitarCidade">
+          Filtrar por cidade
+        </label>
+      </div>
+      <!-- Campo de cidade (condicional) -->
+      @if (filtrosForm.value.habilitarCidade) {
+      <div class="d-flex flex-column">
+        <label for="cidade" class="form-label">Cidade</label>
+        <select id="cidade" class="form-select" formControlName="cidade">
+          <option value="" disabled>Selecione a cidade</option>
+          @for (item of cidades; track item.id) {
+          <option [value]="item.cidade">{{ item.cidade }}</option>
+          }
+        </select>
+      </div>
+      }
+      <!-- Botões -->
+      <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary flex-grow-1" [disabled]="filtrosForm.invalid">
+          Aplicar Filtros
+        </button>
+        <button type="reset" class="btn btn-danger flex-grow-1">
+          Cancelar
+        </button>
+      </div>
+    </form>
+  </div>
 
   <!-- Gráfico -->
-  <div class="row">
-    <div class="col-12">
+  <div class="row justify-content-center text-center p-0">
+    <div class="col-6">
       <div class="card shadow-sm">
         <div class="card-body">
-          <h5 class="card-title mb-3">Gráfico de Dados</h5>
+          <h5 class="card-title mb-3 text-start">Gráfico de Pontação por Cidades/Bairros</h5>
           <app-graph [data]="graph" [type]="'bar'"></app-graph>
         </div>
       </div>

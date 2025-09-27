@@ -46,7 +46,6 @@ export class GraphComponent {
       data: this.data,
       options: this.options,
     };
-
     this.chart = new Chart(this.chartCanvas.nativeElement, config);
   }
 }
