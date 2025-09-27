@@ -63,7 +63,7 @@ export class MapComponent implements AfterViewInit {
   public setMap(lat: number, lon: number, zoom?: number) {
     this.map.setView([lat, lon], zoom || 13);
   }
-  public setMaker(lat: number, lon: number) {
+  public addtMarker(lat: number, lon: number) {
     this.L.marker([lat, lon]).addTo(this.map);
   }
 }

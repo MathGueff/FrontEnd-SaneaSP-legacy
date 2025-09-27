@@ -242,7 +242,7 @@ export class FormCadastroComponent implements OnInit {
         this.geocodingService.geolocation(`${street}, ${number}, ${city}, São Paulo, Brazil`).subscribe({
           next:(coordanates)=>{
             this.map.setMap(coordanates.lat,coordanates.lon,13);
-            this.map.setMaker(coordanates.lat,coordanates.lon);
+            this.map.addtMarker(coordanates.lat,coordanates.lon);
           },
           error:(err)=>{
             this.sweetAlertService.showMessage('Erro ao procurar a coordenada: ' + err)
