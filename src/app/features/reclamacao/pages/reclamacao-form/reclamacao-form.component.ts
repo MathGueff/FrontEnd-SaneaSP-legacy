@@ -14,14 +14,15 @@ import { ICategoria } from '@features/categoria/models/categoria.model';
 import { TagSelectComponent } from "@shared/components/tag-select/tag-select.component";
 import { ImageSelectComponent } from "@shared/components/image-select/image-select.component";
 import { MapComponent } from "@shared/components/map/map.component";
+import { createDecipheriv } from 'crypto';
 
 
 @Component({
-    selector: 'app-reclamacao-form',
-    imports: [ReactiveFormsModule, RouterLink, TagSelectComponent, ImageSelectComponent],
-    templateUrl: './reclamacao-form.component.html',
-    styleUrl: './reclamacao-form.component.css',
-    standalone:true
+  selector: 'app-reclamacao-form',
+  imports: [ReactiveFormsModule, RouterLink, TagSelectComponent, ImageSelectComponent],
+  templateUrl: './reclamacao-form.component.html',
+  styleUrl: './reclamacao-form.component.css',
+  standalone: true
 })
 export class ReclamacaoFormComponent implements OnInit {
 
@@ -31,11 +32,18 @@ export class ReclamacaoFormComponent implements OnInit {
   private viacepService = inject(ViacepService);
   private sweetService = inject(SweetAlertService);
 
-  private images : string[] = []
-  private tagIDs:number[] = [];
+  private imageFiles: File[] = [];
+  private images: string[] = [];
+  private tagIDs: number[] = [];
   rows: number = 2;
 
-   form = this.formBuider.group({
+  public imageChange($event: File[]) {
+    if ($event.length > 0) {
+      $event.map((file) => this.imageFiles.push(file));
+    }
+  }
+
+  form = this.formBuider.group({/*  */
     titulo: ['', [Validators.required]],
     descricao: ['', [Validators.required]],
     cep: [
@@ -51,24 +59,24 @@ export class ReclamacaoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
-      const reclamacao: ICreateReclamacao ={
+      const reclamacao: ICreateReclamacao = {
         ...this.form.value as ICreateReclamacao,
-        idUsuario:1,
+        idUsuario: 1,
         Categorias: this.tagIDs,
         Imagens: this.images
       };
       this.reclamacaoService.postReclamacao(reclamacao).subscribe({
-        next: async() => {
+        next: async () => {
           await this.sweetService.showMessage("Denúncia Criada com sucesso!");
           this.router.navigate(['reclamacao']);
         },
         error: () => {
-          this.sweetService.showMessage(`Não foi possivel criar Denúncia. Verifique se preencheu corretamente o formulário`,true)
+          this.sweetService.showMessage(`Não foi possivel criar Denúncia. Verifique se preencheu corretamente o formulário`, true)
         },
       });
     }
-    else{
-      this.sweetService.showMessage('Formulário inválido. Preeche todos os dados obrigatórios *',true)
+    else {
+      this.sweetService.showMessage('Formulário inválido. Preeche todos os dados obrigatórios *', true)
     }
   }
   ngOnInit(): void {
@@ -120,24 +128,24 @@ export class ReclamacaoFormComponent implements OnInit {
   private setAddressControl(control: string, value: string) {
     this.form.get(control)?.setValue(value);
   }
-  protected autoResize():void {
+  protected autoResize(): void {
     let objTextArea = document.querySelector('textarea');
     if (objTextArea?.value) {
       if (objTextArea.scrollHeight >= objTextArea.offsetHeight) {
         this.rows += 1;
-        console.log("Scroll Height: "+ objTextArea.scrollHeight);
-        console.log("offsetHeight: "+ objTextArea.offsetHeight);
+        console.log("Scroll Height: " + objTextArea.scrollHeight);
+        console.log("offsetHeight: " + objTextArea.offsetHeight);
       }
     } else {
       this.rows = 2;
     }
   }
   public tagsChange($event: ICategoria[]) {
-    this.tagIDs = $event.map((tag)=>tag.id)
+    this.tagIDs = $event.map((tag) => tag.id)
   }
-  public imagesChange($event: File[]){
-    if($event.length > 0){
-      $event.map((file)=> this.images.push(file.name));
+  public imagesChange($event: File[]) {
+    if ($event.length > 0) {
+      $event.map((file) => this.images.push(file.name));
     }
   }
 }
