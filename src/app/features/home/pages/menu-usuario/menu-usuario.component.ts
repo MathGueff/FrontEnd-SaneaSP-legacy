@@ -2,14 +2,16 @@ import { Component } from '@angular/core';
 
 import { MenuUsuario } from '@features/usuario/models/menu-usuario.model';
 import { RouterLink, Router} from '@angular/router';
+import { GraphComponent } from '@shared/components/graph/graph.component';
 
 @Component({
     selector: 'app-menu-usuario',
     imports: [RouterLink],
     templateUrl: './menu-usuario.component.html',
-    styleUrl: './menu-usuario.component.css'
+    styleUrl: './menu-usuario.component.css',
+    standalone:true
 })
-export class MenuUsuarioComponent{
+export class MenuUsuarioComponent{  
   constructor(private router: Router) {}
 
   navigateTo(path: string) {
