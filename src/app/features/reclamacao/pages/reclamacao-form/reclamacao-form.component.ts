@@ -15,6 +15,7 @@ import { TagSelectComponent } from "@shared/components/tag-select/tag-select.com
 import { ImageSelectComponent } from "@shared/components/image-select/image-select.component";
 import { MapComponent } from "@shared/components/map/map.component";
 import { createDecipheriv } from 'crypto';
+import { UploadService } from '@shared/services/upload.service';
 
 
 @Component({
@@ -31,17 +32,12 @@ export class ReclamacaoFormComponent implements OnInit {
   private router = inject(Router);
   private viacepService = inject(ViacepService);
   private sweetService = inject(SweetAlertService);
+  private uploadService = inject(UploadService);
 
   private imageFiles: File[] = [];
   private images: string[] = [];
   private tagIDs: number[] = [];
   rows: number = 2;
-
-  public imageChange($event: File[]) {
-    if ($event.length > 0) {
-      $event.map((file) => this.imageFiles.push(file));
-    }
-  }
 
   form = this.formBuider.group({/*  */
     titulo: ['', [Validators.required]],
@@ -59,6 +55,11 @@ export class ReclamacaoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+
+      this.uploadService.postUpload(this.imageFiles).subscribe({
+        next:(value)=> this.images = value
+      })
+
       const reclamacao: ICreateReclamacao = {
         ...this.form.value as ICreateReclamacao,
         idUsuario: 1,
@@ -143,9 +144,10 @@ export class ReclamacaoFormComponent implements OnInit {
   public tagsChange($event: ICategoria[]) {
     this.tagIDs = $event.map((tag) => tag.id)
   }
-  public imagesChange($event: File[]) {
+
+    public imageChange($event: File[]) {
     if ($event.length > 0) {
-      $event.map((file) => this.images.push(file.name));
+      $event.map((file) => this.imageFiles.push(file));
     }
   }
 }
