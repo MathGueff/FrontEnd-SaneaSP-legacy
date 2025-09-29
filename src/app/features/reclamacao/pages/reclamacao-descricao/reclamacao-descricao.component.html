@@ -8,12 +8,12 @@
         @for (imagem of reclamacao.Imagens; track imagem.id; let firstImage =
         $first ) { @if(firstImage){
         <div class="carousel-item active text-center w-100">
-          <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large imgPainel"
+          <img src="{{imagem.url}}" class="card-icon-large imgPainel"
             alt="Imagem da Denúncia" />
         </div>
         } @else {
         <div class="carousel-item text-center w-100">
-          <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large imgPainel"
+          <img src="{{imagem.url}}" class="card-icon-large imgPainel"
             alt="Imagem da Denúncia" />
         </div>
         } } @empty {

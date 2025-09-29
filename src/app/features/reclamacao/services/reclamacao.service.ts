@@ -8,8 +8,8 @@ import { environment } from 'environments/environment';
 
 @Injectable ({providedIn:'root'})
 export class ReclamacaoService{
-  //
   private urlApi:string = environment.domain +"denuncia";
+  private urlApiImages: string = environment.domain +"upload";
 
   private authService = inject(AuthService);
   private listReclamcao !: IReclamacao[];
@@ -35,11 +35,11 @@ export class ReclamacaoService{
     return this.httpClient.get<IReclamacao[]>(`${this.urlApi}/tags/?${query}`)
   }
 
-  public postReclamacao(reclamacao: ICreateReclamacao):Observable<IReclamacao>{
+  public postReclamacao(reclamacao: FormData):Observable<IReclamacao>{
     const headers = this.setHeader();
     const user = this.authService.getCurrentUser();
     if(user){
-      reclamacao.idUsuario = user.id as number;
+      reclamacao.set('idUsuario', user.id.toString());
     }
     return this.httpClient.post<IReclamacao>(`${this.urlApi}`, reclamacao,{headers})
   }
@@ -64,5 +64,24 @@ export class ReclamacaoService{
       headers = headers.set('Authorization',token)
     }
     return headers
+  }
+
+  public uploadImages(idDenuncia: number, files: File[]): Observable<any> {
+    const headers = this.setHeader();
+    const formData = new FormData();
+    files.forEach(file => formData.append("images", file)); // 'images' = campo do Multer
+    return this.httpClient.post(`${this.urlApiImages}/${idDenuncia}`, formData, { headers });
+  }
+
+  public updateImages(idDenuncia: number, files: File[]): Observable<any> {
+    const headers = this.setHeader();
+    const formData = new FormData();
+    files.forEach(file => formData.append("images", file));
+    return this.httpClient.put(`${this.urlApiImages}/${idDenuncia}`, formData, { headers });
+  }
+
+  public deleteAllImages(idDenuncia: number): Observable<any> {
+    const headers = this.setHeader();
+    return this.httpClient.delete(`${this.urlApiImages}/${idDenuncia}`, { headers });
   }
 }

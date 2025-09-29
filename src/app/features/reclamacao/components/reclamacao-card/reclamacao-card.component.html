@@ -52,12 +52,12 @@
               @for (imagem of card.Imagens; track imagem.id; let firstImage = $first ) {
                 @if(firstImage){
                   <div class="carousel-item active">
-                    <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large" alt="Imagem da Reclamação">
+                    <img src="{{ imagem.url }}" class="card-icon-large" alt="Imagem da Reclamação">
                   </div>
                 }
                 @else {
                   <div class="carousel-item">
-                    <img src="images/denuncia/{{ imagem.nome }}" class="card-icon-large" alt="Imagem da Reclamação">
+                    <img src="{{ imagem.url }}" class="card-icon-large" alt="Imagem da Reclamação">
                   </div>
                 }
               } @empty {

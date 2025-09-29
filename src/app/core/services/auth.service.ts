@@ -2,7 +2,7 @@ import { EmailService } from './email.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable, switchMap, tap } from 'rxjs';
-import { IUser } from '@features/usuario/models/usuario.model';
+import { ICreateUser, IUser } from '@features/usuario/models/usuario.model';
 import { SweetAlertService } from '@shared/services/sweet-alert.service';
 import { LocalStorageService } from '@core/services/local-storage.service';
 import { ErrorService } from './error-handler.service';
@@ -58,7 +58,7 @@ export class AuthService {
   }
 
   /* Criação de um novo usuário */
-  public register(newUser: IUser) {
+  public register(newUser: ICreateUser) {
     this.emailService.sendEmail({
       subject: 'Novo usuário',
       to: newUser.email,
