@@ -7,7 +7,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from "@angular/forms";
-import { IUser } from "@features/usuario/models/usuario.model";
+import { ICreateUser, IUser } from "@features/usuario/models/usuario.model";
 import { IEndereco } from "@shared/models/endereco.model";
 import { ViacepService } from "@shared/services/viacep.service";
 import { IFieldForm } from "@shared/models/field-form.model";
@@ -189,7 +189,7 @@ export class FormCadastroComponent implements OnInit {
         };
 
         //Interface de usuário para guardar as informações do usuário e passar para o userService
-        const newUser: IUser = {
+        const newUser: ICreateUser = {
           nome: this.formCadastro.controls.nome.value,
           email: this.formCadastro.controls.email.value,
           senha: this.formCadastro.controls.senha.value,

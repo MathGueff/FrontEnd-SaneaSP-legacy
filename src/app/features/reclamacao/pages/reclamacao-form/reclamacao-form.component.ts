@@ -16,6 +16,7 @@ import { ImageSelectComponent } from "@shared/components/image-select/image-sele
 import { MapComponent } from "@shared/components/map/map.component";
 import { createDecipheriv } from 'crypto';
 import { UploadService } from '@shared/services/upload.service';
+import { AuthService } from '@core/services/auth.service';
 
 
 @Component({
@@ -27,6 +28,7 @@ import { UploadService } from '@shared/services/upload.service';
 })
 export class ReclamacaoFormComponent implements OnInit {
 
+  private authService = inject(AuthService)
   private reclamacaoService = inject(ReclamacaoService);
   private formBuider = inject(NonNullableFormBuilder);
   private router = inject(Router);
@@ -55,18 +57,30 @@ export class ReclamacaoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+      const formData = new FormData();
 
-      this.uploadService.postUpload(this.imageFiles).subscribe({
-        next:(value)=> this.images = value
-      })
+      // Campos de texto
+      formData.append('titulo', this.form.value.titulo!);
+      formData.append('descricao', this.form.value.descricao!);
+      formData.append('cep', this.form.value.cep!);
+      formData.append('numero', this.form.value.numero!);
+      formData.append('cidade', this.form.value.cidade!);
+      formData.append('bairro', this.form.value.bairro!);
+      formData.append('rua', this.form.value.rua!);
+      formData.append('complemento', this.form.value.complemento ?? '');
+      const user = this.authService.getCurrentUser();
+      if(user)
+        formData.append('idUsuario', user.id.toString());
 
-      const reclamacao: ICreateReclamacao = {
-        ...this.form.value as ICreateReclamacao,
-        idUsuario: 1,
-        Categorias: this.tagIDs,
-        Imagens: this.images
-      };
-      this.reclamacaoService.postReclamacao(reclamacao).subscribe({
+      this.tagIDs.forEach(id => formData.append('Categorias[]', id.toString()));
+
+      if (this.imageFiles) {
+        Array.from(this.imageFiles).forEach(file => {
+          formData.append('imagens', file);
+        });
+      }
+
+      this.reclamacaoService.postReclamacao(formData).subscribe({
         next: async () => {
           await this.sweetService.showMessage("Denúncia Criada com sucesso!");
           this.router.navigate(['reclamacao']);

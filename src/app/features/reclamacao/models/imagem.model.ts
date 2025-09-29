@@ -1,4 +1,5 @@
 export interface IImagem {
   id:number,
-  nome:string
+  nome:string,
+  url: string
 }

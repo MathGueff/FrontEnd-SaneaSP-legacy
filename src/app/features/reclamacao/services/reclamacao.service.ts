@@ -35,11 +35,11 @@ export class ReclamacaoService{
     return this.httpClient.get<IReclamacao[]>(`${this.urlApi}/tags/?${query}`)
   }
 
-  public postReclamacao(reclamacao: ICreateReclamacao):Observable<IReclamacao>{
+  public postReclamacao(reclamacao: FormData):Observable<IReclamacao>{
     const headers = this.setHeader();
     const user = this.authService.getCurrentUser();
     if(user){
-      reclamacao.idUsuario = user.id as number;
+      reclamacao.set('idUsuario', user.id.toString());
     }
     return this.httpClient.post<IReclamacao>(`${this.urlApi}`, reclamacao,{headers})
   }
