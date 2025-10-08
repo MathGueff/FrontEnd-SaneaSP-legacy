@@ -1,0 +1,54 @@
+name: CI / CD - develop (preview)
+
+on:
+  push:
+    branches: 
+      - develop
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      # --- Checkout do código ---
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # --- Instalação de dependências ---
+      - name: Dependências
+        run: npm install --force
+
+      # --- Instala semver globalmente ---
+      - name: Semver
+        run: npm install -g semver
+
+      # --- Calcular nova versão com sufixo preview ---
+      - name: Calcular nova versão Preview
+        id: version
+        run: |
+          git fetch --tags --force --prune
+
+          LAST_TAG=$(git tag --list 'v*' --sort=-v:refname | head -n1 || echo "v0.0.0")
+          CURRENT_VERSION="${LAST_TAG#v}"
+
+          NEW_VERSION=$(semver -i patch "$CURRENT_VERSION")
+
+          # Número do preview (quantas tags preview já existem para essa versão base)
+          COUNT=$(git tag --list "v${NEW_VERSION}-preview.*" | wc -l | xargs)
+          PREVIEW_VERSION="v${NEW_VERSION}-preview.$((COUNT+1))"
+
+          echo "NEW_VERSION=$PREVIEW_VERSION" >> $GITHUB_ENV
+          echo "new_version=$PREVIEW_VERSION" >> $GITHUB_OUTPUT
+
+      # --- Criar Release Preview ---
+      - name: Criar Release Preview
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.new_version }}
+          name: "Preview ${{ steps.version.outputs.new_version }}"
+          draft: false
+          prerelease: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
