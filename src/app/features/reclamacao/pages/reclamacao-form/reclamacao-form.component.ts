@@ -37,7 +37,7 @@ export class ReclamacaoFormComponent implements OnInit {
   private uploadService = inject(UploadService);
 
   private imageFiles: File[] = [];
-  private images: string[] = [];
+  private fileNames: string[] = [];
   private tagIDs: number[] = [];
   rows: number = 2;
 
@@ -57,6 +57,12 @@ export class ReclamacaoFormComponent implements OnInit {
 
   onSubmit() {
     if (this.form.valid) {
+
+      this.uploadService.postUpload(this.imageFiles).subscribe({
+        next:(files)=>{
+          this.fileNames = files;
+        }
+      })
       const formData = new FormData();
 
       // Campos de texto
