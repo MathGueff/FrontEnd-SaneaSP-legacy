@@ -8,12 +8,15 @@ export class UploadService {
     private apiURL = environment.domain + "upload/"
 
     constructor(private http: HttpClient) { }
-    public postUpload(files: File[]): Observable<string[]> {
+    private transformFormData(files: File[]):FormData{
         let formImage = new FormData();
         files.forEach((file)=>{
             formImage.append('imagens',file)
         })
-
+        return formImage
+    }
+    public postUpload(files: File[]): Observable<string[]> {
+        let formImage = this.transformFormData(files);
         return this.http.post<string[]>(this.apiURL,formImage);
     }
 }
