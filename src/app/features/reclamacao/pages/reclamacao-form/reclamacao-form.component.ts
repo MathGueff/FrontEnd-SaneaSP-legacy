@@ -156,7 +156,8 @@ export class ReclamacaoFormComponent implements OnInit {
         await this.sweetService.showMessage("Denúncia Criada com sucesso!");
         this.router.navigate(["reclamacao"]);
       },
-      error: () => {
+      error: async() => {
+        await firstValueFrom(this.uploadService.deleteUpload(this.fileNames));
         this.sweetService.showMessage(
           `Não foi possivel criar Denúncia. Verifique se preencheu corretamente o formulário`,
           true
