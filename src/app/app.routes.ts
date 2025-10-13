@@ -17,7 +17,6 @@ import { AuthGuard } from '@core/guards/auth.guard';
 import { AdminGuard } from '@core/guards/auth-admin.guard';
 import { ConfirmationCadastroComponent } from '@features/autenticacao/pages/confirmation-cadastro/confirmation-cadastro.component';
 import { RelatorioComponent } from '@features/relatorio/relatorio/relatorio.component';
-import { FeedbackComponent } from '@features/comentario/feedback/feedback.component';
 
 
 export const routes: Routes = [
@@ -45,5 +44,4 @@ export const routes: Routes = [
   { path: 'editar-perfil', component: EdicaoPerfilComponent, canActivate: [AuthGuard] },
   { path: 'responsaveis', component: ResponsaveisComponent },
   { path: 'relatorio', component: RelatorioComponent},
-  { path: 'feedback', component: FeedbackComponent}
 ];
