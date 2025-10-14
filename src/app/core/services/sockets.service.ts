@@ -10,7 +10,8 @@ export class SocketService {
 
   constructor() {
     // Conecta ao backend Socket.IO
-    this.socket = io('http://localhost:3000');
+    this.socket = io();
+
   }
 
   // Envia mensagem ao servidor
@@ -27,5 +28,10 @@ export class SocketService {
         console.log(msg)
       });
     });
+  }
+  disconnect(): void {
+    if (this.socket) {
+      this.socket.disconnect();
+    }
   }
 }

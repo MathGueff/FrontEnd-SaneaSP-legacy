@@ -2,7 +2,9 @@
   <h2>{{ title }}</h2>
 
   <div style="border: 1px solid #ccc; border-radius: 8px; padding: 16px; height: 300px; overflow-y: auto; text-align: left;">
-    <div *ngFor="let msg of messages">{{ msg }}</div>
+    @for (msg of messages; track $index) {
+      <p>{{msg}}</p>
+    }
   </div>
 
   <div style="margin-top: 16px;">

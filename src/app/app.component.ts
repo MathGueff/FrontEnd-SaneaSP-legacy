@@ -5,13 +5,14 @@ import { FooterComponent } from '@core/components/footer/footer.component';
 
 import { ToastComponent } from "./shared/components/toast/toast.component";
 import { MapComponent } from '@shared/components/map/map.component';
+import { ChatComponent } from "@features/chat/chat/chat.component";
 
 
 
 
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent,MapComponent],
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent, MapComponent, ChatComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     standalone:true,
