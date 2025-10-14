@@ -17,6 +17,7 @@ import { AuthGuard } from '@core/guards/auth.guard';
 import { AdminGuard } from '@core/guards/auth-admin.guard';
 import { ConfirmationCadastroComponent } from '@features/autenticacao/pages/confirmation-cadastro/confirmation-cadastro.component';
 import { RelatorioComponent } from '@features/relatorio/relatorio/relatorio.component';
+import { FeedbackFormComponent } from '@features/feedback/components/feedback-form/feedback-form.component';
 
 
 export const routes: Routes = [
@@ -31,6 +32,9 @@ export const routes: Routes = [
   { path: 'reclamacao/reclamacao-descricao/:id', component: ReclamacaoDescricaoComponent },
   { path: 'suas-reclamacoes', component: ReclamacaoUsuariosComponent, canActivate: [AuthGuard] },
   { path: 'suas-reclamacoes/reclamacao-descricao/:id', component: ReclamacaoDescricaoComponent, canActivate: [AuthGuard] },
+
+  //Comentários
+  { path: 'feedback', component: FeedbackFormComponent, canActivate: [AuthGuard] },
 
   //Tags
   { path: 'tag-tabela', component: TagTabelaComponent, canActivate: [AdminGuard] },
