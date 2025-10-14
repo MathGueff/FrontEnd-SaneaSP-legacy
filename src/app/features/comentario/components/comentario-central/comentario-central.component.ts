@@ -10,6 +10,7 @@ import { UserService } from '@features/usuario/services/user.service';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
+import { SocketService } from '@core/services/sockets.service';
 
 @Component({
     selector: 'app-comentario-central',
@@ -25,12 +26,10 @@ import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.serv
     styleUrl: './comentario-central.component.css'
 })
 export class ComentarioCentralComponent implements OnInit {
-  private userService = inject(UserService);
   private reclamacaoService = inject(ReclamacaoService);
-  private usuarios = this.userService.getAllUsers();
   public reclamacao$ !: Observable<IReclamacao>
   //variaveis para poder controlar o componente NotFound
-  protected vazio: boolean = true;
+  protected vazio: boolean = false;
   erro: string = "" // mensaagem de erro
   caminhoVoltar: string = "@"; //caminho para voltar para reclamação descricao
 
@@ -120,24 +119,12 @@ export class ComentarioCentralComponent implements OnInit {
   // ];
 
   //Objeto Reclamação para colocar no título, data e descrição
-  constructor(private activeroute: ActivatedRoute) { }
+  constructor(private activeroute: ActivatedRoute, private socketService: SocketService) { }
   ngOnInit(): void {
     this.activeroute.params.subscribe((params) => {
       // pega o valor do parametro da URL da Reclamação
       const IdParametro = Number(params['idReclamamacao']);
       this.reclamacao$ = this.reclamacaoService.getByIdReclamacao(IdParametro)
     });
-    this.reclamacao$.subscribe({
-      next:(reclamacao)=> {
-        if(reclamacao){
-          this.erro = "Não existe comentário para esta Denúncia"
-          this.vazio = true;
-        }
-      },
-      error:()=>{
-        this.erro = "Denúncia não existe"
-        this.vazio = true;
-      }
-    })
   }
 }

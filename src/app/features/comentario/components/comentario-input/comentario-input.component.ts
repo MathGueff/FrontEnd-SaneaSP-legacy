@@ -1,6 +1,7 @@
 
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SocketService } from '@core/services/sockets.service';
 
 @Component({
     selector: 'app-comentario-input',
@@ -13,7 +14,7 @@ export class ComentarioInputComponent {
   rows: number = 0;
   inputText : FormGroup;
 
-  constructor(private formBuilder : FormBuilder){
+  constructor(private formBuilder : FormBuilder, ){
     this.inputText = this.formBuilder.group({
       textForm:['', Validators.required]
     })
@@ -34,7 +35,7 @@ export class ComentarioInputComponent {
 
     if(this.inputText.valid){
       let mensagem = this.inputText.value.textForm;
-      console.log(mensagem);
+      //this.socketService.sendMessage(mensagem)
     }
     else{
       console.log('Mensagem vazia');
