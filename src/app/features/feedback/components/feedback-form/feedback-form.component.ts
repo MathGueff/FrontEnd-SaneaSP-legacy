@@ -5,7 +5,8 @@ import { NonNullableFormBuilder, ReactiveFormsModule, Validators } from '@angula
 import { IFieldForm } from '@shared/models/field-form.model';
 import { FormValidatorEnum } from '@shared/enums/form-validator.enum';
 import { ToastService } from '@shared/services/toast.service';
-
+import { ICreateFeedback } from '@features/feedback/models/feedback.model';
+import { FeedbackService } from '@features/feedback/services/feedback.service';
 
 @Component({
   selector: 'app-feedback-form',
@@ -19,6 +20,7 @@ export class FeedbackFormComponent {
   private router = inject(Router);
   private sweetAlertService = inject(SweetAlertService);
   private toastService = inject(ToastService);
+  private feedbackService = inject(FeedbackService);
 
   protected formFeedback = this.formBuilderService.group({
     descricao: ['', Validators.required, Validators.minLength(10), Validators.maxLength(2048)]
@@ -38,9 +40,21 @@ export class FeedbackFormComponent {
 
   onSubmit() {
     if (this.formFeedback.valid) {
-      let descricao = this.formFeedback.controls.descricao.value;
-      console.log(descricao);
-      this.sweetAlertService.showMessage("Feedback enviado com sucesso");
+      const newFeedback: ICreateFeedback = {
+        data_publicacao: new Date(),
+        descricao: this.formFeedback.controls.descricao.value,
+        fk_funcionario: 1,
+        fk_denuncia: 1,
+        fk_cidadao: 1
+      }
+
+      this.feedbackService.postFeedback(newFeedback).subscribe({
+        next: () => {
+          this.sweetAlertService.showMessage('Feedback enviado com sucesso!');
+          this.router.navigate(['reclamacao']);
+          this.onCancel();
+        }
+      })
     } else {
       this.toastService.show({
         message: "Descreva com foi sua experiência ou clique em CANCELAR",
@@ -52,5 +66,4 @@ export class FeedbackFormComponent {
   onCancel() {
     this.router.navigate(['reclamacao']);
   }
-
 }
