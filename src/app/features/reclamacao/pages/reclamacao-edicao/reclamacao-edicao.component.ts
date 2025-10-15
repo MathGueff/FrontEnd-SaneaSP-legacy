@@ -56,8 +56,8 @@ export class ReclamacaoEdicaoComponent implements OnInit {
       if (this.form.valid && response) {
           const updateReclamacao: ICreateReclamacao = {
             ...this.form.value as ICreateReclamacao,
-            Imagens: this.images,
-            Categorias: this.tagsID
+            imagens: this.images,
+            categorias: this.tagsID
           }
           this.reclamacaoService.putReclamacao(updateReclamacao,this.reclamacao.id).subscribe({
             next: ()=>{
@@ -178,7 +178,7 @@ export class ReclamacaoEdicaoComponent implements OnInit {
       $event.map((file)=> this.images.push(file.name));
     }
     else{
-      this.reclamacao.Imagens.map((image)=>this.images.push(image.nome))
+      this.reclamacao.imagens.map((image)=>this.images.push(image.nome))
     }
   }
 }

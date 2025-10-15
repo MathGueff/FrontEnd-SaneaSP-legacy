@@ -5,9 +5,9 @@
       {{ card.titulo }}
     </h3>
 
-    @if(card.Categorias.length > 0){
+    @if(card.categorias.length > 0){
       <div class="tags d-flex align-items-center m-md-0 gap-md-2 ">
-        @for (tag of card.Categorias; track tag) {
+        @for (tag of card.categorias; track tag) {
           <span class="tag">
             {{tag.nome}}
           </span>
@@ -49,7 +49,7 @@
       <div class="card-image-div col-lg-2 col-md-12 d-flex justify-content-lg-center">
           <div id="carouselImage" class="carousel slide">
             <div class="carousel-inner">
-              @for (imagem of card.Imagens; track imagem.id; let firstImage = $first ) {
+              @for (imagem of card.imagens; track imagem.id; let firstImage = $first ) {
                 @if(firstImage){
                   <div class="carousel-item active">
                     <img src="{{ imagem.url }}" class="card-icon-large" alt="Imagem da Reclamação">
@@ -65,7 +65,7 @@
               }
             </div>
 
-        @if(card.Imagens.length > 1){
+        @if(card.imagens.length > 1){
           <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>

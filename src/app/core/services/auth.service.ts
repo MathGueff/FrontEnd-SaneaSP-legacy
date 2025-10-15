@@ -131,4 +131,13 @@ export class AuthService {
   public removeAuthToken() {
     this.localStorageService.remove('access-token')
   }
+  /*Coloca o token no cabeçario do */
+  public setHeaders(): HttpHeaders {
+        const token = this.getAuthToken();
+        let headers = new HttpHeaders();
+        if (token) {
+            headers = headers.set('Authorization', token)
+        }
+        return headers
+    }
 }

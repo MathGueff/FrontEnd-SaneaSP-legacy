@@ -23,8 +23,8 @@ export class Reclamacao implements IReclamacao{
     numero ?: string;
     complemento ?: string;
     Usuario ?: IUser;
-    Imagens !: IImagem[];
-    Categorias !: ICategoria[];
+    imagens !: IImagem[];
+    categorias !: ICategoria[];
 }
 
 export interface IReclamacao{
@@ -41,8 +41,8 @@ export interface IReclamacao{
     numero ?: string,
     complemento ?: string,
     Usuario ?: IUser,
-    Imagens : IImagem[],
-    Categorias : ICategoria[],
+    imagens : IImagem[],
+    categorias : ICategoria[],
 }
 export interface ICreateReclamacao{
     titulo: string,
@@ -54,7 +54,7 @@ export interface ICreateReclamacao{
     numero ?: string,
     complemento ?: string,
     idUsuario: number,
-    Imagens : string[],
-    Categorias : number[]
+    imagens : string[],
+    categorias : number[]
 }
 
