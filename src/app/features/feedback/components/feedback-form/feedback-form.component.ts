@@ -23,7 +23,7 @@ export class FeedbackFormComponent {
   private feedbackService = inject(FeedbackService);
 
   protected formFeedback = this.formBuilderService.group({
-    descricao: ['', Validators.required, Validators.minLength(10), Validators.maxLength(2048)]
+    descricao: ['', [Validators.required, Validators.minLength(10), Validators.maxLength(2048)]]
   })
 
   inputs: IFieldForm[] = [

@@ -1,18 +1,19 @@
 import { HttpClient } from "@angular/common/http";
 import { environment } from "environments/environment";
+import { AuthService } from "@core/services/auth.service";
 import { Observable } from "rxjs";
-import { SweetAlertService } from "@shared/services/sweet-alert.service";
-import { ErrorService } from "@core/services/error-handler.service";
 import { ICreateFeedback, IFeedback } from "../models/feedback.model";
+import { Injectable, inject } from "@angular/core"
+
+@Injectable({
+    providedIn: 'root'
+})
 
 export class FeedbackService {
     private urlApi: string = environment.domain + 'feedback'
+    private authService = inject(AuthService)
 
-    constructor(
-        private httpClient: HttpClient,
-        private sweetAlertService: SweetAlertService,
-        private errorService: ErrorService
-    ) { }
+    constructor(private httpClient: HttpClient,) { }
 
     public postFeedback(newFeedback: ICreateFeedback): Observable<IFeedback> {
         return this.httpClient.post<IFeedback>(`${this.urlApi}/create-feedback`, newFeedback);
