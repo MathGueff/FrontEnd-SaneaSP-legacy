@@ -14,22 +14,18 @@ export class SocketService {
 
   }
 
-  // Envia mensagem ao servidor
-  sendMessage(msg: string) {
-    console.log(msg)
-    this.socket.emit('message', msg);
+  emit(event: string, data: any) {
+    this.socket.emit(event, data);
   }
 
-  // Ouve mensagens do servidor
-  onMessage(): Observable<string> {
-    return new Observable(observer => {
-      this.socket.on('message', (msg: string) => {
-        observer.next(msg);
-        console.log(msg)
+  on<T>(event: string): Observable<T> {
+    return new Observable<T>((observer) => {
+      this.socket.on(event, (data) => {
+        observer.next(data);
       });
-    });
+    })
   }
-  disconnect(): void {
+ public disconnect(): void {
     if (this.socket) {
       this.socket.disconnect();
     }

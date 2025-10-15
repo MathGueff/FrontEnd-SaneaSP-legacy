@@ -38,7 +38,7 @@
               "node_modules/scrollreveal/dist/scrollreveal.js"
             ],
             "server": "src/main.server.ts",
-            "prerender": true
+            "prerender": false
           },
           "configurations": {
             "production": {

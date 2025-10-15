@@ -6,7 +6,8 @@ import { Component, inject, Input, OnInit } from '@angular/core';
     selector: 'app-comentario-baixo',
     imports: [],
     templateUrl: './comentario-baixo.component.html',
-    styleUrl: './comentario-baixo.component.css'
+    styleUrl: './comentario-baixo.component.css',
+    standalone:true
 })
 export class ComentarioBaixoComponent implements OnInit {
   @Input() comentario!: Comentario;
