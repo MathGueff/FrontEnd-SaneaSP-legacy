@@ -40,9 +40,9 @@ export class ComentarioInputComponent {
       let mensage : ComentarioInput  = {
         descricao: this.inputText.value.textForm,
         usuario: this.userCurrent
-      }
-
-      this.socketService.emit('comentario', mensage)
+      };
+      this.inputText.setValue({textForm: ''});
+      this.socketService.emit('comentario', mensage);
     }
     else{
       console.log('Mensagem vazia');

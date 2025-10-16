@@ -29,7 +29,7 @@ import { IUser } from '@features/usuario/models/usuario.model';
     styleUrl: './comentario-central.component.css',
     standalone:true
 })
-export class ComentarioCentralComponent implements OnInit, OnDestroy {
+export class ComentarioCentralComponent implements OnInit {
   private reclamacaoService = inject(ReclamacaoService);
   private activeroute = inject(ActivatedRoute);
   private route = inject(Router);
@@ -75,9 +75,6 @@ export class ComentarioCentralComponent implements OnInit, OnDestroy {
         console.log(this.messages)
       });
     });
-  }
-  ngOnDestroy(): void {
-    this.socketService.disconnect();
   }
 }
 
