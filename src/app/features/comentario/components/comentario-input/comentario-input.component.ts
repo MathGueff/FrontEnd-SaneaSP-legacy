@@ -38,7 +38,7 @@ export class ComentarioInputComponent {
 
     if(this.inputText.valid){
       let mensage : ComentarioInput  = {
-        descricao: this.inputText.value,
+        descricao: this.inputText.value.textForm,
         usuario: this.userCurrent
       }
 
