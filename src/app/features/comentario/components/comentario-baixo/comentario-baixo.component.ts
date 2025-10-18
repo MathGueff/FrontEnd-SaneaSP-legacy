@@ -1,5 +1,5 @@
 import { UserService } from '@features/usuario/services/user.service';
-import { Comentario, ComentarioRead } from '../../models/comentario.model';
+import {IComentario } from '../../models/comentario.model';
 import { Component, inject, Input, OnInit } from '@angular/core';
 
 @Component({
@@ -10,7 +10,7 @@ import { Component, inject, Input, OnInit } from '@angular/core';
     standalone:true
 })
 export class ComentarioBaixoComponent implements OnInit {
-  @Input() comentario!: ComentarioRead;
+  @Input() comentario!: IComentario;
 
   userService = inject(UserService);
 

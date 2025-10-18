@@ -1,9 +1,9 @@
-
 import { Component, Input } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SocketService } from '@core/services/sockets.service';
 import { ComentarioInput } from '@features/comentario/models/comentario.model';
 import { IUser } from '@features/usuario/models/usuario.model';
+import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 
 @Component({
     selector: 'app-comentario-input',
@@ -13,11 +13,12 @@ import { IUser } from '@features/usuario/models/usuario.model';
     standalone:true
 })
 export class ComentarioInputComponent {
-  @Input() userCurrent !: IUser
+  @Input() userCurrent !: IUser;
+  @Input() denuncia !: IReclamacao
   rows: number = 0;
   inputText : FormGroup;
 
-  constructor(private formBuilder : FormBuilder, private socketService:SocketService ){
+  constructor(private formBuilder : FormBuilder, private socketService:SocketService){
     this.inputText = this.formBuilder.group({
       textForm:['', Validators.required]
     })
@@ -39,10 +40,11 @@ export class ComentarioInputComponent {
     if(this.inputText.valid){
       let mensage : ComentarioInput  = {
         descricao: this.inputText.value.textForm,
-        usuario: this.userCurrent
+        usuario: this.userCurrent,
+        denuncia : this.denuncia
       };
       this.inputText.setValue({textForm: ''});
-      this.socketService.emit('comentario', mensage);
+      this.socketService.emit('newComentario', mensage);
     }
     else{
       console.log('Mensagem vazia');

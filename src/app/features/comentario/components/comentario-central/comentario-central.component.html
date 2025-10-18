@@ -10,13 +10,14 @@
         @for (comentario of messages; track $index) {
           <app-comentario-baixo [comentario]="comentario" [ngStyle]="{
               'justify-content':
-                comentario.usuario.nivel && comentario.usuario.nivel > 0 ? 'start' : 'end'
-            }" ></app-comentario-baixo>
+                (comentario.usuario.nivel && comentario.usuario.nivel > 0) ? 'start' : 'end'
+            }" >
+          </app-comentario-baixo>
         }
       </div>
 
       <div class="novo-comentario pt-5 pb-3 px-0">
-        <app-comentario-input [userCurrent]="userCurrent"></app-comentario-input>
+        <app-comentario-input [userCurrent]="userCurrent" [denuncia]="reclamacao"></app-comentario-input>
       </div>
       }
       @else{
