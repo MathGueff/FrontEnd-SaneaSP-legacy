@@ -47,9 +47,9 @@
                   Pontuação:<span> {{ reclamacao.pontuacao }}</span>
                 </div>
               </section>
-              @if(reclamacao.Categorias.length > 0){
+              @if(reclamacao.categorias.length > 0){
                 <section class="tags d-flex align-items-center me-md-0 mt-md-4 m-md-0 gap-md-2">
-                  @for (tag of reclamacao.Categorias; track tag) {
+                  @for (tag of reclamacao.categorias; track tag) {
                     <span class="tag text-center">
                       {{ tag.nome }}
                     </span>
