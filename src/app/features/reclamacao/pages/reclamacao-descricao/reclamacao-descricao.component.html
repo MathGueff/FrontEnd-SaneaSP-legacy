@@ -5,7 +5,7 @@
   <header class="header-painel row justify-content-between p-4 mx-0 h-auto">
     <div id="carouselImage" class="carousel slide col-3">
       <div class="carousel-inner w-100">
-        @for (imagem of reclamacao.Imagens; track imagem.id; let firstImage =
+        @for (imagem of reclamacao.imagens; track imagem.id; let firstImage =
         $first ) { @if(firstImage){
         <div class="carousel-item active text-center w-100">
           <img src="{{imagem.url}}" class="card-icon-large imgPainel"
@@ -21,7 +21,7 @@
         }
       </div>
 
-              @if(reclamacao.Imagens.length > 1){
+              @if(reclamacao.imagens.length > 1){
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselImage" data-bs-slide="prev">
                   <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                   <span class="visually-hidden">Previous</span>
