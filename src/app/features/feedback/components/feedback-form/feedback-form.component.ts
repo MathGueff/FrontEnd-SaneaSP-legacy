@@ -53,6 +53,12 @@ export class FeedbackFormComponent {
           this.sweetAlertService.showMessage('Feedback enviado com sucesso!');
           this.router.navigate(['reclamacao']);
           this.onCancel();
+        }, error: () => {
+          this.toastService.show({
+            message: "Erro ao enviar feedback",
+            error: true
+          });
+          this.router.navigate(['reclamacao']);
         }
       })
     } else {
