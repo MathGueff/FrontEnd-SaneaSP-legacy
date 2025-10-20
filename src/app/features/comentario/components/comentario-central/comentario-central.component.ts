@@ -57,7 +57,7 @@ export class ComentarioCentralComponent implements OnInit {
 
       this.socketService.on<IComentario>('comentario').subscribe(msg => {
         this.messages.push(msg);
-        console.log(this.messages)
+        console.log(msg)
       });
     });
   }

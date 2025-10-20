@@ -8,10 +8,7 @@
       </div>
       <div class="body-comentario w-100 d-flex flex-column h-auto pt-5 pb-3 gap-5 p-0">
         @for (comentario of messages; track $index) {
-          <app-comentario-baixo [comentario]="comentario" [ngStyle]="{
-              'justify-content':
-                (comentario.usuario.nivel && comentario.usuario.nivel > 0) ? 'start' : 'end'
-            }" >
+          <app-comentario-baixo [comentario]="comentario">
           </app-comentario-baixo>
         }
       </div>
