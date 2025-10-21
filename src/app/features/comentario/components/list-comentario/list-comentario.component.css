@@ -1,0 +1,65 @@
+/* Container que simula a tela do celular */
+.whatsapp-shell {
+  max-width: 90%;
+  margin: 20px auto;
+  border: 1px solid #ccc;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  background-color: white;
+}
+
+/* Estilização do cabeçalho */
+.header-main {
+  /* Cor verde do WhatsApp */
+  background-color: var(--cor-primaria) !important
+}
+
+
+/* Indicador de aba (linha branca) */
+.nav-link.active .tab-indicator {
+  content: '';
+  display: block;
+  height: 3px;
+  background-color: white;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 70%;
+}
+
+
+/* Lista de Conversas */
+.chat-list-body {
+  height: calc(100% - 130px); /* Ajuste conforme a altura do seu header */
+  overflow-y: auto;
+  background-color: var(--cor-terciaria) !important
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item:hover, .list-group-item:focus {
+  transform: none;
+  background-color: var( --cor-quaternaria) !important; 
+}
+
+/* Avatar */
+.avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+
+/* Ajustes de texto */
+
+.time-text {
+  font-size: 0.75rem;
+  width: auto;
+}
+.text-visible{
+    color: var(--cor-segundario)
+}

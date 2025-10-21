@@ -118,28 +118,16 @@ export class MenuAdminComponent implements OnInit {
     [AdminSidebarOptions.Comentario]: [
       {
         type: 'link',
-        path: '/comentario/1',
+        path: '/list-comentario/',
         name: 'Ver seus comentários',
         img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'link',
-        path: '/comentario/1',
+        path: '/list-comentario',
         name: 'Adicionar comentário',
         img: 'icons/actions/white/add_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/comentario/1',
-        name: 'Editar comentário',
-        img: 'icons/actions/white/edit_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/comentario/1',
-        name: 'Remover um comentário',
-        img: 'icons/actions/white/delete_icon.svg',
-      },
+      }
     ],
     [AdminSidebarOptions.Tag] : [
       {

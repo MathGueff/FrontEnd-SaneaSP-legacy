@@ -1,0 +1,30 @@
+<div class="whatsapp-shell">
+  <div class="header-main text-white p-3 pt-4">
+    <div class="d-flex justify-content-between align-items-center mb-2">
+      <h1 class="h4 mb-0 fw-bold">Comentários</h1>
+    </div>
+  </div>
+
+  <ul class="list-group list-group-flush chat-list-body">
+    @for (item of chatItems; track item.id) {
+      <li class="list-group-item d-flex align-items-center align-content-between py-3 px-3"
+          (click)="openChat(item)">
+        <div class="flex-grow-1 text-truncate text-start">
+          <h6 class="mb-0 fw-bold">{{ item.name }}</h6>
+          
+          @if (!item.isTyping) {
+            <p class="text-muted mb-0 text-truncate last-message-text">
+              {{ item.lastMessage }}
+            </p>
+          }
+          
+          @if (item.isTyping) {
+            <p class="mb-0 text-visible text-truncate last-message-text">
+              typing...
+            </p>
+          }
+        </div>
+      </li>
+    }
+  </ul>
+</div>
