@@ -51,16 +51,8 @@
         } @else {
         <a
           class="opcao-dashboard focus-terciario rounded d-flex justify-content-center align-items-center flex-column col-xl-3 col-lg-4 col-md-4 col-sm-12"
-          (click)="
-            alternarModal(
-              opcao.tipoModal || modalTypes.None
-            )
-          "
-          (keydown.enter)="
-            alternarModal(
-              opcao.tipoModal || modalTypes.None
-            )
-          "
+          (click)="exportarExcel()"
+          (keydown.enter)="exportarExcel()"
           tabindex="0"
           routerLink="."
         >

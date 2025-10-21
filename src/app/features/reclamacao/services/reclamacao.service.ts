@@ -5,6 +5,7 @@ import { Observable } from "rxjs";
 import { ICreateReclamacao, IReclamacao } from "@features/reclamacao/models/reclamacao.model";
 import { AuthService } from "@core/services/auth.service";
 import { environment } from 'environments/environment';
+import { saveAs } from 'file-saver';
 
 @Injectable ({providedIn:'root'})
 export class ReclamacaoService{
@@ -80,5 +81,35 @@ export class ReclamacaoService{
   public deleteAllImages(idDenuncia: number): Observable<any> {
     const headers = this.setHeader();
     return this.httpClient.delete(`${this.urlApiImages}/${idDenuncia}`, { headers });
+  }
+
+  exportarDenunciasExcel() {
+    return this.httpClient.get(`${this.urlApi}/export`, {
+      responseType: 'blob'
+    });
+  }
+ 
+  baixarExcel() {
+    this.exportarDenunciasExcel().subscribe({
+      next: (res: Blob) => {
+        const blob = new Blob([res], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        saveAs(blob, 'denuncias.xlsx');
+      },
+      error: (err) => console.error('Erro ao exportar Excel', err)
+    });
+  }
+
+   baixarPdf() {
+    this.exportarDenunciasExcel().subscribe({
+      next: (res: Blob) => {
+        const blob = new Blob([res], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        saveAs(blob, 'denuncias.xlsx');
+      },
+      error: (err) => console.error('Erro ao exportar Excel', err)
+    });
   }
 }

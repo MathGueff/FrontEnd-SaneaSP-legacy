@@ -7,6 +7,7 @@ import { ModalType } from '@features/categoria/models/ModalType.enum';
 import { TagModalComponent } from '@features/categoria/components/tag-modal/tag-modal.component';
 import { ILinkPanelAdmin, ILinkSidebarAdmin } from '@features/administrador/models/link-admin.model';
 import { AuthService } from '@core/services/auth.service';
+import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 
 @Component({
     selector: 'app-menu-admin',
@@ -15,13 +16,14 @@ import { AuthService } from '@core/services/auth.service';
     styleUrl: './menu-admin.component.css'
 })
 export class MenuAdminComponent implements OnInit {
-  constructor(private router: Router, private authService : AuthService) {}
+  constructor(private router: Router, private authService : AuthService, private reclamacaoService : ReclamacaoService) {}
 
   ngOnInit(): void {
     if(!this.authService.getCurrentUser()){
       this.router.navigate([''])
     }
   }
+
 
   // ***** Modal *****
   modalTypes = ModalType;
@@ -77,7 +79,7 @@ export class MenuAdminComponent implements OnInit {
       opcao: AdminSidebarOptions.Tag,
     },
     {
-      name: 'Log',
+      name: 'Exportar',
       img: 'icons/shared/white/log_icon.svg',
       opcao: AdminSidebarOptions.Log,
     },
@@ -168,9 +170,15 @@ export class MenuAdminComponent implements OnInit {
     ],
     [AdminSidebarOptions.Log]: [
       {
-        type: 'link',
+        type: 'modal',
         path: '/',
-        name: 'Visualizar log de comentários',
+        name: 'Exportar para PDF',
+        img: 'icons/shared/white/log_icon.svg',
+      },
+      {
+        type: 'modal',
+        path: '/',
+        name: 'Exportar para Excel',
         img: 'icons/shared/white/log_icon.svg',
       },
     ]
@@ -186,5 +194,15 @@ export class MenuAdminComponent implements OnInit {
   mudarOpcaoAtual(opcao: AdminSidebarOptions) {
     this.sidebarAtual = opcao;
     this.opcoesMenuAtuais = this.menuLink[opcao] || [];
+  }
+
+   exportarExcel() {
+     console.log('tewytsyufbdsfdsbffjdsf dfbfhydfhbggfdbfdsf')
+    this.reclamacaoService.baixarExcel();
+  }
+
+  exportarPdf() {
+    // Se não tiver método no service, cria um
+    this.reclamacaoService.baixarPdf();
   }
 }
