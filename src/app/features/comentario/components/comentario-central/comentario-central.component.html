@@ -6,20 +6,32 @@
       <div class="header-comentario py-2">
         <app-comentario-cima [reclamacao]="reclamacao"></app-comentario-cima>
       </div>
-      <div class="body-comentario w-100 d-flex flex-column h-auto pt-5 pb-3 gap-5 p-0">
+      <div
+        class="body-comentario w-100 d-flex flex-column h-auto pt-5 pb-3 gap-5 p-0"
+      >
         @for (comentario of messages; track $index) {
-          <app-comentario-baixo [comentario]="comentario">
-          </app-comentario-baixo>
+        <app-comentario-baixo [comentario]="comentario"> </app-comentario-baixo>
+        } @empty {
+          <div class="mx-5 my-1">
+            <app-not-found
+              mensageError="Não foi feito nenhum comentário relacionado a essa denúncia"
+            ></app-not-found>
+          </div>
         }
       </div>
-
+      @if (userCurrent) {
       <div class="novo-comentario pt-5 pb-3 px-0">
-        <app-comentario-input [userCurrent]="userCurrent" [denuncia]="reclamacao"></app-comentario-input>
+        <app-comentario-input
+          [userCurrent]="userCurrent"
+          [denuncia]="reclamacao"
+        ></app-comentario-input>
       </div>
-      }
-      @else{
+      } } @else{
       <div class="erro m-auto my-3">
-        <app-not-found mensageError ="Não foi possível achar nenhuma Denúncia" caminhoVoltar="../../"></app-not-found>
+        <app-not-found
+          mensageError="Não foi possível achar nenhuma Denúncia"
+          caminhoVoltar="../../"
+        ></app-not-found>
       </div>
       }
     </div>

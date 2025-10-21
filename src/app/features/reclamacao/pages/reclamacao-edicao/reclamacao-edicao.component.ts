@@ -178,7 +178,7 @@ export class ReclamacaoEdicaoComponent implements OnInit {
       $event.map((file)=> this.images.push(file.name));
     }
     else{
-      this.reclamacao.Imagens.map((image)=>this.images.push(image.nome))
+      this.reclamacao.imagens.map((image)=>this.images.push(image.nome))
     }
   }
 }

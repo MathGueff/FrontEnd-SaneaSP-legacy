@@ -5,7 +5,7 @@ import { ComentarioCimaComponent } from '../comentario-cima/comentario-cima.comp
 import { CommonModule } from '@angular/common';
 
 import { ActivatedRoute, Router, RouterModule } from '@angular/router';
-import { Observable } from 'rxjs';
+import { firstValueFrom, Observable } from 'rxjs';
 import { UserService } from '@features/usuario/services/user.service';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
 import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
@@ -15,6 +15,8 @@ import { AuthService } from '@core/services/auth.service';
 import { IUser } from '@features/usuario/models/usuario.model';
 import { IComentario } from '@features/comentario/models/comentario.model';
 import { ComentarioInputComponent } from '../comentario-input/comentario-input.component';
+import { ComentarioService } from '@features/comentario/services/comentario.service';
+import { SweetAlertService } from '@shared/services/sweet-alert.service';
 
 @Component({
     selector: 'app-comentario-central',
@@ -32,29 +34,32 @@ import { ComentarioInputComponent } from '../comentario-input/comentario-input.c
 })
 export class ComentarioCentralComponent implements OnInit {
   private reclamacaoService = inject(ReclamacaoService);
+  private authService = inject(AuthService);
   private activeroute = inject(ActivatedRoute);
-  private route = inject(Router);
   private socketService = inject(SocketService);
-  private authService = inject(AuthService)
-  public reclamacao$ !: Observable<IReclamacao>
+  private SweetService = inject(SweetAlertService);
+  public reclamacao$ !: Observable<IReclamacao>;
+  public comentarioService = inject(ComentarioService);
   //variaveis para poder controlar o componente NotFound
-  public userCurrent !: IUser
+  public userCurrent !: IUser | null;
 
   messages: IComentario[] =[];
 
-  ngOnInit(): void {
-    let user = this.authService.getCurrentUser();
-    if(!user){
-      this.route.navigate(['/']);
-      return;
-    }
-    this.userCurrent = user;
-    this.activeroute.params.subscribe((params) => {
+   ngOnInit(): void {
+    this.userCurrent = this.authService.getCurrentUser();
 
-      
+    this.activeroute.params.subscribe(async (params) => {
       const IdParametro = Number(params['idReclamamacao']);
       this.reclamacao$ = this.reclamacaoService.getByIdReclamacao(IdParametro);
 
+      const comentarios = await firstValueFrom(this.comentarioService.getComentarioByDenuncia(IdParametro))
+       console.log(this.userCurrent);
+      if(comentarios){
+        this.messages = comentarios
+      }
+      else{
+        this.SweetService.showMessage('Não foi possível carregar mensagens anteriores',true)
+      }
       this.socketService.on<IComentario>('comentario').subscribe(msg => {
         this.messages.push(msg);
         console.log(msg)
