@@ -29,8 +29,8 @@ export class FeedbackService {
         return this.httpClient.post<IFeedback>(`${this.urlApi}/create-feedback`, newFeedback, { headers: this.getAuthHeaders() });
     }
 
-    public getAllFeedBacks(): IFeedback[] {
-        return this.feedbacks;
+    getAllFeedBacks(): Observable<IFeedback[]> {
+        return this.httpClient.get<IFeedback[]>(`${this.urlApi}/feedback`);
     }
     /*
     public putFeedback(feedback: IFeedback): Observable<IFeedback> {
