@@ -54,7 +54,7 @@ export interface ICreateReclamacao{
     numero ?: string,
     complemento ?: string,
     idUsuario: number,
-    Imagens : string[],
-    Categorias : number[]
+    imagens : string[],
+    categorias : number[]
 }
 

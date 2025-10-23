@@ -56,8 +56,8 @@ export class ReclamacaoEdicaoComponent implements OnInit {
       if (this.form.valid && response) {
           const updateReclamacao: ICreateReclamacao = {
             ...this.form.value as ICreateReclamacao,
-            Imagens: this.images,
-            Categorias: this.tagsID
+            imagens: this.images,
+            categorias: this.tagsID
           }
           this.reclamacaoService.putReclamacao(updateReclamacao,this.reclamacao.id).subscribe({
             next: ()=>{
