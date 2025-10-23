@@ -58,7 +58,7 @@ export class FeedbackFormComponent {
             message: "Erro ao enviar feedback",
             error: true
           });
-          this.router.navigate(['reclamacao']);
+          this.router.navigate(['']);
         }
       })
     } else {
@@ -70,6 +70,6 @@ export class FeedbackFormComponent {
   }
 
   onCancel() {
-    this.router.navigate(['reclamacao']);
+    this.router.navigate(['']);
   }
 }
