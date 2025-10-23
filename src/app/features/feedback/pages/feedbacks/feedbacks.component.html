@@ -1,1 +1,43 @@
-<p>feedbacks works!</p>
+<main class="background container-fluid pt-2">
+    <section class="row banner align-content-center m-md-5 m-1 px-md-4 py-md-0 px-sm-2">
+        <div class="titulo mt-2 mb-2 text-lg-start text-sm-center">
+            <h1>Feedback dos Usuários</h1>
+        </div>
+        <div class="row align-items-center">
+            <figure class="col-lg col-md-5">
+                <img class="img-fluid" src="images/feedback/feedback.svg" alt="banner feedback" />
+            </figure>
+            <div class="col-md-7 col-lg-8">
+                <p>
+                    A voz do cidadão é o alicerce de uma sociedade justa e participativa.
+                    Cada feedback aqui exposto representa um gesto de colaboração,
+                    reflexão e desejo de melhoria. Que estas palavras inspirem o
+                    aperfeiçoamento contínuo e fortaleçam o elo entre comunidade e
+                    serviço público.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="row mt-4 mb-4 cards-div">
+        @if (!vazio) {
+        @for (feedback of feedbacks$ | async; track feedback) {
+        <article class="col-12 col-md-10 col-lg-8 m-auto mb-4">
+            <div class="card shadow-sm border-0 rounded-4 p-4">
+                <p class="mb-0 fs-5 text-secondary">
+                    "{{ feedback.descricao }}"
+                </p>
+                <small class="text-muted d-block mt-2 text-end">
+                    Publicado em {{ feedback.data_publicacao | date:'dd/MM/yyyy' }}
+                </small>
+            </div>
+        </article>
+        }
+        }
+        @else {
+        <div class="col text-center mt-5">
+            <p class="text-muted fs-5">Nenhum feedback encontrado.</p>
+        </div>
+        }
+    </section>
+</main>
