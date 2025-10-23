@@ -1,6 +1,0 @@
-textarea.form-control {
-    overflow: hidden !important;
-    resize: none !important;
-    height: auto !important;
-    transition: height 0.25s ease;
-}
