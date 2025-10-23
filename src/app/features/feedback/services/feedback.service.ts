@@ -12,15 +12,6 @@ import { Injectable, inject } from "@angular/core"
 export class FeedbackService {
     private urlApi: string = environment.domain + 'feedback'
     private authService = inject(AuthService)
-
-    constructor(private httpClient: HttpClient,) { }
-
-    private currentUser = this.authService.currentUser$;
-
-    public postFeedback(newFeedback: ICreateFeedback): Observable<IFeedback> {
-        return this.httpClient.post<IFeedback>(`${this.urlApi}/create-feedback`, newFeedback, { headers: this.getAuthHeaders() });
-    }
-
     private getAuthHeaders(): HttpHeaders {
         const token = this.authService.getAuthToken();
         let headers = new HttpHeaders();
@@ -32,6 +23,12 @@ export class FeedbackService {
 
     private feedbacks: IFeedback[] = [];
 
+    constructor(private httpClient: HttpClient,) { }
+
+    public postFeedback(newFeedback: ICreateFeedback): Observable<IFeedback> {
+        return this.httpClient.post<IFeedback>(`${this.urlApi}/create-feedback`, newFeedback, { headers: this.getAuthHeaders() });
+    }
+
     public getAllFeedBacks(): IFeedback[] {
         return this.feedbacks;
     }
@@ -40,7 +37,9 @@ export class FeedbackService {
         return this.httpClient.put<IFeedback>(`${this.urlApi}/${feedback.id}`, feedback);
     }
     */
+    /*
     public deleteFeedback(id: number): Observable<void> {
         return this.httpClient.delete<void>(`${this.urlApi}/${id}`, { headers: this.getAuthHeaders() });
     }
+     */
 }
