@@ -17,7 +17,7 @@ import { AuthGuard } from '@core/guards/auth.guard';
 import { AdminGuard } from '@core/guards/auth-admin.guard';
 import { ConfirmationCadastroComponent } from '@features/autenticacao/pages/confirmation-cadastro/confirmation-cadastro.component';
 import { RelatorioComponent } from '@features/relatorio/relatorio/relatorio.component';
-import { FeedbackFormComponent } from '@features/feedback/components/feedback-form/feedback-form.component';
+import { FeedbackFormComponent } from '@features/feedback/pages/feedback-form/feedback-form.component';
 
 
 export const routes: Routes = [
