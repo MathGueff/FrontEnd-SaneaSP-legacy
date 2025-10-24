@@ -30,7 +30,7 @@ export class FeedbackService {
     }
 
     getAllFeedBacks(): Observable<IFeedback[]> {
-        return this.httpClient.get<IFeedback[]>(`${this.urlApi}/feedback`);
+        return this.httpClient.get<IFeedback[]>(`${this.urlApi}`);
     }
     /*
     public putFeedback(feedback: IFeedback): Observable<IFeedback> {
