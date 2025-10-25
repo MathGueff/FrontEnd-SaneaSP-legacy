@@ -8,20 +8,16 @@ import { Observable } from 'rxjs';
 export class UserService {
   private API_URL =  environment.domain + "user/"
 
-  constructor(private httpClient : HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   getUserById(id : number):Observable<IUser>{
     return this.httpClient.get<IUser>(this.API_URL + id);;
   }
-  
+
   private users: IUser[] = [];
 
   /* Pega todos os usuários existentes local */
   public getAllUsers(): IUser[] {
     return this.users;
   }
-
-  //CADASTRO
-
-  
 }

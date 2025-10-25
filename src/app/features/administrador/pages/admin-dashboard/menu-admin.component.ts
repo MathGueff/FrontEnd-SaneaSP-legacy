@@ -82,6 +82,11 @@ export class MenuAdminComponent implements OnInit {
       img: 'icons/shared/white/log_icon.svg',
       opcao: AdminSidebarOptions.Log,
     },
+    {
+      name: 'Feedback',
+      img: 'icons/shared/white/reclamacao_icon.svg',
+      opcao: AdminSidebarOptions.Feedback,
+    },
   ];
 
   /* Objeto com todas opções do menu, organizados por tipo de menu e os links dele
@@ -162,7 +167,14 @@ export class MenuAdminComponent implements OnInit {
         name: 'Visualizar log de comentários',
         img: 'icons/shared/white/log_icon.svg',
       },
-    ]
+    ],
+    [AdminSidebarOptions.Feedback]: [
+      {
+        type: 'link',
+        path: '/feedbacks',
+        name: 'Visualizar feedbacks dos usuários',
+        img: 'icons/actions/white/view_icon.svg'
+    }]
   };
 
   //Variável para guardar a opção atual selecionada no sidebar (inicia com o primeiro elemento de linksSidebar)

@@ -18,6 +18,8 @@ import { AdminGuard } from '@core/guards/auth-admin.guard';
 import { ConfirmationCadastroComponent } from '@features/autenticacao/pages/confirmation-cadastro/confirmation-cadastro.component';
 import { RelatorioComponent } from '@features/relatorio/relatorio/relatorio.component';
 import { ListComentarioComponent } from '@features/comentario/components/list-comentario/list-comentario.component';
+import { FeedbackFormComponent } from '@features/feedback/pages/feedback-form/feedback-form.component';
+import { FeedbacksComponent } from '@features/feedback/pages/feedbacks/feedbacks.component';
 
 
 export const routes: Routes = [
@@ -33,6 +35,10 @@ export const routes: Routes = [
   { path: 'suas-reclamacoes', component: ReclamacaoUsuariosComponent, canActivate: [AuthGuard] },
   { path: 'suas-reclamacoes/reclamacao-descricao/:id', component: ReclamacaoDescricaoComponent, canActivate: [AuthGuard] },
 
+  //Comentários
+  { path: 'feedback', component: FeedbackFormComponent, canActivate: [AuthGuard] },
+  { path: 'feedbacks', component: FeedbacksComponent, canActivate: [AdminGuard]},
+
   //Tags
   { path: 'tag-tabela', component: TagTabelaComponent, canActivate: [AdminGuard] },
 
@@ -46,4 +52,5 @@ export const routes: Routes = [
   { path: 'responsaveis', component: ResponsaveisComponent },
   { path: 'relatorio', component:RelatorioComponent},
   { path: 'list-comentario', component:ListComentarioComponent},
+  { path: 'relatorio', component: RelatorioComponent},
 ];
