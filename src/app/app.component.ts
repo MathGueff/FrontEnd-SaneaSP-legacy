@@ -9,9 +9,10 @@ import { MapComponent } from '@shared/components/map/map.component';
 
 
 
+
 @Component({
     selector: 'app-root',
-    imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent,MapComponent],
+    imports: [RouterOutlet, HeaderComponent, FooterComponent, ToastComponent],
     templateUrl: './app.component.html',
     styleUrl: './app.component.css',
     standalone:true,

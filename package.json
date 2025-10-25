@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng serve --proxy-config src/proxy.conf.json",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -32,6 +32,7 @@
     "leaflet": "^1.9.4",
     "rxjs": "~7.8.0",
     "scrollreveal": "^4.0.9",
+    "socket.io-client": "^4.8.1",
     "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
     "zone.js": "~0.15.1"

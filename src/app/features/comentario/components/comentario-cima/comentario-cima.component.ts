@@ -5,7 +5,8 @@ import { Reclamacao } from '@features/reclamacao/models/reclamacao.model';
     selector: 'app-comentario-cima',
     imports: [],
     templateUrl: './comentario-cima.component.html',
-    styleUrl: './comentario-cima.component.css'
+    styleUrl: './comentario-cima.component.css',
+    standalone:true
 })
 export class ComentarioCimaComponent {
   @Input() reclamacao !: Reclamacao

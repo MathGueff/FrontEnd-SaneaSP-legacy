@@ -22,7 +22,7 @@ export class Reclamacao implements IReclamacao{
     rua ?: string;
     numero ?: string;
     complemento ?: string;
-    Usuario ?: IUser;
+    usuario ?: IUser;
     imagens !: IImagem[];
     categorias !: ICategoria[];
 }
@@ -40,7 +40,7 @@ export interface IReclamacao{
     rua ?: string,
     numero ?: string,
     complemento ?: string,
-    Usuario ?: IUser,
+    usuario ?: IUser,
     imagens : IImagem[],
     categorias : ICategoria[],
 }

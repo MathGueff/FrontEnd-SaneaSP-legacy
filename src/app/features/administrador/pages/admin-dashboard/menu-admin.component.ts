@@ -12,7 +12,8 @@ import { AuthService } from '@core/services/auth.service';
     selector: 'app-menu-admin',
     imports: [RouterLink, TagModalComponent],
     templateUrl: './menu-admin.component.html',
-    styleUrl: './menu-admin.component.css'
+    styleUrl: './menu-admin.component.css',
+    standalone:true
 })
 export class MenuAdminComponent implements OnInit {
   constructor(private router: Router, private authService : AuthService) {}
@@ -122,28 +123,16 @@ export class MenuAdminComponent implements OnInit {
     [AdminSidebarOptions.Comentario]: [
       {
         type: 'link',
-        path: '/reclamacao',
+        path: '/list-comentario/',
         name: 'Ver seus comentários',
         img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'link',
-        path: '/reclamacao',
+        path: '/list-comentario',
         name: 'Adicionar comentário',
         img: 'icons/actions/white/add_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/reclamacao',
-        name: 'Editar comentário',
-        img: 'icons/actions/white/edit_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/reclamacao',
-        name: 'Remover um comentário',
-        img: 'icons/actions/white/delete_icon.svg',
-      },
+      }
     ],
     [AdminSidebarOptions.Tag] : [
       {
