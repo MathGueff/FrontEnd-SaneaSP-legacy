@@ -24,32 +24,33 @@
       </div>
     </div>
     <!-- OPCOES DO MENU (VARIA CONFORME OPCAO SELECIONADA NO SIDEBAR) -->
-    <div class="opcoes-dashboard col-md-10 col-12 d-flex justify-content-center align-items-center">
-      <div class="row gap-3 p-3 d-flex justify-content-center align-items-center w-100">
-        @for (opcao of opcoesMenuAtuais; track $index) {
-          @if(opcao.type =='link'){
-            <a class="opcao-dashboard focus-terciario d-flex justify-content-center align-items-center flex-column col-xl-3 col-lg-4 col-md-4 col-sm-12"
-              routerLink="{{ opcao.path }}">
-              <img class="icone-menu-admin" src="{{ opcao.img }}" alt="" />
-              <span class="text-center">{{ opcao.name }}</span>
-            </a>
-          } 
-          @else {
-            <a class="opcao-dashboard focus-terciario rounded d-flex justify-content-center align-items-center flex-column col-xl-3 col-lg-4 col-md-4 col-sm-12"
-              (click)="
-                alternarModal(
-                  opcao.tipoModal || modalTypes.None
-                )
-              " (keydown.enter)="
-                alternarModal(
-                  opcao.tipoModal || modalTypes.None
-                )
-              " tabindex="0" routerLink=".">
-              <img class="icone-menu-admin" src="{{ opcao.img }}" alt="" />
-              <span class="text-center">{{ opcao.name }}</span>
-            </a>
-          } 
-        }
+    <div
+      class="opcoes-dashboard col-md-10 col-12 d-flex justify-content-center align-items-center"
+    >
+      <div
+        class="row gap-3 p-3 d-flex justify-content-center align-items-center w-100"
+      >
+        @for (opcao of opcoesMenuAtuais; track $index) { @if(opcao.type
+        =='link'){
+        <a
+          class="opcao-dashboard focus-terciario d-flex justify-content-center align-items-center flex-column col-xl-3 col-lg-4 col-md-4 col-sm-12"
+          routerLink="{{ opcao.path }}"
+        >
+          <img class="icone-menu-admin" src="{{ opcao.img }}" alt=""/>
+          <span class="text-center">{{ opcao.name }}</span>
+        </a>
+        } @else {
+        <a
+          class="opcao-dashboard focus-terciario rounded d-flex justify-content-center align-items-center flex-column col-xl-3 col-lg-4 col-md-4 col-sm-12"
+          (click)="exportarExcel()"
+          (keydown.enter)="exportarExcel()"
+          tabindex="0"
+          routerLink="."
+        >
+          <img class="icone-menu-admin" src="{{ opcao.img }}" alt="" />
+          <span class="text-center">{{ opcao.name }}</span>
+        </a>
+        } }
       </div>
     </div>
   </div>
