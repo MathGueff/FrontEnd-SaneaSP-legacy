@@ -13,7 +13,8 @@ import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.serv
     selector: 'app-menu-admin',
     imports: [RouterLink, TagModalComponent],
     templateUrl: './menu-admin.component.html',
-    styleUrl: './menu-admin.component.css'
+    styleUrl: './menu-admin.component.css',
+    standalone:true
 })
 export class MenuAdminComponent implements OnInit {
   constructor(private router: Router, private authService : AuthService, private reclamacaoService : ReclamacaoService) {}
@@ -83,6 +84,11 @@ export class MenuAdminComponent implements OnInit {
       img: 'icons/shared/white/log_icon.svg',
       opcao: AdminSidebarOptions.Log,
     },
+    {
+      name: 'Feedback',
+      img: 'icons/shared/white/reclamacao_icon.svg',
+      opcao: AdminSidebarOptions.Feedback,
+    },
   ];
 
   /* Objeto com todas opções do menu, organizados por tipo de menu e os links dele
@@ -119,28 +125,16 @@ export class MenuAdminComponent implements OnInit {
     [AdminSidebarOptions.Comentario]: [
       {
         type: 'link',
-        path: '/reclamacao',
+        path: '/list-comentario/',
         name: 'Ver seus comentários',
         img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'link',
-        path: '/reclamacao',
+        path: '/list-comentario',
         name: 'Adicionar comentário',
         img: 'icons/actions/white/add_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/reclamacao',
-        name: 'Editar comentário',
-        img: 'icons/actions/white/edit_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/reclamacao',
-        name: 'Remover um comentário',
-        img: 'icons/actions/white/delete_icon.svg',
-      },
+      }
     ],
     [AdminSidebarOptions.Tag] : [
       {
@@ -181,7 +175,14 @@ export class MenuAdminComponent implements OnInit {
         name: 'Exportar para Excel',
         img: 'icons/shared/white/log_icon.svg',
       },
-    ]
+    ],
+    [AdminSidebarOptions.Feedback]: [
+      {
+        type: 'link',
+        path: '/feedbacks',
+        name: 'Visualizar feedbacks dos usuários',
+        img: 'icons/actions/white/view_icon.svg'
+    }]
   };
 
   //Variável para guardar a opção atual selecionada no sidebar (inicia com o primeiro elemento de linksSidebar)

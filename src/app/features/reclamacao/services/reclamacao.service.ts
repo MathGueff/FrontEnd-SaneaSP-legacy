@@ -52,7 +52,7 @@ export class ReclamacaoService{
 
   public getByUser():Observable<IReclamacao[]>{
     const headers = this.setHeader();
-    return this.httpClient.get<IReclamacao[]>(`${this.urlApi}/usuario`,{headers})
+    return this.httpClient.get<IReclamacao[]>(`${this.urlApi}/my`,{headers})
   }
 
   private setHeader():HttpHeaders{

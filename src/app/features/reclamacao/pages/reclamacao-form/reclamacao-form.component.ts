@@ -68,7 +68,7 @@ export class ReclamacaoFormComponent implements OnInit {
       
       let newDenuncia = {
         ...(this.form.value as ICreateReclamacao),
-        Imagens: this.fileNames,
+        imagens: this.fileNames,
         idUsuario: this.authService.getCurrentUser()!.id,
       };
       this.NewDenuncia(newDenuncia);
