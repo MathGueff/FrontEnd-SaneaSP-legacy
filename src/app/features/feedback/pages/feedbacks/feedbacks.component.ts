@@ -1,12 +1,12 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
-import { AsyncPipe, DatePipe, NgFor, NgIf } from '@angular/common';
+import { Component, OnInit, inject } from '@angular/core';
+import { AsyncPipe, DatePipe} from '@angular/common';
 import { FeedbackService } from '../../services/feedback.service';
 import { IFeedback } from '../../models/feedback.model';
 import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-feedbacks',
-  imports: [NgIf, NgFor, AsyncPipe, DatePipe],
+  imports: [ AsyncPipe, DatePipe],
   templateUrl: './feedbacks.component.html',
   styleUrl: './feedbacks.component.css',
   standalone: true
