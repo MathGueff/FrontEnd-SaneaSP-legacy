@@ -1,27 +1,18 @@
 <div class="background container-fluid">
   <div class="container-dashboard d-flex flex-md-row flex-column">
     <!-- SIDEBAR -->
-    <div
-      class="sidebar-dashboard d-flex flex-column align-items-center col-md-2 col-12"
-    >
-      <div
-        class="sidebar-dashboard-header d-none d-md-flex flex-column pe-3 pt-3 ps-3"
-      >
+    <div class="sidebar-dashboard d-flex flex-column align-items-center col-md-2 col-12">
+      <div class="sidebar-dashboard-header d-none d-md-flex flex-column pe-3 pt-3 ps-3">
         <span> Opções de Gerenciamento</span>
         <hr />
       </div>
       <div
-        class="sidebar-dashboard-opcoes d-flex flex-md-column flex-row position-sticky p-3 gap-4 flex-wrap justify-content-center align-items-center text-center"
-      >
+        class="sidebar-dashboard-opcoes d-flex flex-md-column flex-row position-sticky p-3 gap-4 flex-wrap justify-content-center align-items-center text-center">
         @for (link of linksSidebar; track $index) {
-        <div
-          [class.opcao-sidebar-selecionada]="sidebarAtual == link.opcao"
+        <div [class.opcao-sidebar-selecionada]="sidebarAtual == link.opcao"
           class="opcao-sidebar focus-terciario d-flex align-items-center gap-2 p-2 flex-lg-row flex-column text-center"
-          (click)="mudarOpcaoAtual(link.opcao)"
-          (keydown.enter)="mudarOpcaoAtual(link.opcao)"
-          (keydown.space)="mudarOpcaoAtual(link.opcao)"
-          tabindex="0"
-        >
+          (click)="mudarOpcaoAtual(link.opcao)" (keydown.enter)="mudarOpcaoAtual(link.opcao)"
+          (keydown.space)="mudarOpcaoAtual(link.opcao)" tabindex="0">
           <div class="">
             <img class="opcao-sidebar-icone" src="{{ link.img }}" alt="" />
           </div>
@@ -51,16 +42,8 @@
         } @else {
         <a
           class="opcao-dashboard focus-terciario rounded d-flex justify-content-center align-items-center flex-column col-xl-3 col-lg-4 col-md-4 col-sm-12"
-          (click)="
-            alternarModal(
-              opcao.tipoModal || modalTypes.None
-            )
-          "
-          (keydown.enter)="
-            alternarModal(
-              opcao.tipoModal || modalTypes.None
-            )
-          "
+          (click)="exportarExcel()"
+          (keydown.enter)="exportarExcel()"
           tabindex="0"
           routerLink="."
         >
@@ -72,15 +55,8 @@
     </div>
   </div>
 
-  <button
-    class="d-none"
-    [attr.data-bs-target]="'#modalTag'"
-    [attr.data-bs-toggle]="'modal'"
-    #botaoModal
-  ></button>
+  <button class="d-none" [attr.data-bs-target]="'#modalTag'" [attr.data-bs-toggle]="'modal'" #botaoModal></button>
 
   <!-- Modal - Vai virar componente depois-->
-  <app-tag-modal
-    [modalTypeSelected]="tipoModalAtual"
-  ></app-tag-modal>
+  <app-tag-modal [modalTypeSelected]="tipoModalAtual"></app-tag-modal>
 </div>

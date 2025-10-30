@@ -1,0 +1,125 @@
+name: Release Main
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  pipeline:
+    runs-on: ubuntu-latest
+
+    steps:
+      # --- Checkout do repositório ---
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      # --- Instalar dependências ---
+      - name: Instalar dependências
+        run: npm ci
+
+      # --- Instalar semver ---
+      - name: Instalar semver
+        run: npm install -g semver
+
+      # --- Criar nova tag inicial caso não exista ---
+      - name: Criar nova tag caso não exista
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          if [ -z "$(git tag --list)" ]; then
+            git config --global user.name 'github-actions'
+            git config --global user.email 'github-actions@github.com'
+
+            git tag -a v0.0.0 -m "Initial release"
+
+            # 🔑 Usa GH_TOKEN para push
+            git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+            git push origin v0.0.0
+          else
+            echo "Tag v0.0.0 já existe - nenhuma ação necessária."
+          fi
+
+      # --- Calcular nova versão semântica ---
+      - name: Calcular nova versão
+        id: version
+        shell: bash
+        run: |
+          set -euo pipefail
+          git fetch --tags --force --prune
+
+          LAST_TAG=$(git tag --list 'v[0-9]*.[0-9]*.[0-9]*' --sort=-v:refname | head -n1 || true)
+          [ -z "$LAST_TAG" ] && LAST_TAG="v0.0.0"
+          echo "Última tag: $LAST_TAG"
+
+          CURRENT_VERSION="${LAST_TAG#v}"
+          LOG_RANGE="${LAST_TAG}..HEAD"
+
+          mapfile -t COMMITS < <(git log ${LOG_RANGE} --pretty=format:'%s' || true)
+
+          echo "Commits desde ${LAST_TAG}:"
+          printf ' - %s\n' "${COMMITS[@]:-<nenhum>}"
+
+          MAJOR=0; MINOR=0; PATCH=0
+          for COMMIT in "${COMMITS[@]:-}"; do
+            if [[ "$COMMIT" == *"BREAKING CHANGE"* ]] || [[ "$COMMIT" =~ ^feat!\: ]] || [[ "$COMMIT" =~ \!$ ]]; then
+              MAJOR=1
+            elif [[ "$COMMIT" =~ ^feat(\(.+\))?\: ]]; then
+              MINOR=1
+            elif [[ "$COMMIT" =~ ^fix(\(.+\))?\: ]]; then
+              PATCH=1
+            fi
+          done
+
+          NEW_VERSION="$CURRENT_VERSION"
+          if [[ $MAJOR -eq 1 ]]; then
+            NEW_VERSION=$(semver -i major "$CURRENT_VERSION")
+          elif [[ $MINOR -eq 1 ]]; then
+            NEW_VERSION=$(semver -i minor "$CURRENT_VERSION")
+          elif [[ $PATCH -eq 1 ]]; then
+            NEW_VERSION=$(semver -i patch "$CURRENT_VERSION")
+          fi
+
+          echo "Versão final: $CURRENT_VERSION -> $NEW_VERSION"
+          echo "NEW_VERSION=$NEW_VERSION" >> $GITHUB_ENV
+          echo "new_version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "should_deploy=$([[ $CURRENT_VERSION != $NEW_VERSION ]] && echo true || echo false)" >> $GITHUB_OUTPUT
+
+      # --- Atualizar package.json ---
+      - name: Atualizar versão no package.json
+        if: steps.version.outputs.should_deploy == 'true'
+        run: npm version $NEW_VERSION --no-git-tag-version
+
+      # --- Commit e criar tag ---
+      - name: Commit e criar tag
+        if: steps.version.outputs.should_deploy == 'true'
+        env:
+          NEW_VERSION: ${{ steps.version.outputs.new_version }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 🔑 Troca o remote ANTES de qualquer push
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/${{ github.repository }}.git
+
+          git add package.json
+          git commit -m "chore(release): v$NEW_VERSION" || echo "Sem alterações para commitar"
+
+          git tag "v$NEW_VERSION"
+          git push origin main
+          git push origin "v$NEW_VERSION"
+
+      # --- Criar Release no GitHub ---
+      - name: Criar Release
+        if: steps.version.outputs.should_deploy == 'true'
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ steps.version.outputs.new_version }}
+          name: "Release v${{ steps.version.outputs.new_version }}"
+          draft: false
+          prerelease: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}

@@ -1,11 +1,18 @@
-import { Reclamacao } from "@features/reclamacao/models/reclamacao.model";
+import { IReclamacao, Reclamacao } from "@features/reclamacao/models/reclamacao.model";
 import { IUser } from "@features/usuario/models/usuario.model";
 
-export class Comentario {
-  id: number | null = 0;
-  descricaoComentario:string = '';
-  dataComentario: string = ''; //por enquanto é tipo String
-  objAdmin: string | null = null; // ObjAdmin será do tipo number, como usa-lo como se fosse o Id do Admin. O tipo null é para poder controlar o comentario
-  objReclamacao !: Reclamacao;
-  objUsuario !: IUser;
+export interface ComentarioInput{
+  descricao:string,
+  usuario: IUser,
+  denuncia : IReclamacao
 }
+export interface IComentario{
+  id : number,
+  descricao:string,
+  dataPublicacao: Date,
+  fkDenuncia : number,
+  fkUsuario : number,
+  usuario : IUser,
+  denuncia ?: IReclamacao
+}
+

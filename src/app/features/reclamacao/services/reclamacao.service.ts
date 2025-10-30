@@ -5,11 +5,12 @@ import { Observable } from "rxjs";
 import { ICreateReclamacao, IReclamacao } from "@features/reclamacao/models/reclamacao.model";
 import { AuthService } from "@core/services/auth.service";
 import { environment } from 'environments/environment';
+import { saveAs } from 'file-saver';
 
 @Injectable ({providedIn:'root'})
 export class ReclamacaoService{
-  //
   private urlApi:string = environment.domain +"denuncia";
+  private urlApiImages: string = environment.domain +"upload";
 
   private authService = inject(AuthService);
   private listReclamcao !: IReclamacao[];
@@ -38,9 +39,6 @@ export class ReclamacaoService{
   public postReclamacao(reclamacao: ICreateReclamacao):Observable<IReclamacao>{
     const headers = this.setHeader();
     const user = this.authService.getCurrentUser();
-    if(user){
-      reclamacao.idUsuario = user.id as number;
-    }
     return this.httpClient.post<IReclamacao>(`${this.urlApi}`, reclamacao,{headers})
   }
   public putReclamacao(reclamacao:ICreateReclamacao, idReclamacao: number){
@@ -54,7 +52,7 @@ export class ReclamacaoService{
 
   public getByUser():Observable<IReclamacao[]>{
     const headers = this.setHeader();
-    return this.httpClient.get<IReclamacao[]>(`${this.urlApi}/usuario`,{headers})
+    return this.httpClient.get<IReclamacao[]>(`${this.urlApi}/my`,{headers})
   }
 
   private setHeader():HttpHeaders{
@@ -64,5 +62,54 @@ export class ReclamacaoService{
       headers = headers.set('Authorization',token)
     }
     return headers
+  }
+
+  public uploadImages(idDenuncia: number, files: File[]): Observable<any> {
+    const headers = this.setHeader();
+    const formData = new FormData();
+    files.forEach(file => formData.append("images", file)); // 'images' = campo do Multer
+    return this.httpClient.post(`${this.urlApiImages}/${idDenuncia}`, formData, { headers });
+  }
+
+  public updateImages(idDenuncia: number, files: File[]): Observable<any> {
+    const headers = this.setHeader();
+    const formData = new FormData();
+    files.forEach(file => formData.append("images", file));
+    return this.httpClient.put(`${this.urlApiImages}/${idDenuncia}`, formData, { headers });
+  }
+
+  public deleteAllImages(idDenuncia: number): Observable<any> {
+    const headers = this.setHeader();
+    return this.httpClient.delete(`${this.urlApiImages}/${idDenuncia}`, { headers });
+  }
+
+  exportarDenunciasExcel() {
+    return this.httpClient.get(`${this.urlApi}/export`, {
+      responseType: 'blob'
+    });
+  }
+ 
+  baixarExcel() {
+    this.exportarDenunciasExcel().subscribe({
+      next: (res: Blob) => {
+        const blob = new Blob([res], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        saveAs(blob, 'denuncias.xlsx');
+      },
+      error: (err) => console.error('Erro ao exportar Excel', err)
+    });
+  }
+
+   baixarPdf() {
+    this.exportarDenunciasExcel().subscribe({
+      next: (res: Blob) => {
+        const blob = new Blob([res], {
+          type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        });
+        saveAs(blob, 'denuncias.xlsx');
+      },
+      error: (err) => console.error('Erro ao exportar Excel', err)
+    });
   }
 }

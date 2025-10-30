@@ -22,9 +22,9 @@ export class Reclamacao implements IReclamacao{
     rua ?: string;
     numero ?: string;
     complemento ?: string;
-    Usuario ?: IUser;
-    Imagens !: IImagem[];
-    Categorias !: ICategoria[];
+    usuario ?: IUser;
+    imagens !: IImagem[];
+    categorias !: ICategoria[];
 }
 
 export interface IReclamacao{
@@ -40,9 +40,9 @@ export interface IReclamacao{
     rua ?: string,
     numero ?: string,
     complemento ?: string,
-    Usuario ?: IUser,
-    Imagens : IImagem[],
-    Categorias : ICategoria[],
+    usuario ?: IUser,
+    imagens : IImagem[],
+    categorias : ICategoria[],
 }
 export interface ICreateReclamacao{
     titulo: string,
@@ -54,7 +54,7 @@ export interface ICreateReclamacao{
     numero ?: string,
     complemento ?: string,
     idUsuario: number,
-    Imagens : string[],
-    Categorias : number[]
+    imagens : string[],
+    categorias : number[]
 }
 

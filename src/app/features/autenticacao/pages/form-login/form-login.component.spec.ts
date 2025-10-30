@@ -10,7 +10,7 @@ describe('FormLoginComponent', () => {
     await TestBed.configureTestingModule({
       imports: [FormLoginComponent]
     })
-    .compileComponents();
+      .compileComponents();
 
     fixture = TestBed.createComponent(FormLoginComponent);
     component = fixture.componentInstance;
