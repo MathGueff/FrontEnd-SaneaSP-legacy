@@ -90,7 +90,17 @@ jobs:
       # --- Atualizar package.json ---
       - name: Atualizar versão no package.json
         if: steps.version.outputs.should_deploy == 'true'
-        run: npm version $NEW_VERSION --no-git-tag-version
+        run: |
+          CURRENT_VERSION=$(node -p "require('./package.json').version")
+          echo "📦 Versão atual no package.json: $CURRENT_VERSION"
+          echo "🆕 Nova versão calculada: $NEW_VERSION"
+
+          if [ "$CURRENT_VERSION" != "$NEW_VERSION" ]; then
+          echo "🔹 Atualizando package.json para $NEW_VERSION..."
+          npm version $NEW_VERSION --no-git-tag-version
+          else
+          echo "✅ A versão no package.json já está atualizada ($CURRENT_VERSION). Nenhuma alteração necessária."
+          fi
 
       # --- Commit e criar tag ---
       - name: Commit e criar tag
