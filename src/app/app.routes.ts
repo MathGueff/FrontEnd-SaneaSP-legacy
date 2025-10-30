@@ -43,7 +43,7 @@ export const routes: Routes = [
   { path: 'tag-tabela', component: TagTabelaComponent, canActivate: [AdminGuard] },
 
   //Outros
-  { path: 'confirmar-cadastro', component: ConfirmationCadastroComponent },
+  { path: 'register-confirmation', component: ConfirmationCadastroComponent },
   { path: 'sobre-nos', component: SobrenosComponent },
   { path: 'login', component: FormLoginComponent },
   { path: 'cadastro', component: FormCadastroComponent },
