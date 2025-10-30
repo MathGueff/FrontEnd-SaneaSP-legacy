@@ -18,7 +18,7 @@ jobs:
 
       # --- Instalar dependências ---
       - name: Instalar dependências
-        run: npm ci
+        run: npm install --force
 
       # --- Instalar semver ---
       - name: Instalar semver
