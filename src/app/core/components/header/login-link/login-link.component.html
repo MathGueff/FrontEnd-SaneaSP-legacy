@@ -3,45 +3,28 @@
   @if (authService.currentUser$ | async; as user) {
   <!-- Caso contrário, exibe o dropdown -->
   <div class="login-menu dropdown">
-    <a
-      #dropdown
-      class="focus-secundario dropdown-toggle d-flex justify-content-center align-items-center"
-      tabindex="0"
-      role="listbox"
-      data-bs-toggle="dropdown"
-      (keydown.enter)="toggleLoginDropdown()"
-      (keydown.space)="toggleLoginDropdown()"
-    >
+    <a #dropdown class="focus-secundario dropdown-toggle d-flex justify-content-center align-items-center" tabindex="0"
+      role="listbox" data-bs-toggle="dropdown" (keydown.enter)="toggleLoginDropdown()"
+      (keydown.space)="toggleLoginDropdown()">
       <img src="icons/ui/white/login_icon.svg" id="icon_login" />
       <span>{{ user.nome }}</span>
       <!-- Corrigido para user.nome -->
     </a>
-    <ul
-      #dropdownLinks
-      class="focus-secundario dropdown-menu dropdown-menu-dark row"
-    >
+    <ul #dropdownLinks class="focus-secundario dropdown-menu dropdown-menu-dark row">
       <li>
-        <a
-          tabindex="0"
-          class="focus-secundario dropdown-item"
-          routerLink="/editar-perfil"
-        >
-          <img
-            src="icons/actions/white/edit_profile_icon.svg"
-            class="me-1"
-            alt=""
-          />
+        <a tabindex="0" class="focus-secundario dropdown-item" routerLink="/editar-perfil">
+          <img src="icons/actions/white/edit_profile_icon.svg" class="me-1" alt="" />
           Editar seu perfil
         </a>
       </li>
       <li>
-        <a
-          tabindex="0"
-          class="focus-secundario dropdown-item"
-          (click)="btnLogout()"
-          (keydown.enter)="btnLogout()"
-          (keydown.space)="btnLogout()"
-        >
+        <a tabindex=0 class="focus-secundario dropdown-item" routerLink="/feedback">
+          Nos de um feedback!
+        </a>
+      </li>
+      <li>
+        <a tabindex="0" class="focus-secundario dropdown-item" (click)="btnLogout()" (keydown.enter)="btnLogout()"
+          (keydown.space)="btnLogout()">
           <img src="icons/ui/white/logout_icon.svg" class="me-1" alt="" />
           Logout
         </a>
@@ -50,10 +33,7 @@
   </div>
   } @else {
   <div class="login-link">
-    <a
-      class="focus-secundario d-flex justify-content-center align-items-center"
-      routerLink="/login"
-    >
+    <a class="focus-secundario d-flex justify-content-center align-items-center" routerLink="/login">
       <img src="icons/ui/white/login_icon.svg" id="icon_login" />
       <span>Login</span>
     </a>

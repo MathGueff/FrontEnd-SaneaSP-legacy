@@ -241,4 +241,7 @@ dist
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
 
 .editorconfig
-.vscode
+.vscode 
+
+# Docker
+Dockerfile

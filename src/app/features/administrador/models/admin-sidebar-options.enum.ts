@@ -2,5 +2,6 @@ export enum AdminSidebarOptions{
     Reclamacao,
     Tag,
     Comentario,
-    Log
+    Log,
+    Feedback
 }

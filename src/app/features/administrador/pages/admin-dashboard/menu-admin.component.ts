@@ -7,21 +7,24 @@ import { ModalType } from '@features/categoria/models/ModalType.enum';
 import { TagModalComponent } from '@features/categoria/components/tag-modal/tag-modal.component';
 import { ILinkPanelAdmin, ILinkSidebarAdmin } from '@features/administrador/models/link-admin.model';
 import { AuthService } from '@core/services/auth.service';
+import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 
 @Component({
     selector: 'app-menu-admin',
     imports: [RouterLink, TagModalComponent],
     templateUrl: './menu-admin.component.html',
-    styleUrl: './menu-admin.component.css'
+    styleUrl: './menu-admin.component.css',
+    standalone:true
 })
 export class MenuAdminComponent implements OnInit {
-  constructor(private router: Router, private authService : AuthService) {}
+  constructor(private router: Router, private authService : AuthService, private reclamacaoService : ReclamacaoService) {}
 
   ngOnInit(): void {
     if(!this.authService.getCurrentUser()){
       this.router.navigate([''])
     }
   }
+
 
   // ***** Modal *****
   modalTypes = ModalType;
@@ -77,9 +80,14 @@ export class MenuAdminComponent implements OnInit {
       opcao: AdminSidebarOptions.Tag,
     },
     {
-      name: 'Log',
+      name: 'Exportar',
       img: 'icons/shared/white/log_icon.svg',
       opcao: AdminSidebarOptions.Log,
+    },
+    {
+      name: 'Feedback',
+      img: 'icons/shared/white/reclamacao_icon.svg',
+      opcao: AdminSidebarOptions.Feedback,
     },
   ];
 
@@ -117,28 +125,16 @@ export class MenuAdminComponent implements OnInit {
     [AdminSidebarOptions.Comentario]: [
       {
         type: 'link',
-        path: '/reclamacao',
+        path: '/list-comentario/',
         name: 'Ver seus comentários',
         img: 'icons/actions/white/view_icon.svg',
       },
       {
         type: 'link',
-        path: '/reclamacao',
+        path: '/list-comentario',
         name: 'Adicionar comentário',
         img: 'icons/actions/white/add_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/reclamacao',
-        name: 'Editar comentário',
-        img: 'icons/actions/white/edit_icon.svg',
-      },
-      {
-        type: 'link',
-        path: '/reclamacao',
-        name: 'Remover um comentário',
-        img: 'icons/actions/white/delete_icon.svg',
-      },
+      }
     ],
     [AdminSidebarOptions.Tag] : [
       {
@@ -168,12 +164,25 @@ export class MenuAdminComponent implements OnInit {
     ],
     [AdminSidebarOptions.Log]: [
       {
-        type: 'link',
+        type: 'modal',
         path: '/',
-        name: 'Visualizar log de comentários',
+        name: 'Exportar para PDF',
         img: 'icons/shared/white/log_icon.svg',
       },
-    ]
+      {
+        type: 'modal',
+        path: '/',
+        name: 'Exportar para Excel',
+        img: 'icons/shared/white/log_icon.svg',
+      },
+    ],
+    [AdminSidebarOptions.Feedback]: [
+      {
+        type: 'link',
+        path: '/feedbacks',
+        name: 'Visualizar feedbacks dos usuários',
+        img: 'icons/actions/white/view_icon.svg'
+    }]
   };
 
   //Variável para guardar a opção atual selecionada no sidebar (inicia com o primeiro elemento de linksSidebar)
@@ -186,5 +195,15 @@ export class MenuAdminComponent implements OnInit {
   mudarOpcaoAtual(opcao: AdminSidebarOptions) {
     this.sidebarAtual = opcao;
     this.opcoesMenuAtuais = this.menuLink[opcao] || [];
+  }
+
+   exportarExcel() {
+     console.log('tewytsyufbdsfdsbffjdsf dfbfhydfhbggfdbfdsf')
+    this.reclamacaoService.baixarExcel();
+  }
+
+  exportarPdf() {
+    // Se não tiver método no service, cria um
+    this.reclamacaoService.baixarPdf();
   }
 }

@@ -30,6 +30,9 @@ npm install
 # Rode a aplicação
 npm start
 
+# Rode o container do Front
+docker run -p 4200:4200 angular-docker-develop
+
 ```
 ## Estrutura das pastas
 

@@ -1,9 +1,13 @@
-<div class="card-comentario h-auto mx-5 d-flex flex-column">
-  <div class="user-comentario">
-    <span>{{this.autor}}</span>
+<div class="w-100 d-flex" [ngStyle]="{
+    'justify-content' : (comentario.usuario.nivel && comentario.usuario.nivel > 0) ? 'flex-end' : 'flex-start' 
+  }">
+  <div class="card-comentario h-auto mx-5 d-flex flex-column" >
+    <div class="user-comentario">
+      <span>{{this.comentario.usuario.nome}}</span>
+    </div>
+    <div class="conteudo-comentario mt-1">
+      <p>{{comentario.descricao}}</p>
+    </div>
+    <span class="text-end">{{comentario.dataPublicacao | date:'dd/mm/yyyy hh:mm a'}}</span>
   </div>
-  <div class="conteudo-comentario mt-1">
-    <p>{{comentario.descricaoComentario}}</p>
-  </div>
-  <span class="text-end">{{comentario.dataComentario}}</span>
 </div>
