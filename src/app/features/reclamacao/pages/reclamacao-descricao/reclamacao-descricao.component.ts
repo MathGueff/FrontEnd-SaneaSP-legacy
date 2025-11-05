@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, ElementRef, inject, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
@@ -6,6 +6,8 @@ import { IReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { ReclamacaoService } from '@features/reclamacao/services/reclamacao.service';
 import { StatusReclamacao } from '@features/reclamacao/models/reclamacao.model';
 import { NotFoundComponent } from '@shared/components/not-found/not-found.component';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 
 @Component({
     selector: 'app-reclamacao-descricao',
@@ -16,6 +18,7 @@ import { NotFoundComponent } from '@shared/components/not-found/not-found.compon
 })
 export class ReclamacaoDescricaoComponent implements OnInit {
   //Observable de reclamacao
+  
   private reclamacaoService = inject(ReclamacaoService);
   reclamacao$ !: Observable<IReclamacao | undefined>
 
@@ -59,5 +62,24 @@ export class ReclamacaoDescricaoComponent implements OnInit {
         this.situation = 'Resolvida';
         break;
     }
+  }
+
+  // 🔹 Referência ao conteúdo que será exportado
+  @ViewChild('conteudoPDF', { static: false }) conteudoPDF!: ElementRef;
+
+// 🔹 Método responsável por gerar o PDF
+  gerarPDF() {
+    if (!this.conteudoPDF) return;
+    const element = this.conteudoPDF.nativeElement;
+
+    html2canvas(element, { scale: 2 }).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+      const pdf = new jsPDF('p', 'mm', 'a4');
+      const pdfWidth = pdf.internal.pageSize.getWidth();
+      const pdfHeight = (canvas.height * pdfWidth) / canvas.width;
+
+      pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+      pdf.save('reclamacao.pdf');
+    });
   }
 }
